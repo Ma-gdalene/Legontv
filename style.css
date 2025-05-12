@@ -1,3 +1,4 @@
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,152 +7,133 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #011936, #114b88);
+  background: linear-gradient(to right, #001f3f, #005bb5); /* Background gradient */
   color: white;
 }
 
-/* HEADER / HERO SECTION */
+/* Header Section */
 header {
-  background-image: url('hero.jpg'); /* Replace with your preferred hero image */
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
   position: relative;
+  height: 90vh; /* Full height for hero section */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-image: url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1350&q=80'); /* Updated background image */
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
 
-.overlay {
+.hero-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay to enhance text visibility */
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 800px;
-  padding: 20px;
-  animation: fadeIn 2s ease-out;
+  color: white;
+  animation: fadeIn 2s ease-out; /* Animation for hero content */
 }
 
-.logo {
-  width: 100px;
+.hero-content .logo {
+  height: 60px; /* Logo size */
   margin-bottom: 20px;
-  animation: bounceIn 1.5s ease-in-out;
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  color: #fff;
+.hero-content h1 {
+  font-size: 3.5em; /* Large heading */
+  margin: 0;
 }
 
-p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  color: #ccc;
+.hero-content p {
+  font-size: 1.5em; /* Subheading size */
+  margin: 10px 0;
 }
 
-/* BUTTONS */
-.buttons {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
+.cta-buttons {
+  margin-top: 20px;
 }
 
-.btn,
-.btn-outline {
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s ease;
+.cta-buttons .btn, .cta-buttons .btn-outline {
+  padding: 12px 30px;
+  font-weight: bold;
+  border-radius: 5px;
   text-decoration: none;
+  margin: 10px;
+  transition: all 0.3s ease;
 }
 
-.btn {
-  background: #00BFFF;
-  color: white;
-  border: none;
+.cta-buttons .btn {
+  background-color: #ffcc00; /* Yellow button */
+  color: black;
 }
 
-.btn:hover {
-  background: #007acc;
+.cta-buttons .btn:hover {
+  background-color: #ffe066; /* Hover effect for yellow button */
 }
 
-.btn-outline {
-  border: 2px solid #00BFFF;
-  color: #00BFFF;
-  background: transparent;
+.cta-buttons .btn-outline {
+  background-color: transparent;
+  border: 2px solid #ffcc00;
+  color: #ffcc00;
 }
 
-.btn-outline:hover {
-  background: #00BFFF;
-  color: white;
+.cta-buttons .btn-outline:hover {
+  background-color: #ffcc00;
+  color: black;
 }
 
-/* SECTION */
+/* Section Styles */
 .section {
-  padding: 60px 30px;
-  background: #f4f4f4;
-  color: #222;
+  padding: 50px 20px;
   text-align: center;
-}
-
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 40px;
 }
 
 .cards {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  justify-content: space-around;
+  margin-top: 30px;
 }
 
 .card {
-  background: white;
-  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background for cards */
   padding: 20px;
-  width: 280px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
+  border-radius: 10px;
+  width: 30%;
+  color: white;
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px); /* Hover effect to elevate the cards */
 }
 
 .card h3 {
-  color: #114b88;
-  margin-bottom: 10px;
+  font-size: 1.5em; /* Card heading */
+  margin-bottom: 15px;
 }
 
 .card p {
-  color: #444;
+  font-size: 1em;
+  line-height: 1.5;
 }
 
-/* FOOTER */
+/* Footer Styles */
 footer {
-  background: #001422;
   padding: 20px;
+  background-color: rgba(0, 0, 0, 0.2); /* Semi-dark footer */
   text-align: center;
-  color: #bbb;
+  font-size: 1.1em;
 }
 
-/* ANIMATIONS */
+/* Keyframe for fade-in effect */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bounceIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  60% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); }
   }
