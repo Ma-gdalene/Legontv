@@ -7,19 +7,20 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #001f3f, #005bb5); /* Background gradient */
   color: white;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-/* Header Section */
+/* Header Section with Parallax Effect */
 header {
   position: relative;
-  height: 90vh; /* Full height for hero section */
+  height: 100vh; /* Full screen height for hero section */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-image: url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1350&q=80'); /* Updated background image */
+  background-image: url('https://images.unsplash.com/photo-1603995000314-4400f6b2a1c3'); /* Parallax background */
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -38,7 +39,7 @@ header {
   position: relative;
   z-index: 2;
   color: white;
-  animation: fadeIn 2s ease-out; /* Animation for hero content */
+  animation: fadeIn 2s ease-out;
 }
 
 .hero-content .logo {
@@ -136,4 +137,4 @@ footer {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-  }
+}
