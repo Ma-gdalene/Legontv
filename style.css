@@ -15,7 +15,7 @@ body, html {
 
 /* Parallax background */
 .parallax {
-  background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b');
+  background-image: url('https://img.freepik.com/free-vector/flat-design-back-school-background_23-2149470285.jpg');
   height: 100vh;
   background-attachment: fixed;
   background-position: center;
@@ -58,6 +58,20 @@ nav a {
 
 nav a:hover {
   color: #007BFF;
+}
+
+.watch-live {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.watch-live:hover {
+  background-color: #0056b3;
 }
 
 /* Main content */
