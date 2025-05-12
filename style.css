@@ -1,140 +1,135 @@
-/* Global Styles */
+/* styles.css */
+
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
-/* Header Section with Parallax Effect */
-header {
-  position: relative;
-  height: 100vh; /* Full screen height for hero section */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-image: url('https://images.unsplash.com/photo-1603995000314-4400f6b2a1c3'); /* Parallax background */
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+body, html {
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Dark overlay to enhance text visibility */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  color: white;
-  animation: fadeIn 2s ease-out;
+/* Parallax background */
+.parallax {
+  background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b');
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(0.7);
 }
 
-.hero-content .logo {
-  height: 60px; /* Logo size */
-  margin-bottom: 20px;
-}
-
-.hero-content h1 {
-  font-size: 3.5em; /* Large heading */
-  margin: 0;
-}
-
-.hero-content p {
-  font-size: 1.5em; /* Subheading size */
-  margin: 10px 0;
-}
-
-.cta-buttons {
-  margin-top: 20px;
-}
-
-.cta-buttons .btn, .cta-buttons .btn-outline {
-  padding: 12px 30px;
-  font-weight: bold;
-  border-radius: 5px;
-  text-decoration: none;
-  margin: 10px;
-  transition: all 0.3s ease;
-}
-
-.cta-buttons .btn {
-  background-color: #ffcc00; /* Yellow button */
-  color: black;
-}
-
-.cta-buttons .btn:hover {
-  background-color: #ffe066; /* Hover effect for yellow button */
-}
-
-.cta-buttons .btn-outline {
-  background-color: transparent;
-  border: 2px solid #ffcc00;
-  color: #ffcc00;
-}
-
-.cta-buttons .btn-outline:hover {
-  background-color: #ffcc00;
-  color: black;
-}
-
-/* Section Styles */
-.section {
-  padding: 50px 20px;
-  text-align: center;
-}
-
-.cards {
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255,255,255,0.95);
+  padding: 20px 40px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
   display: flex;
-  justify-content: space-around;
-  margin-top: 30px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.card {
-  background-color: rgba(0, 0, 0, 0.7); /* Dark background for cards */
-  padding: 20px;
-  border-radius: 10px;
-  width: 30%;
-  color: white;
-  transition: transform 0.3s ease;
+header h1 {
+  font-size: 1.8em;
+  color: #333;
 }
 
-.card:hover {
-  transform: translateY(-10px); /* Hover effect to elevate the cards */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
-.card h3 {
-  font-size: 1.5em; /* Card heading */
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #007BFF;
+}
+
+/* Main content */
+main {
+  margin-top: 120px;
+  display: flex;
+  gap: 20px;
+  padding: 40px;
+  background-color: #f5f5f5;
+}
+
+.featured {
+  flex: 3;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.featured h2 {
   margin-bottom: 15px;
+  color: #333;
 }
 
-.card p {
-  font-size: 1em;
-  line-height: 1.5;
+.featured p {
+  color: #555;
+  line-height: 1.6;
 }
 
-/* Footer Styles */
+aside {
+  flex: 1;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+aside h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+aside ul {
+  list-style: none;
+}
+
+aside li {
+  margin-bottom: 10px;
+}
+
+aside a {
+  text-decoration: none;
+  color: #007BFF;
+  transition: color 0.3s;
+}
+
+aside a:hover {
+  color: #0056b3;
+}
+
+/* Footer */
 footer {
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.2); /* Semi-dark footer */
+  background-color: #333;
+  color: #fff;
   text-align: center;
-  font-size: 1.1em;
+  padding: 20px;
+  margin-top: 40px;
 }
 
-/* Keyframe for fade-in effect */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+  }
