@@ -73,13 +73,24 @@ body, html {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.2); /* subtle tint to make text readable */
+  background: rgba(0, 0, 0, 0.2);
 }
 .hero-content {
   position: relative;
   z-index: 1;
   color: white;
   max-width: 90%;
+  animation: fadeIn 1.5s ease-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .hero-content h1 {
   font-size: 3rem;
@@ -126,6 +137,7 @@ footer {
   .nav-links {
     flex-wrap: wrap;
     gap: 15px;
+    justify-content: center;
   }
   .hero-content h1 {
     font-size: 2.2rem;
@@ -137,7 +149,7 @@ footer {
 @media (max-width: 480px) {
   .nav-links {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
   }
   .hero-content h1 {
@@ -147,4 +159,4 @@ footer {
     font-size: 1rem;
     padding: 10px 20px;
   }
-  }
+    }
