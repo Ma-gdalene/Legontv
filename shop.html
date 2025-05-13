@@ -1,129 +1,111 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legon TV Shop</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>
-        * {
-            box-sizing: border-box;
-        }body {
-        font-family: 'Montserrat', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #0b0b0b;
-        color: white;
-        overflow-x: hidden;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legon TV Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-    nav {
-        background: linear-gradient(to right, #002855, #004080);
-        padding: 1rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        z-index: 2;
-    }
-
-    nav h1 {
-        margin: 0;
-        font-size: 24px;
-        color: white;
-    }
-
-    .nav-links a {
-        color: white;
-        text-decoration: none;
-        margin-left: 20px;
-        font-weight: 600;
-        transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-        color: #00bcd4;
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #000;
+      color: white;
+      overflow: hidden;
     }
 
     .background-video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        object-fit: cover;
-        z-index: -1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px 30px;
+      display: flex;
+      align-items: center;
+      z-index: 1;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    .center-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
     }
 
     .typing-animation {
-        font-size: 42px;
-        font-weight: bold;
-        color: #ffffff;
-        text-align: center;
-        padding-top: 35vh;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        text-shadow: 0 0 15px rgba(0,0,0,0.7);
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: white;
     }
 
-    .cursor {
-        animation: blink 0.7s infinite;
+    .coming-soon {
+      display: none;
+      font-size: 4rem;
+      font-weight: 700;
+      margin-top: 30px;
+      animation: fadeIn 2s ease-in-out forwards;
     }
 
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    footer {
-        background: #002855;
-        color: white;
-        text-align: center;
-        padding: 1rem;
-        position: relative;
-        z-index: 2;
-    }
-</style>
-
+  </style>
 </head>
 <body>
-    <nav>
-        <h1>LegonTV</h1>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="blog.html">Blog</a>
-            <a href="politics.html">Politics</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav><video class="background-video" autoplay loop muted>
-    <source src="https://assets.mixkit.co/videos/preview/mixkit-cityscape-at-dusk-27176-large.mp4" type="video/mp4">
-</video>
 
-<div class="typing-animation">
-    <span id="typed-text"></span><span class="cursor">|</span>
-</div>
+  <video class="background-video" autoplay muted loop>
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-cityscape-at-dusk-27176-large.mp4" type="video/mp4" />
+  </video>
 
-<audio id="typewriter-sound" src="https://www.soundjay.com/button/sounds/typewriter-1.mp3" preload="auto"></audio>
+  <header>
+    <img src="logo.png" alt="Legon TV Logo">
+  </header>
 
-<footer>
-    &copy; 2025 LegonTV. All rights reserved.
-</footer>
+  <div class="center-container">
+    <div class="typing-animation">
+      <span id="typed-text"></span><span class="cursor">|</span>
+    </div>
+    <div id="coming-soon" class="coming-soon">COMING SOON</div>
+  </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-<script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+  <script>
     var typed = new Typed('#typed-text', {
-        strings: ['Hey you, yes you...', 'Legon TV Shop is coming soon...'],
-        typeSpeed: 50,
-        backSpeed: 20,
-        backDelay: 1000,
-        startDelay: 1000,
-        loop: false,
-        showCursor: false,
-        onComplete: function() {
-            document.getElementById('typewriter-sound').play();
-        }
+      strings: ['Hey you, yes you...', 'Legon TV Shop is coming soon...'],
+      typeSpeed: 60,
+      backSpeed: 30,
+      backDelay: 1000,
+      startDelay: 1000,
+      loop: false,
+      showCursor: false,
+      onComplete: function () {
+        document.getElementById('coming-soon').style.display = 'block';
+      }
     });
-</script>
+  </script>
 
 </body>
-  </html>
+</html>
