@@ -1,1 +1,77 @@
-h
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legon TV Blog</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white text-gray-900">
+    <!-- Header -->
+    <header class="w-full p-4 shadow-md flex items-center justify-between bg-white sticky top-0 z-50">
+      <div class="text-2xl font-bold">Legon TV</div>
+      <nav class="space-x-6 text-sm font-medium">
+        <a href="#" class="hover:text-blue-600">Home</a>
+        <a href="#" class="hover:text-blue-600">News</a>
+        <a href="#" class="hover:text-blue-600">Shows</a>
+        <a href="#" class="text-blue-600">Blog</a>
+        <a href="#" class="hover:text-blue-600">Contact</a>
+      </nav>
+      <input type="text" placeholder="Search..." class="border rounded-md px-2 py-1 w-40" />
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="bg-cover bg-center h-64 flex items-center justify-center text-white text-center"
+      style="background-image: url('blog-hero.jpg');"
+    >
+      <div class="bg-black/50 p-6 rounded-xl">
+        <h1 class="text-4xl font-extrabold mb-2">Legon TV Blog</h1>
+        <p class="text-lg">Insights, updates, and behind-the-scenes from Legon TV.</p>
+      </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Repeat this card for each blog post -->
+      <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden">
+        <img src="blog-thumbnail-1.jpg" alt="Blog thumbnail" class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h2 class="text-xl font-semibold mb-2">Blog Post Title 1</h2>
+          <p class="text-sm text-gray-600 mb-4">
+            Short description of the blog post content. A few lines to tease the reader...
+          </p>
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span>By Author</span>
+            <span>May 13, 2025</span>
+          </div>
+          <a href="#" class="text-blue-600 text-sm mt-2 inline-block">Read more</a>
+        </div>
+      </div>
+
+      <!-- Duplicate the above block for more posts -->
+      <!-- Example: -->
+      <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden">
+        <img src="blog-thumbnail-2.jpg" alt="Blog thumbnail" class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h2 class="text-xl font-semibold mb-2">Blog Post Title 2</h2>
+          <p class="text-sm text-gray-600 mb-4">
+            Another quick preview of what's in this article. Just a bit of text to invite interest.
+          </p>
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span>By Author</span>
+            <span>May 13, 2025</span>
+          </div>
+          <a href="#" class="text-blue-600 text-sm mt-2 inline-block">Read more</a>
+        </div>
+      </div>
+      <!-- Add more cards as needed -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 mt-12 p-6 text-center text-sm text-gray-600">
+      <p>&copy; 2025 Legon TV. All rights reserved.</p>
+    </footer>
+  </body>
+          </html>
