@@ -4,119 +4,148 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | LegonTV</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+
+  <!-- Font Awesome for Social Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: url('background3.jpg') no-repeat center center fixed;
+      background-image: url('background3.jpg');
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       color: #fff;
     }
 
     header {
+      background: rgba(0, 0, 0, 0.8);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 10px 30px;
-      background: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      padding: 15px 30px;
     }
 
-    header img {
+    .logo img {
       height: 50px;
     }
 
     nav a {
       color: white;
-      margin: 0 15px;
+      margin-left: 20px;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s ease;
     }
 
-    .hero {
-      text-align: center;
-      padding: 60px 20px 20px;
+    nav a:hover {
+      color: #ffd700;
     }
 
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
+    .container {
+      max-width: 960px;
+      margin: 50px auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 12px;
     }
 
-    .about {
-      max-width: 800px;
-      margin: 20px auto;
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
-      border-radius: 10px;
+    h2 {
+      margin-bottom: 20px;
     }
 
-    .contact-form {
-      max-width: 800px;
-      margin: 20px auto;
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
-      border-radius: 10px;
+    .about h2 {
+      font-size: 28px;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
+    .about p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    h2.contact-heading {
+      font-size: 28px;
+      color: #00aaff;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, textarea {
       padding: 12px;
-      margin: 10px 0;
+      margin-bottom: 20px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-size: 16px;
     }
 
-    .contact-form button {
-      background-color: #0057ff;
+    input[type="submit"] {
+      background-color: #0077cc;
       color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
-      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #005fa3;
     }
 
     .socials {
+      margin-top: 30px;
       text-align: center;
-      margin: 30px auto;
     }
 
     .socials a {
       color: white;
-      font-size: 18px;
+      font-size: 30px;
       margin: 0 15px;
-      display: inline-block;
-      text-decoration: none;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      transition: 0.3s ease;
+      transition: transform 0.3s, color 0.3s;
     }
 
     .socials a:hover {
-      background: #0057ff;
+      transform: scale(1.2);
+      color: #ffd700;
     }
 
     footer {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       padding: 20px;
       text-align: center;
-      color: #ccc;
+      font-size: 14px;
       margin-top: 40px;
     }
 
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 32px;
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav a {
+        margin: 10px 0;
+      }
+
+      .container {
+        margin: 20px;
+        padding: 25px;
       }
     }
   </style>
 </head>
+
 <body>
+
+  <!-- Header -->
   <header>
-    <img src="logo.png" alt="LegonTV Logo">
+    <div class="logo">
+      <img src="logo.png" alt="LegonTV Logo" />
+    </div>
     <nav>
       <a href="index.html">Home</a>
       <a href="blog.html">Blog</a>
@@ -126,35 +155,50 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <h1>Contact LegonTV</h1>
-  </section>
+  <!-- Main Container -->
+  <div class="container">
 
-  <section class="about">
-    <h2>About Us</h2>
-    <p>LegonTV is your premier destination for school-related entertainment, trends, events, and stories. From the vibrant student life on campus to insightful commentary on academic and social matters, LegonTV connects the world to everything happening in and around student culture.</p>
-  </section>
+    <!-- About Section -->
+    <div class="about">
+      <h2>About LegonTV</h2>
+      <p>
+        LegonTV is your premier hub for vibrant student journalism and entertainment. Covering the latest on education, lifestyle, culture, and events that matter to students and young people across the globe. Whether it's on-campus gossip, academic trends, or viral entertainment, LegonTV blends fun with facts to keep you informed and engaged.
+      </p>
+    </div>
 
-  <section class="contact-form">
-    <h2>Get in Touch</h2>
+    <!-- Contact Heading -->
+    <h2 class="contact-heading">Contact LegonTV</h2>
+
+    <!-- Contact Form -->
     <form action="mailto:lhyttlesark@gmail.com" method="POST" enctype="text/plain">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
       <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send Message</button>
+      <input type="submit" value="Send Message" />
     </form>
-  </section>
 
-  <section class="socials">
-    <h2>Follow Us</h2>
-    <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank">WhatsApp</a>
-    <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank">Instagram</a>
-    <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank">YouTube</a>
-    <a href="https://www.tiktok.com/@legon.tvv" target="_blank">TikTok</a>
-  </section>
+    <!-- Social Media Icons -->
+    <div class="socials">
+      <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank" title="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.tiktok.com/@legon.tvv" target="_blank" title="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
 
+  </div>
+
+  <!-- Footer -->
   <footer>
     &copy; 2025 LegonTV. All rights reserved.
   </footer>
+
 </body>
-    </html>
+  </html>
