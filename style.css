@@ -1,26 +1,22 @@
-/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body, html {
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* NAVBAR */
 header {
   background-color: #002c5f;
+  padding: 10px 20px;
 }
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 30px;
-  flex-wrap: wrap;
 }
 
 .logo {
@@ -31,7 +27,6 @@ header {
   list-style: none;
   display: flex;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 .nav-menu li a {
@@ -41,16 +36,14 @@ header {
   font-size: 16px;
 }
 
-/* HERO SECTION */
 .hero {
   background: url('background.jpg') no-repeat center center/cover;
-  height: calc(100vh - 60px);
+  height: 90vh;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  overflow: hidden;
 }
 
 .overlay {
@@ -92,17 +85,14 @@ header {
   background-color: #e6c200;
 }
 
-/* ANIMATIONS */
-.fade-in {
+.animate {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s ease forwards;
+  transform: translateY(30px);
+  animation: fadeInUp 1s forwards;
 }
-
 .delay-1 {
   animation-delay: 0.5s;
 }
-
 .delay-2 {
   animation-delay: 1s;
 }
@@ -112,4 +102,4 @@ header {
     opacity: 1;
     transform: translateY(0);
   }
-  }
+}
