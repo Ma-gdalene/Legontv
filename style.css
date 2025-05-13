@@ -6,11 +6,12 @@
 
 body, html {
   height: 100%;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 header {
   position: absolute;
+  top: 0;
   width: 100%;
   z-index: 10;
 }
@@ -20,7 +21,8 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: rgba(0, 34, 85, 0.9);
-  padding: 20px 50px;
+  padding: 20px 30px;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -30,63 +32,100 @@ header {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.nav-links a {
-  color: white;
+.nav-links li a {
   text-decoration: none;
+  color: white;
   font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #ffc107;
 }
 
 .hero {
-  background-image: url("Background.jpg");
-  background-size: cover;
-  background-position: center;
+  background: url('Background.jpg') no-repeat center center/cover;
   height: 100vh;
   position: relative;
-}
-
-.overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
   text-align: center;
-  color: white;
 }
 
-.animate-text {
-  font-size: 3rem;
-  font-weight: bold;
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px 20px;
+  border-radius: 10px;
+  color: white;
+  max-width: 90%;
+}
+
+.hero-overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
   animation: fadeInUp 1.5s ease forwards;
 }
 
-.overlay p {
-  font-size: 1.3rem;
-  margin: 10px 0 20px;
+.hero-overlay p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
   animation: fadeIn 2s ease forwards;
 }
 
 .btn {
   background-color: #ffc107;
   color: black;
-  padding: 12px 24px;
+  padding: 12px 25px;
   font-weight: bold;
-  border: none;
   text-decoration: none;
   border-radius: 5px;
+  transition: background 0.3s ease;
   animation: fadeIn 2.5s ease forwards;
+}
+
+.btn:hover {
+  background-color: #e6b800;
+}
+
+footer {
+  background-color: #002255;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer-links a {
+  color: #ffc107;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translate(-50%, -60%);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translateY(0);
   }
 }
 
@@ -97,4 +136,54 @@ header {
   to {
     opacity: 1;
   }
+}
+
+/* --- Responsive Rules --- */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
   }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-overlay h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-overlay p {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .navbar {
+    padding: 15px;
+  }
+    }
