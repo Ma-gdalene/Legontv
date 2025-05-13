@@ -47,11 +47,14 @@
       align-items: center;
       height: calc(100vh - 100px);
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     #typed-text {
       font-size: 2em;
       min-height: 60px;
+      transition: opacity 1s ease-in-out;
     }
 
     #coming-soon {
@@ -59,17 +62,55 @@
       font-weight: bold;
       opacity: 0;
       animation: fadeIn 3s ease-in-out forwards;
-      animation-delay: 5s;
+      animation-delay: 6s;
     }
 
     @keyframes fadeIn {
       to { opacity: 1; }
     }
 
+    /* Fancy Countdown Styles */
     #countdown {
-      margin-top: 20px;
-      font-size: 1.5em;
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 2em;
       font-weight: bold;
+      position: relative;
+    }
+
+    .countdown-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 120px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      animation: pulse 1s infinite alternate;
+    }
+
+    .countdown-box span {
+      font-size: 3em;
+      font-weight: bold;
+    }
+
+    .countdown-box p {
+      margin-top: 10px;
+      font-size: 1em;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.1);
+      }
     }
 
     footer {
@@ -79,16 +120,17 @@
       text-align: center;
       font-size: 14px;
       color: #fff;
+      z-index: 2;
     }
 
     .socials {
-      margin-top: 25px;
+      margin-top: 30px;
     }
 
     .socials a {
       color: white;
-      font-size: 1.5em;
-      margin: 0 10px;
+      font-size: 2em;
+      margin: 0 15px;
       transition: transform 0.3s;
     }
 
@@ -99,9 +141,21 @@
     audio {
       display: none;
     }
+
+    #overlay {
+      background: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
+  <div id="overlay"></div>
+
   <header>
     <img src="logo.png" alt="LegonTV Logo">
     <nav>
@@ -112,7 +166,24 @@
   <div class="center-content">
     <div id="typed-text"></div>
     <div id="coming-soon">LegonTV Shop Coming Soon</div>
-    <div id="countdown"></div>
+    <div id="countdown">
+      <div class="countdown-box">
+        <span id="days">00</span>
+        <p>Days</p>
+      </div>
+      <div class="countdown-box">
+        <span id="hours">00</span>
+        <p>Hours</p>
+      </div>
+      <div class="countdown-box">
+        <span id="minutes">00</span>
+        <p>Minutes</p>
+      </div>
+      <div class="countdown-box">
+        <span id="seconds">00</span>
+        <p>Seconds</p>
+      </div>
+    </div>
     <div class="socials">
       <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank"><i class="fab fa-whatsapp"></i></a>
       <a href="https://www.instagram.com/legontv.web" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -133,10 +204,18 @@
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      const typedText = document.getElementById("typed-text");
+
       new Typed("#typed-text", {
         strings: ["Hello everyone, big surprise coming up. Stay tuned."],
-        typeSpeed: 40,
-        showCursor: false
+        typeSpeed: 45,
+        backSpeed: 0,
+        showCursor: false,
+        onComplete: () => {
+          setTimeout(() => {
+            typedText.style.opacity = 0;
+          }, 1000);
+        }
       });
 
       // Countdown
@@ -153,10 +232,13 @@
         const minutes = Math.floor((distance / (1000 * 60)) % 60);
         const seconds = Math.floor((distance / 1000) % 60);
 
-        countdownEl.textContent = `Launching in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById("days").textContent = days < 10 ? "0" + days : days;
+        document.getElementById("hours").textContent = hours < 10 ? "0" + hours : hours;
+        document.getElementById("minutes").textContent = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("seconds").textContent = seconds < 10 ? "0" + seconds : seconds;
 
         if (distance < 0) {
-          countdownEl.textContent = "We're live!";
+          countdownEl.innerHTML = "<h2>We're live!</h2>";
         }
       }
 
@@ -164,4 +246,4 @@
     });
   </script>
 </body>
-</html>
+                                                                                             </html>
