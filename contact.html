@@ -1,125 +1,137 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | LegonTV</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About & Contact | LegonTV</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f8f9fa;
-      color: #222;
-    }
-    header {
-      background: linear-gradient(to right, #003366, #3366cc);
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #002855, #005792);
       color: white;
     }
-    header img {
-      height: 50px;
-    }
-    header nav a {
-      margin-left: 1.5rem;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .hero {
-      background-image: url('https://images.unsplash.com/photo-1587560699334-bea93391dcef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-      background-size: cover;
-      background-position: center;
-      height: 350px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #002244;
-    }
-    .hero h1 {
-      background: rgba(255, 255, 255, 0.85);
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      font-size: 2.5rem;
-    }
-    .about, .contact {
-      padding: 3rem 2rem;
-      max-width: 900px;
+
+    .container {
+      max-width: 1100px;
       margin: auto;
+      padding: 2rem;
     }
-    .about h2, .contact h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #003366;
+
+    h1, h2 {
+      color: #ffffff;
     }
-    .about p {
-      line-height: 1.7;
+
+    .about-section, .contact-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
-    .socials {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 2rem;
+
+    .about-section p {
+      line-height: 1.8;
     }
-    .socials a {
-      color: #003366;
-      font-size: 1.8rem;
-      transition: color 0.3s;
+
+    form {
+      display: grid;
+      gap: 1.5rem;
     }
-    .socials a:hover {
-      color: #3366cc;
-    }
-    footer {
-      background: linear-gradient(to right, #003366, #3366cc);
-      text-align: center;
-      color: white;
+
+    input, textarea {
       padding: 1rem;
-      margin-top: 3rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      width: 100%;
+      outline: none;
     }
-    .tiktok-embed {
-      margin-top: 2rem;
+
+    button {
+      background: #007bff;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .social-icons {
       display: flex;
       justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-icons a img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s;
+    }
+
+    .social-icons a:hover img {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      .about-section, .contact-section {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="LegonTV Logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="blog.html">Blog</a>
-      <a href="politics.html">Politics</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>  <section class="hero">
-    <h1>LegonTV Contact & About</h1>
-  </section>  <section class="about">
-    <h2>About LegonTV</h2>
-    <p>
-      LegonTV is a student-centered media platform dedicated to bringing you everything trending and informative across the academic, entertainment, and campus lifestyle spaces. From breaking university news to features on rising talents, political commentary, and world events that affect the student body, LegonTV blends creativity, relevance, and authenticity.
-    </p>
-  </section>  <section class="contact">
-    <h2>Get in Touch</h2>
-    <p>Email: <a href="mailto:lhyttlesark@gmail.com">lhyttlesark@gmail.com</a></p>
-    <div class="socials">
-      <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.tiktok.com/@legon.tvv" target="_blank"><i class="fab fa-tiktok"></i></a>
-    </div><div class="tiktok-embed">
-  <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@legon.tvv" data-unique-id="legon.tvv" style="max-width: 605px; min-width: 325px;">
-    <section>
-      <a target="_blank" title="@legon.tvv" href="https://www.tiktok.com/@legon.tvv">@legon.tvv</a>
-    </section>
-  </blockquote>
-  <script async src="https://www.tiktok.com/embed.js"></script>
-</div>
 
-  </section>  <footer>
-    &copy; 2025 LegonTV. All rights reserved.
-  </footer>
+  <div class="container">
+    <div class="about-section">
+      <h1>About LegonTV</h1>
+      <p>
+        LegonTV is your premier student-run digital platform bringing campus news, entertainment, and global conversations to your screen. 
+        We cover everything from university happenings to music, pop culture, education, innovation, and social trends — all with a student-focused lens.
+      </p>
+      <p>
+        Our mission is to inform, engage, and entertain. Whether it's highlighting school events, promoting student talent, 
+        or analyzing global issues that affect the youth, LegonTV is here to amplify student voices and showcase excellence.
+      </p>
+      <p>
+        Follow us as we explore campus life, share important updates, and connect students to the wider world. 
+        LegonTV isn't just a blog — it's a movement.
+      </p>
+    </div>
+
+    <div class="contact-section">
+      <h2>Contact Us</h2>
+      <form action="mailto:lhyttlesark@gmail.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+
+      <div class="social-icons">
+        <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank">
+          <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp" />
+        </a>
+        <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank">
+          <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram" />
+        </a>
+        <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank">
+          <img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube" />
+        </a>
+        <a href="https://www.tiktok.com/@legon.tvv" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok--v1.png" alt="TikTok" style="filter: invert(1);" />
+        </a>
+      </div>
+    </div>
+  </div>
+
 </body>
-</html>
+          </html>
