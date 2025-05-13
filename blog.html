@@ -35,40 +35,40 @@
     </div>
   </section>
 
-  <!-- Blog Preview Section -->
+  <!-- Blog Preview -->
   <section class="max-w-4xl mx-auto py-12 px-4">
     <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
       <img src="my-thumbnail.jpg" alt="University of Ghana" class="w-full h-64 object-cover rounded-md mb-4">
       <h2 class="text-3xl font-bold text-blue-800 mb-2">Discovering Excellence: A Glimpse into the University of Ghana, Legon</h2>
       <p class="text-gray-700 mb-4">The University of Ghana, Legon, is more than just a hub of academic excellence – it's a melting pot of cultures, ideas, and innovation...</p>
-      <a href="#full-post" class="inline-block text-blue-700 hover:underline font-semibold">Read More</a>
+      <button onclick="togglePost()" class="inline-block text-blue-700 hover:underline font-semibold">Read More</button>
     </div>
-  </section>
 
-  <!-- Full Blog Post Section -->
-  <section id="full-post" class="max-w-4xl mx-auto px-4 pb-16">
-    <article class="bg-white p-6 rounded-lg shadow-md space-y-6">
-      <p>The University of Ghana, Legon, is more than just a hub of academic excellence – it's a melting pot of cultures, ideas, and innovation. As one of the premier institutions of higher learning in West Africa, it has a rich history that spans over seven decades.</p>
+    <!-- Full Blog Post - Hidden Initially -->
+    <article id="fullPost" class="bg-white p-6 rounded-lg shadow-md space-y-6 hidden">
+      <p>The University of Ghana, Legon, is more than just a hub of academic excellence - it's a melting pot of cultures, ideas, and innovation. As one of the premier institutions of higher learning in West Africa, it has a rich history that spans over seven decades.</p>
 
       <img src="university1.jpg" alt="Campus Photo 1" class="w-full rounded-lg">
 
-      <p>Imagine walking through the vibrant campus, surrounded by lush greenery and state-of-the-art facilities. You're likely to bump into students from all over the continent, engaged in lively debates, collaborative projects, or simply soaking up the infectious energy that permeates the air.</p>
+      <p>Imagine walking through the vibrant campus, surrounded by lush greenery and state-of-the-art facilities. You're likely to bump into students from all over the continent, engaged in lively debates, collaborative projects, or simply soaking up the infectious energy that permeates the air. This is Legon - a place where young minds come to explore, discover, and unleash their potential.</p>
 
       <img src="university2.jpg" alt="Campus Photo 2" class="w-full rounded-lg">
 
-      <p>The university's story began in 1948, when it was founded as the University College of the Gold Coast. Back then, it was an affiliate college of the University of London, which supervised its academic programs and awarded degrees. Fast forward to 1961, and the University of Ghana gained full university status, allowing it to award its own degrees.</p>
+      <p>The university's story began in 1948, when it was founded as the University College of the Gold Coast. Back then, it was an affiliate college of the University of London, which supervised its academic programs and awarded degrees. Fast forward to 1961, and the University of Ghana gained full university status, allowing it to award its own degrees. This marked a significant milestone in the institution's history, paving the way for it to become the renowned university it is today.</p>
 
       <img src="university3.jpg" alt="Campus Photo 3" class="w-full rounded-lg">
 
-      <p>Today, the University of Ghana, Legon, is a beacon of academic excellence, attracting students from all over the world. Its academic programs are designed to equip students with the knowledge, skills, and competencies needed to succeed in their chosen careers.</p>
+      <p>Today, the University of Ghana, Legon, is a beacon of academic excellence, attracting students from all over the world. Its academic programs are designed to equip students with the knowledge, skills, and competencies needed to succeed in their chosen careers. From the Bachelor of Arts in Education to the Bachelor of Laws, and from Actuarial Science to Medicine, the university offers a wide range of programs that cater to diverse interests and passions.</p>
 
-      <p>It's not just about academics – it's about the experience. A community that values creativity, innovation, and entrepreneurship. A community that encourages you to think outside the box, challenge the status quo, and push the boundaries of what's possible.</p>
+      <p>But it's not just about academics - it's about the experience. Imagine being part of a community that values creativity, innovation, and entrepreneurship. A community that encourages you to think outside the box, challenge the status quo, and push the boundaries of what's possible. This is the Legon way - a way of life that fosters growth, development, and transformation.</p>
 
-      <p>As you explore the campus, you'll notice the blend of modern and traditional architecture, reflecting the university's commitment to preserving its rich heritage while embracing innovation.</p>
+      <img src="university4.jpg" alt="Campus Photo 4" class="w-full rounded-lg">
+
+      <p>As you explore the campus, you'll notice the blend of modern and traditional architecture, reflecting the university's commitment to preserving its rich heritage while embracing innovation. The university's sports stadium, with a capacity of 10,000, hosts association football, rugby union, and athletics events, showcasing the institution's commitment to sports development.</p>
 
       <p>The University of Ghana, Legon, is led by visionary leaders who are passionate about shaping the next generation of leaders. Mary Chinery-Hesse, the Chancellor, and Nana Aba Appiah Amfo, the Vice-Chancellor, are just two examples of the exceptional individuals who are driving the university's mission forward.</p>
 
-      <p>In conclusion, the University of Ghana, Legon, is a world-class institution that offers so much more than just academic excellence. Whether you're interested in academics, sports, or entrepreneurship, Legon has something for everyone. So, what are you waiting for? Come and experience it for yourself!</p>
+      <p>In conclusion, the University of Ghana, Legon, is a world-class institution that offers so much more than just academic excellence. It's a place where young people can come to discover their passions, develop their talents, and unleash their potential. Whether you're interested in academics, sports, or entrepreneurship, Legon has something for everyone. So, what are you waiting for? Come and experience it for yourself!</p>
     </article>
   </section>
 
@@ -79,5 +79,13 @@
     </div>
   </footer>
 
+  <!-- JavaScript -->
+  <script>
+    function togglePost() {
+      const post = document.getElementById('fullPost');
+      post.classList.toggle('hidden');
+      window.scrollTo({ top: post.offsetTop, behavior: 'smooth' });
+    }
+  </script>
 </body>
   </html>
