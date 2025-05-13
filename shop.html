@@ -1,153 +1,186 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Legon TV Shop</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>  <style>
-    body {
+  <title>Legon TV Shop - Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
       font-family: 'Montserrat', sans-serif;
+      color: #fff;
       background-color: #000;
-      color: white;
-      overflow: hidden;
     }
 
     .background-video {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: -1;
     }
 
     header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 10px 30px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      z-index: 1;
+      align-items: center;
+      padding: 20px;
+      position: absolute;
+      width: 100%;
+      z-index: 2;
     }
 
-    header img {
+    .logo img {
       height: 50px;
     }
 
-    .social-icons a {
-      margin-left: 15px;
+    .socials a {
       color: white;
-      text-decoration: none;
-      font-size: 20px;
+      margin-left: 20px;
+      font-size: 1.2em;
+      transition: color 0.3s;
     }
 
-    .center-container {
+    .socials a:hover {
+      color: #1da1f2;
+    }
+
+    .center-content {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
       text-align: center;
-      padding: 20px;
-      position: relative;
       z-index: 1;
+      position: relative;
+      background: rgba(0, 0, 0, 0.5);
     }
 
-    .typing-animation {
-      font-size: 2.5rem;
+    .typing-text {
+      font-size: 36px;
       font-weight: bold;
       color: white;
+      margin-bottom: 20px;
     }
 
     .coming-soon {
-      display: none;
-      font-size: 4rem;
+      font-size: 48px;
       font-weight: 700;
-      margin-top: 30px;
-      animation: fadeIn 2s ease-in-out forwards;
+      color: white;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 6s;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .countdown, .newsletter {
-      margin-top: 20px;
-      color: white;
-      font-size: 1.2rem;
-    }
-
-    .newsletter input[type="email"] {
-      padding: 10px;
-      margin-right: 10px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    .newsletter button {
-      padding: 10px 20px;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style></head>
-<body>  <video class="background-video" autoplay muted loop>
-    <source src="https://assets.mixkit.co/videos/preview/mixkit-cityscape-at-dusk-27176-large.mp4" type="video/mp4" />
-  </video>  <header>
-    <img src="logo.png" alt="Legon TV Logo">
-    <div class="social-icons">
-      <a href="https://instagram.com/legontv.web" target="_blank">Instagram</a>
-      <a href="https://tiktok.com/@legon.tvv" target="_blank">TikTok</a>
-      <a href="https://youtube.com/@legontv" target="_blank">YouTube</a>
-      <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank">WhatsApp</a>
-    </div>
-  </header>  <div class="center-container">
-    <div class="typing-animation">
-      <span id="typed-text"></span><span class="cursor">|</span>
-    </div>
-    <div id="coming-soon" class="coming-soon">COMING SOON</div>
-    <div class="countdown" id="countdown">Launching in: <span id="timer"></span></div>
-    <div class="newsletter">
-      <p>Sign up for updates:</p>
-      <input type="email" placeholder="Enter your email">
-      <button>Subscribe</button>
-    </div>
-  </div>  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>  <script>
-    var typed = new Typed('#typed-text', {
-      strings: ['Hey you, yes you...', 'Legon TV Shop is coming soon...'],
-      typeSpeed: 60,
-      backSpeed: 30,
-      backDelay: 1000,
-      startDelay: 1000,
-      loop: false,
-      showCursor: false,
-      onComplete: function () {
-        document.getElementById('coming-soon').style.display = 'block';
+      to {
+        opacity: 1;
       }
-    });
+    }
 
-    // Countdown timer
-    const launchDate = new Date("July 1, 2025 00:00:00").getTime();
-    const timerElement = document.getElementById("timer");
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
+    .countdown {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    .hidden {
+      display: none;
+    }
 
-      timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
-  </script></body>
+    @media (max-width: 600px) {
+      .typing-text {
+        font-size: 24px;
+      }
+      .coming-soon {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video class="background-video" autoplay muted loop>
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-cityscape-at-dusk-27176-large.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="LegonTV Logo">
+    </div>
+    <div class="socials">
+      <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@legon.tvv" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </header>
+
+  <div class="center-content">
+    <div class="typing-text" id="typing"></div>
+    <div class="coming-soon" id="coming-soon">COMING SOON</div>
+    <div class="countdown" id="countdown"></div>
+  </div>
+
+  <script>
+    // Typing animation
+    const text = "Hey you, yes you... Legon TV Shop is coming soon...";
+    let i = 0;
+    const speed = 100;
+
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      } else {
+        setTimeout(() => {
+          document.getElementById("typing").style.display = "none";
+        }, 1000);
+      }
+    }
+
+    window.onload = function () {
+      typeWriter();
+      setCountdown();
+    };
+
+    // Countdown to 60 days from today
+    function setCountdown() {
+      const now = new Date();
+      const targetDate = new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000); // 60 days
+      const countdownEl = document.getElementById("countdown");
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          countdownEl.innerHTML = "Launched!";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownEl.innerHTML = `Launching in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      setInterval(updateCountdown, 1000);
+    }
+  </script>
+</body>
 </html>
