@@ -1,74 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | LegonTV</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
   <style>
-    html {
-      scroll-behavior: smooth;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #0077cc, #003366);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header img {
+      height: 40px;
+      vertical-align: middle;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px #000;
+    }
+    .about {
+      padding: 30px;
+      background-color: white;
+      max-width: 900px;
+      margin: 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .contact {
+      padding: 30px;
+      background-color: #fff;
+      max-width: 900px;
+      margin: 0 auto 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .socials {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .socials a {
+      margin: 0 15px;
+    }
+    .socials img {
+      width: 40px;
+      height: 40px;
+    }
+    footer {
+      background: linear-gradient(135deg, #003366, #0077cc);
+      color: white;
+      text-align: center;
+      padding: 15px;
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
-
-  <!-- Header -->
-  <header class="bg-gradient-to-r from-blue-800 to-blue-500 shadow-md">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
-      <img src="logo.png" alt="LegonTV Logo" class="h-10">
-      <nav class="space-x-6 text-white font-semibold">
-        <a href="index.html" class="hover:underline">Home</a>
-        <a href="blog.html" class="hover:underline">Blog</a>
-        <a href="politics.html" class="hover:underline">Politics</a>
-        <a href="contact.html" class="underline">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- About Us Section -->
-  <section class="max-w-4xl mx-auto py-12 px-4">
-    <h2 class="text-3xl font-bold text-blue-800 mb-6">About Us</h2>
-    <p class="text-gray-700 mb-4">
-      Welcome to our corner of the internet! I’m Legon KWESI ARTHUR, and this is where I share my thoughts, experiences, and insights as an entrepreneur and photographer. You might know me from my Instagram, now LegonKWESIARTHUR, or my X (formerly Twitter) presence at <a href="https://x.com/whyz_lhyttle?t=-ZsV_g6P7KfN06HoLNPeGA&s=08" class="text-blue-600 hover:underline">https://x.com/whyz_lhyttle</a>. Originally from Dansoman, I’ve been navigating the online world since joining in 2017, building a community. You’ll find a mix of content here, from my entrepreneurial ventures (including my online store featuring hoodies, crop hoodies, sweatshirts, and iPhone accessories) to my photomodeling work. I’m excited to connect with you and share my journey. Feel free to explore, engage, and join the conversation!
+<body>
+  <header>
+    <img src="logo.png" alt="LegonTV Logo" />
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>  <div class="hero">
+    Connect With LegonTV
+  </div>  <section class="about">
+    <h2>About LegonTV</h2>
+    <p>
+      LegonTV is your window into campus culture, education, and global student life. From the latest entertainment buzz to political developments that affect students and educators, we bring it all under one roof. With a mission to inform, engage, and inspire, we cover real stories from real people—on and off campus.
     </p>
-  </section>
-
-  <!-- Contact Form -->
-  <section class="max-w-4xl mx-auto py-12 px-4 bg-white rounded-lg shadow-md">
-    <h2 class="text-3xl font-bold text-blue-800 mb-6">Get in Touch</h2>
-    <form action="mailto:lhyttlesark@gmail.com" method="POST" enctype="text/plain" class="space-y-6">
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Name</label>
-        <input type="text" name="name" class="w-full mt-1 p-3 border border-gray-300 rounded-md" required>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Email</label>
-        <input type="email" name="email" class="w-full mt-1 p-3 border border-gray-300 rounded-md" required>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Message</label>
-        <textarea name="message" rows="5" class="w-full mt-1 p-3 border border-gray-300 rounded-md" required></textarea>
-      </div>
-      <button type="submit" class="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800">Send Message</button>
-    </form>
-  </section>
-
-  <!-- Social Media Links -->
-  <section class="max-w-4xl mx-auto py-12 px-4">
-    <h2 class="text-3xl font-bold text-blue-800 mb-6">Connect with Us</h2>
-    <div class="flex flex-wrap gap-6">
-      <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank" class="flex items-center space-x-2 text-green-600 hover:underline">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2.003a9.99 9.99 0 00-8.99 14.99l-1.05 3.85 3.96-1.04a9.99 9.99 0 0014.99-8.99 10 10 0 00-9.91-8.9zm0 18.18a8.18 8.18 0 01-4.18-1.16l-.3-.18-2.35.62.63-2.29-.19-.3a8.18 8.18 0 1114.39-5.68 8.18 8.18 0 01-8.18 8.18zm4.5-6.18c-.25-.13-1.47-.73-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.8.98-.15.17-.3.19-.55.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.3.38-.45.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.5-.4-.43-.56-.44-.15-.01-.32-.01-.5-.01-.17 0-.45.06-.68.32-.23.25-.9.88-.9 2.13s.92 2.47 1.05 2.64c.13.17 1.8 2.75 4.37 3.86.61.26 1.09.42 1.46.54.61.19 1.17.16 1.61.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.29z"/></svg>
-        <span>WhatsApp Channel</span>
+    <p>
+      Our team is made up of student journalists, content creators, and creatives passionate about uncovering the pulse of university life in Ghana and beyond. We are storytellers for a generation that wants the truth, told with authenticity and energy. LegonTV doesn’t just report the news; we shape the conversation.
+    </p>
+  </section>  <section class="contact">
+    <h2>Contact Us</h2>
+    <p>Have questions, stories, or tips? We'd love to hear from you!</p>
+    <p>Email us at: <strong>lhyttlesark@gmail.com</strong></p>
+    <div class="socials">
+      <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/000000/whatsapp.png" alt="WhatsApp">
       </a>
-      <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank" class="flex items-center space-x-2 text-pink-600 hover:underline">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-.75a1 1 0 110 2 1 1 0 010-2z"/></svg>
-        <span>Instagram</span>
+      <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram">
       </a>
-      <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank" class="flex items-center space-x-2 text-red-600 hover:underline">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6zm12-3c0-1.1-.9-2-2-2H4a2 2 0 00-2 2v0c0 1.1.9 2 2 2h16a2 2 0 002-2v0z"/></svg>
-        <span>YouTube</span>
+      <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank">
+        <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube">
       </a>
-      <a href="https://www.tiktok.com/@legon.tvv" target="_blank" class="flex items-center space-x-2 text-black hover:underline">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.47c.5.09.68-.22.68-.48v-1.7c-2.78.0
+      <a href="https://www.tiktok.com/@legon.tvv" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/TikTok_logo.svg" alt="TikTok">
+      </a>
+    </div>
+  </section>  <footer>
+    &copy; 2025 LegonTV. All rights reserved.
+  </footer>
+</body>
+  </html>
