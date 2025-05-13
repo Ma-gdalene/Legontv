@@ -1,189 +1,150 @@
+/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body, html {
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
 }
 
-header {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
-
-.navbar {
+/* Utility Bar */
+.utility-bar {
+  background-color: #001f4d;
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 34, 85, 0.9);
-  padding: 20px 30px;
-  flex-wrap: wrap;
+  padding: 8px 20px;
+  font-size: 0.9rem;
 }
-
-.logo {
-  height: 40px;
+.breaking-news {
+  color: #ffc107;
 }
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.nav-links li a {
+.sign-in {
+  color: #fff;
   text-decoration: none;
+  font-weight: bold;
+}
+.sign-in:hover {
+  text-decoration: underline;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgba(0, 0, 50, 0.9);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.logo {
+  height: 45px;
+}
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+.nav-links a {
   color: white;
+  text-decoration: none;
   font-weight: bold;
   transition: color 0.3s;
 }
-
-.nav-links li a:hover {
+.nav-links a:hover {
   color: #ffc107;
 }
 
+/* Hero Section */
 .hero {
   background: url('Background.jpg') no-repeat center center/cover;
   height: 100vh;
-  position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  align-items: center;
   text-align: center;
+  position: relative;
 }
-
-.hero-overlay {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 40px 20px;
-  border-radius: 10px;
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2); /* subtle tint to make text readable */
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
   color: white;
   max-width: 90%;
 }
-
-.hero-overlay h1 {
-  font-size: 2.5rem;
+.hero-content h1 {
+  font-size: 3rem;
   margin-bottom: 15px;
-  animation: fadeInUp 1.5s ease forwards;
 }
-
-.hero-overlay p {
-  font-size: 1.1rem;
+.hero-content p {
+  font-size: 1.2rem;
   margin-bottom: 20px;
-  animation: fadeIn 2s ease forwards;
 }
-
 .btn {
   background-color: #ffc107;
-  color: black;
+  color: #000;
   padding: 12px 25px;
-  font-weight: bold;
   text-decoration: none;
+  font-weight: bold;
   border-radius: 5px;
-  transition: background 0.3s ease;
-  animation: fadeIn 2.5s ease forwards;
+  transition: background 0.3s;
 }
-
 .btn:hover {
   background-color: #e6b800;
 }
 
+/* Footer */
 footer {
-  background-color: #002255;
+  background-color: #001f4d;
   color: white;
-  padding: 20px;
   text-align: center;
+  padding: 20px 15px;
 }
-
 .footer-links {
   margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
 }
-
 .footer-links a {
   color: #ffc107;
+  margin: 0 10px;
   text-decoration: none;
-  font-weight: 500;
 }
-
 .footer-links a:hover {
   text-decoration: underline;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* --- Responsive Rules --- */
+/* Responsive */
 @media (max-width: 768px) {
   .nav-links {
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    padding-top: 10px;
+    flex-wrap: wrap;
+    gap: 15px;
   }
-
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+  .hero-content h1 {
+    font-size: 2.2rem;
   }
-
-  .hero-overlay h1 {
-    font-size: 2rem;
-  }
-
-  .hero-overlay p {
-    font-size: 1rem;
-  }
-
-  .btn {
+  .hero-content p {
     font-size: 1rem;
   }
 }
-
 @media (max-width: 480px) {
-  .hero-overlay h1 {
-    font-size: 1.6rem;
-  }
-
-  .hero-overlay p {
-    font-size: 0.95rem;
-  }
-
-  .btn {
-    padding: 10px 20px;
-    font-size: 0.95rem;
-  }
-
   .nav-links {
-    gap: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
-
-  .navbar {
-    padding: 15px;
+  .hero-content h1 {
+    font-size: 1.8rem;
   }
-    }
+  .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
