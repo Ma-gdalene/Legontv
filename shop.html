@@ -79,24 +79,21 @@
       font-weight: 700;
       color: white;
       opacity: 0;
+      display: none;
       animation: fadeIn 2s ease forwards;
-      animation-delay: 6s;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
     }
 
     .countdown {
       margin-top: 20px;
       font-size: 24px;
       font-weight: 600;
+      display: none;
     }
 
-    .hidden {
-      display: none;
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     @media (max-width: 600px) {
@@ -134,7 +131,6 @@
   </div>
 
   <script>
-    // Typing animation
     const text = "Hey you, yes you... Legon TV Shop is coming soon...";
     let i = 0;
     const speed = 100;
@@ -147,16 +143,14 @@
       } else {
         setTimeout(() => {
           document.getElementById("typing").style.display = "none";
+          const soon = document.getElementById("coming-soon");
+          soon.style.display = "block";
+          soon.style.animationDelay = "0s";
+          document.getElementById("countdown").style.display = "block";
         }, 1000);
       }
     }
 
-    window.onload = function () {
-      typeWriter();
-      setCountdown();
-    };
-
-    // Countdown to 60 days from today
     function setCountdown() {
       const now = new Date();
       const targetDate = new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000); // 60 days
@@ -181,6 +175,11 @@
 
       setInterval(updateCountdown, 1000);
     }
+
+    window.onload = function () {
+      typeWriter();
+      setCountdown();
+    };
   </script>
 </body>
-</html>
+  </html>
