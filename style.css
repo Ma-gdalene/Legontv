@@ -5,93 +5,111 @@
 }
 
 body, html {
-  font-family: Arial, sans-serif;
   height: 100%;
-  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* NAVBAR */
 header {
-  background: #002855;
-  padding: 10px 20px;
+  background-color: #002c5f; /* Dark blue */
 }
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px 20px;
+  flex-wrap: wrap;
 }
 
 .logo {
   height: 40px;
 }
 
-.nav-links {
-  list-style: none;
+.nav-menu {
   display: flex;
+  list-style: none;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-.nav-links li a {
-  text-decoration: none;
+.nav-menu li a {
   color: white;
   font-weight: bold;
-  transition: 0.3s;
+  text-decoration: none;
+  font-size: 1rem;
 }
 
-.nav-links li a:hover {
-  color: #FFD700;
-}
-
+/* HERO SECTION */
 .hero {
   background: url('background.jpg') no-repeat center center/cover;
-  height: 100vh;
+  height: calc(100vh - 60px);
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: white;
-  position: relative;
 }
 
 .hero::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5); /* Overlay */
   z-index: 0;
 }
 
-.hero-content {
+.hero-text {
   position: relative;
   z-index: 1;
 }
 
-.hero h1 {
-  font-size: 2.5rem;
+/* TEXT + BUTTON STYLING */
+.hero-text h1 {
+  font-size: 2.8rem;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.hero h1 span {
-  font-size: 2.8rem;
-}
-
-.hero p {
+.hero-text p {
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
 
-.btn {
+.watch-button {
   background-color: #FFD700;
   color: black;
   padding: 12px 24px;
-  text-decoration: none;
   font-weight: bold;
-  border-radius: 6px;
+  text-decoration: none;
+  border-radius: 5px;
   transition: 0.3s;
 }
 
-.btn:hover {
+.watch-button:hover {
   background-color: #e6c200;
-    }
+}
+
+/* ANIMATIONS */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.5s;
+}
+
+.delay-2 {
+  animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  }
