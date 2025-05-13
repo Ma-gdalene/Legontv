@@ -3,26 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Legon TV Blog</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>LegonTV Blog</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
   <style>
-    header, footer {
-      background: linear-gradient(to right, #003366, #66ccff);
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50 text-gray-900">
 
   <!-- Header -->
-  <header class="text-white p-6">
-    <div class="flex items-center justify-between">
-      <img src="logo.png" alt="Legon TV Logo" class="h-10">
-      <nav>
-        <ul class="flex space-x-6">
-          <li><a href="#" class="hover:text-gray-300">Home</a></li>
-          <li><a href="#" class="hover:text-gray-300">About</a></li>
-          <li><a href="#" class="hover:text-gray-300">Contact</a></li>
-        </ul>
+  <header class="bg-gradient-to-r from-blue-800 to-blue-500 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
+      <img src="logo.png" alt="LegonTV Logo" class="h-10">
+      <nav class="space-x-6 text-white font-semibold">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="blog.html" class="hover:underline">Blog</a>
+        <a href="politics.html" class="hover:underline">Politics</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
       </nav>
     </div>
   </header>
@@ -31,76 +30,54 @@
   <section class="relative h-96 bg-cover bg-center" style="background-image: url('blog-hero.jpg');">
     <div class="absolute inset-0 bg-white opacity-60"></div>
     <div class="relative z-10 text-center py-24 px-4">
-      <h1 class="text-4xl font-bold text-blue-900">LegonTV Blog</h1>
-      <p class="mt-4 text-xl text-blue-800">Your source for news and updates from the University of Ghana, Legon.</p>
+      <h1 class="text-5xl md:text-6xl font-extrabold text-blue-900 tracking-wide drop-shadow-lg">LegonTV Blog</h1>
+      <p class="mt-4 text-lg md:text-xl text-blue-800 font-medium">Stories, Voices, and Campus Vibes</p>
     </div>
   </section>
 
-  <!-- Blog Post Preview Section -->
-  <section class="max-w-6xl mx-auto py-16">
-    <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden mb-8">
-      <img src="my-thumbnail.jpg" alt="University of Ghana Campus" class="w-full h-48 object-cover" />
-      <div class="p-6">
-        <h2 class="text-2xl font-bold text-blue-900 mb-2">
-          Discovering Excellence: A Glimpse into the University of Ghana, Legon
-        </h2>
-        <p class="text-gray-700 mb-4">
-          The University of Ghana, Legon, is more than just a hub of academic excellence – it's a melting pot of cultures, ideas, and innovation...
-        </p>
-        <button onclick="document.getElementById('fullPost').classList.remove('hidden'); this.classList.add('hidden');" class="text-blue-700 hover:text-blue-900 font-semibold">
-          Read More
-        </button>
-      </div>
+  <!-- Blog Preview Section -->
+  <section class="max-w-4xl mx-auto py-12 px-4">
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
+      <img src="my-thumbnail.jpg" alt="University of Ghana" class="w-full h-64 object-cover rounded-md mb-4">
+      <h2 class="text-3xl font-bold text-blue-800 mb-2">Discovering Excellence: A Glimpse into the University of Ghana, Legon</h2>
+      <p class="text-gray-700 mb-4">The University of Ghana, Legon, is more than just a hub of academic excellence – it's a melting pot of cultures, ideas, and innovation...</p>
+      <a href="#full-post" class="inline-block text-blue-700 hover:underline font-semibold">Read More</a>
     </div>
+  </section>
 
-    <!-- Full Blog Post -->
-    <div id="fullPost" class="hidden max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden mb-8">
-      <div class="p-6 space-y-6 text-gray-700">
+  <!-- Full Blog Post Section -->
+  <section id="full-post" class="max-w-4xl mx-auto px-4 pb-16">
+    <article class="bg-white p-6 rounded-lg shadow-md space-y-6">
+      <p>The University of Ghana, Legon, is more than just a hub of academic excellence – it's a melting pot of cultures, ideas, and innovation. As one of the premier institutions of higher learning in West Africa, it has a rich history that spans over seven decades.</p>
 
-        <p>
-          The University of Ghana, Legon, is more than just a hub of academic excellence – it's a melting pot of cultures, ideas, and innovation. As one of the premier institutions of higher learning in West Africa, it has a rich history that spans over seven decades.
-        </p>
+      <img src="university1.jpg" alt="Campus Photo 1" class="w-full rounded-lg">
 
-        <img src="university1.jpg" alt="Campus" class="w-full rounded-lg">
+      <p>Imagine walking through the vibrant campus, surrounded by lush greenery and state-of-the-art facilities. You're likely to bump into students from all over the continent, engaged in lively debates, collaborative projects, or simply soaking up the infectious energy that permeates the air.</p>
 
-        <p>
-          Imagine walking through the vibrant campus, surrounded by lush greenery and state-of-the-art facilities. You're likely to bump into students from all over the continent, engaged in lively debates, collaborative projects, or simply soaking up the infectious energy that permeates the air.
-        </p>
+      <img src="university2.jpg" alt="Campus Photo 2" class="w-full rounded-lg">
 
-        <img src="university2.jpg" alt="Student Life" class="w-full rounded-lg">
+      <p>The university's story began in 1948, when it was founded as the University College of the Gold Coast. Back then, it was an affiliate college of the University of London, which supervised its academic programs and awarded degrees. Fast forward to 1961, and the University of Ghana gained full university status, allowing it to award its own degrees.</p>
 
-        <p>
-          The university's story began in 1948, when it was founded as the University College of the Gold Coast. Back then, it was an affiliate college of the University of London, which supervised its academic programs and awarded degrees. Fast forward to 1961, and the University of Ghana gained full university status.
-        </p>
+      <img src="university3.jpg" alt="Campus Photo 3" class="w-full rounded-lg">
 
-        <img src="university3.jpg" alt="Lecture Hall" class="w-full rounded-lg">
+      <p>Today, the University of Ghana, Legon, is a beacon of academic excellence, attracting students from all over the world. Its academic programs are designed to equip students with the knowledge, skills, and competencies needed to succeed in their chosen careers.</p>
 
-        <p>
-          Today, the University of Ghana is a beacon of academic excellence. Its academic programs are designed to equip students with knowledge and skills. From the Bachelor of Arts in Education to the Bachelor of Laws and Medicine, the university offers a wide range of programs.
-        </p>
+      <p>It's not just about academics – it's about the experience. A community that values creativity, innovation, and entrepreneurship. A community that encourages you to think outside the box, challenge the status quo, and push the boundaries of what's possible.</p>
 
-        <img src="university4.jpg" alt="Graduation" class="w-full rounded-lg">
+      <p>As you explore the campus, you'll notice the blend of modern and traditional architecture, reflecting the university's commitment to preserving its rich heritage while embracing innovation.</p>
 
-        <p>
-          The university values creativity, innovation, and entrepreneurship. As you explore the campus, you'll notice a blend of modern and traditional architecture, reflecting its commitment to preserving heritage while embracing innovation.
-        </p>
+      <p>The University of Ghana, Legon, is led by visionary leaders who are passionate about shaping the next generation of leaders. Mary Chinery-Hesse, the Chancellor, and Nana Aba Appiah Amfo, the Vice-Chancellor, are just two examples of the exceptional individuals who are driving the university's mission forward.</p>
 
-        <p>
-          The University of Ghana is led by visionary leaders like Mary Chinery-Hesse and Nana Aba Appiah Amfo. They are passionate about shaping the next generation of leaders.
-        </p>
-
-        <p>
-          In conclusion, Legon is a world-class institution where young people come to discover their passions, develop their talents, and unleash their potential. Whether you're interested in academics, sports, or entrepreneurship, Legon has something for everyone.
-        </p>
-
-      </div>
-    </div>
+      <p>In conclusion, the University of Ghana, Legon, is a world-class institution that offers so much more than just academic excellence. Whether you're interested in academics, sports, or entrepreneurship, Legon has something for everyone. So, what are you waiting for? Come and experience it for yourself!</p>
+    </article>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gradient-to-r from-blue-900 to-blue-500 text-white p-6 text-center">
-    <p>&copy; 2025 Legon TV | All Rights Reserved</p>
+  <footer class="bg-gradient-to-r from-blue-800 to-blue-500 text-white py-6 mt-12">
+    <div class="container mx-auto text-center text-sm">
+      &copy; 2025 LegonTV. All rights reserved.
+    </div>
   </footer>
 
 </body>
-</html>
+  </html>
