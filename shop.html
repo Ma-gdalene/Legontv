@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Legon TV Shop</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-  <style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>  <style>
     body {
       margin: 0;
       padding: 0;
@@ -35,11 +32,19 @@
       padding: 10px 30px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       z-index: 1;
     }
 
     header img {
       height: 50px;
+    }
+
+    .social-icons a {
+      margin-left: 15px;
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
     }
 
     .center-container {
@@ -72,27 +77,51 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-  </style>
-</head>
-<body>
 
-  <video class="background-video" autoplay muted loop>
+    .countdown, .newsletter {
+      margin-top: 20px;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .newsletter input[type="email"] {
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .newsletter button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style></head>
+<body>  <video class="background-video" autoplay muted loop>
     <source src="https://assets.mixkit.co/videos/preview/mixkit-cityscape-at-dusk-27176-large.mp4" type="video/mp4" />
-  </video>
-
-  <header>
+  </video>  <header>
     <img src="logo.png" alt="Legon TV Logo">
-  </header>
-
-  <div class="center-container">
+    <div class="social-icons">
+      <a href="https://instagram.com/legontv.web" target="_blank">Instagram</a>
+      <a href="https://tiktok.com/@legon.tvv" target="_blank">TikTok</a>
+      <a href="https://youtube.com/@legontv" target="_blank">YouTube</a>
+      <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank">WhatsApp</a>
+    </div>
+  </header>  <div class="center-container">
     <div class="typing-animation">
       <span id="typed-text"></span><span class="cursor">|</span>
     </div>
     <div id="coming-soon" class="coming-soon">COMING SOON</div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-  <script>
+    <div class="countdown" id="countdown">Launching in: <span id="timer"></span></div>
+    <div class="newsletter">
+      <p>Sign up for updates:</p>
+      <input type="email" placeholder="Enter your email">
+      <button>Subscribe</button>
+    </div>
+  </div>  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>  <script>
     var typed = new Typed('#typed-text', {
       strings: ['Hey you, yes you...', 'Legon TV Shop is coming soon...'],
       typeSpeed: 60,
@@ -105,7 +134,20 @@
         document.getElementById('coming-soon').style.display = 'block';
       }
     });
-  </script>
 
-</body>
+    // Countdown timer
+    const launchDate = new Date("July 1, 2025 00:00:00").getTime();
+    const timerElement = document.getElementById("timer");
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script></body>
 </html>
