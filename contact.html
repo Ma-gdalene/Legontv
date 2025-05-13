@@ -1,115 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legon TV - Contact</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | LegonTV</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: url('background3.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
 
-        .hero {
-            background-image: url('https://example.com/path/to/background3.jpg'); /* Replace this with your actual hosted background3 image URL */
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-        }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      background: rgba(0, 0, 0, 0.7);
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-            font-weight: 700;
-        }
+    header img {
+      height: 50px;
+    }
 
-        .content {
-            padding: 2rem;
-        }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-        .content h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
+    .hero {
+      text-align: center;
+      padding: 60px 20px 20px;
+    }
 
-        .content p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
 
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
+    .about {
+      max-width: 800px;
+      margin: 20px auto;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .contact-form {
+      max-width: 800px;
+      margin: 20px auto;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
-        }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
 
-        .social-icons a {
-            margin: 0 10px;
-            color: white;
-            font-size: 1.5rem;
-        }
-    </style>
+    .contact-form button {
+      background-color: #0057ff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .socials {
+      text-align: center;
+      margin: 30px auto;
+    }
+
+    .socials a {
+      color: white;
+      font-size: 18px;
+      margin: 0 15px;
+      display: inline-block;
+      text-decoration: none;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .socials a:hover {
+      background: #0057ff;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      text-align: center;
+      color: #ccc;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <img src="logo.png" alt="LegonTV Logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="politics.html">Politics</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-    <header>
-        <nav>
-            <a href="/" class="logo">Legon TV</a>
-            <div class="social-icons">
-                <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank">WhatsApp</a>
-                <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank">Instagram</a>
-                <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank">YouTube</a>
-                <a href="https://www.tiktok.com/@legon.tvv?_r=1&_d=ed41fa774hh6ae&sec_uid=MS4wLjABAAAAEgn4x02QaGTnP6c5AjYmvw96i0QMB0NznPvEkw5JlsJXEJ1iSgrAQZE6ysCyxkh7" target="_blank">TikTok</a>
-            </div>
-        </nav>
-    </header>
+  <section class="hero">
+    <h1>Contact LegonTV</h1>
+  </section>
 
-    <div class="hero">
-        <h1>Contact Legon TV</h1>
-    </div>
+  <section class="about">
+    <h2>About Us</h2>
+    <p>LegonTV is your premier destination for school-related entertainment, trends, events, and stories. From the vibrant student life on campus to insightful commentary on academic and social matters, LegonTV connects the world to everything happening in and around student culture.</p>
+  </section>
 
-    <div class="content">
-        <h2>About Us</h2>
-        <p>Legon TV is a global platform dedicated to bringing the latest news, educational insights, and entertainment from around the world. Our mission is to connect viewers with stories that matter, covering topics ranging from academic excellence to cultural trends.</p>
-        <h3>Contact Details</h3>
-        <p>Email: <a href="mailto:lhyttlesark@gmail.com">lhyttlesark@gmail.com</a></p>
-    </div>
+  <section class="contact-form">
+    <h2>Get in Touch</h2>
+    <form action="mailto:lhyttlesark@gmail.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-    <footer>
-        <p>© 2025 Legon TV | All Rights Reserved</p>
-    </footer>
+  <section class="socials">
+    <h2>Follow Us</h2>
+    <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank">WhatsApp</a>
+    <a href="https://www.instagram.com/legontv.web?igsh=ejlobXU3dWtoZHE5" target="_blank">Instagram</a>
+    <a href="https://youtube.com/@legontv?si=gYw_5Z3Yj2nNILAf" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@legon.tvv" target="_blank">TikTok</a>
+  </section>
 
+  <footer>
+    &copy; 2025 LegonTV. All rights reserved.
+  </footer>
 </body>
-</html>
+    </html>
