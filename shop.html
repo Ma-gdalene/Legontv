@@ -4,13 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LegonTV Shop</title>
-
-  <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap">
-
-  <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     * {
       margin: 0;
@@ -21,9 +16,9 @@
     body {
       font-family: 'Montserrat', sans-serif;
       background: url('background2.jpg') no-repeat center center/cover;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       color: white;
-      position: relative;
     }
 
     header {
@@ -32,8 +27,6 @@
       align-items: center;
       padding: 15px 30px;
       background: linear-gradient(90deg, #0d47a1, #1976d2);
-      z-index: 2;
-      position: relative;
     }
 
     header img {
@@ -52,7 +45,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 60px 20px;
+      height: calc(100vh - 100px);
       text-align: center;
       position: relative;
       z-index: 2;
@@ -76,7 +69,6 @@
       to { opacity: 1; }
     }
 
-    /* Countdown Styles */
     #countdown {
       margin-top: 30px;
       display: flex;
@@ -120,6 +112,16 @@
       }
     }
 
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: #fff;
+      z-index: 2;
+    }
+
     .socials {
       margin-top: 30px;
     }
@@ -135,63 +137,18 @@
       transform: scale(1.3);
     }
 
-    footer {
-      background: rgba(0, 0, 0, 0.85);
-      padding: 20px;
-      text-align: center;
-      font-size: 14px;
-      color: #fff;
-      position: relative;
-      z-index: 2;
-    }
-
     audio {
       display: none;
     }
 
     #overlay {
       background: rgba(0, 0, 0, 0.4);
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
       z-index: 1;
-    }
-
-    /* Social Feed Section */
-    .social-feed {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-      margin: 60px auto;
-      max-width: 1200px;
-      z-index: 2;
-      position: relative;
-    }
-
-    .social-feed iframe {
-      border: none;
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    }
-
-    @media (max-width: 768px) {
-      .countdown-box {
-        width: 80px;
-        padding: 15px;
-      }
-
-      .countdown-box span {
-        font-size: 2em;
-      }
-
-      .social-feed {
-        flex-direction: column;
-        align-items: center;
-      }
     }
   </style>
 </head>
@@ -226,21 +183,13 @@
         <p>Seconds</p>
       </div>
     </div>
+
     <div class="socials">
       <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank"><i class="fab fa-whatsapp"></i></a>
       <a href="https://www.instagram.com/legontv.web" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="https://youtube.com/@legontv" target="_blank"><i class="fab fa-youtube"></i></a>
       <a href="https://www.tiktok.com/@legon.tvv" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
-  </div>
-
-  <!-- Social Media Feeds -->
-  <div class="social-feed">
-    <!-- Instagram Embed -->
-    <iframe src="https://www.instagram.com/legontv.web/embed" width="400" height="480" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen></iframe>
-
-    <!-- Twitter Embed -->
-    <iframe src="https://twitframe.com/show?url=https://twitter.com/legontv" width="400" height="480" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen></iframe>
   </div>
 
   <audio id="bg-music" autoplay loop>
@@ -252,7 +201,6 @@
     &copy; 2025 LegonTV. All rights reserved.
   </footer>
 
-  <!-- Typed.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -298,4 +246,4 @@
     });
   </script>
 </body>
-      </html>
+</html>
