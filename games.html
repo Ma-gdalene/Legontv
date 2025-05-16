@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LegonTV Games</title>
   <style>
     * {
@@ -9,108 +9,127 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }body {
-  background: linear-gradient(135deg, #1e3a8a, #0f172a);
-  color: white;
-  padding: 20px;
-}
-
-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-header h1 {
-  font-size: 3rem;
-  color: #00ffea;
-  text-shadow: 0 0 10px #00ffea;
-}
-
-.game-list {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.game-card {
-  background: #1e293b;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
-  padding: 20px;
-  width: 250px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.game-card:hover {
-  transform: scale(1.05);
-}
-
-.game-container {
-  margin-top: 30px;
-  display: none;
-}
-
-canvas {
-  background: url('https://i.imgur.com/6bCVz1o.png');
-  background-size: cover;
-  display: block;
-  margin: 20px auto;
-  border: 3px solid #00ffea;
-}
-
-.controls {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.controls button {
-  background: #00ffea;
-  border: none;
-  margin: 5px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 10px #00ffea;
-}
-
-#scoreBoard {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 1.2rem;
-}
-
+    }
+    body {
+      background: linear-gradient(135deg, #002f4b, #dc4225);
+      color: white;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #00ffcc;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    nav a {
+      color: #00ffcc;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .game-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .game-card {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+      cursor: pointer;
+    }
+    .game-card:hover {
+      background: #111;
+    }
+    .game-container {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background: #001f3f;
+      border-radius: 15px;
+    }
+    canvas {
+      background: #006400;
+      display: block;
+      margin: auto;
+      border: 3px solid #00ffcc;
+    }
+    .controls {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .controls button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      background-color: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>LegonTV Games</h1>
-  </header>  <div class="game-list">
-    <div class="game-card" onclick="showGame('football')">Football Game</div>
-    <div class="game-card" onclick="showGame('chess')">Chess Game</div>
-    <div class="game-card" onclick="showGame('car')">Car Racing</div>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="entertainment.html">Entertainment</a>
+    <a href="sports.html">Sports</a>
+  </nav>
+  <div class="game-list">
+    <div class="game-card" onclick="showGame('football')">
+      <h3>Football Game</h3>
+      <p>Move the ball into the goal using buttons!</p>
+    </div>
+    <div class="game-card" onclick="showGame('chess')">
+      <h3>Chess Game</h3>
+      <p>Play classic chess!</p>
+    </div>
+    <div class="game-card" onclick="showGame('race')">
+      <h3>Car Race Game</h3>
+      <p>Try not to crash as you race!</p>
+    </div>
   </div>  <div id="football" class="game-container">
-    <canvas id="footballGame" width="600" height="400"></canvas>
+    <h2>Football Game</h2>
+    <canvas id="footballCanvas" width="500" height="300"></canvas>
     <div class="controls">
       <button onclick="move('up')">Up</button>
-      <button onclick="move('down')">Down</button>
       <button onclick="move('left')">Left</button>
       <button onclick="move('right')">Right</button>
+      <button onclick="move('down')">Down</button>
     </div>
-    <div id="scoreBoard">Score: 0</div>
   </div>  <div id="chess" class="game-container">
-    <iframe src="https://www.chess.com/embed" width="100%" height="600" frameborder="0"></iframe>
-  </div>  <div id="car" class="game-container">
-    <iframe src="https://games.construct.net/41/latest" width="100%" height="500" frameborder="0"></iframe>
+    <h2>Chess Game</h2>
+    <iframe src="https://www.chess.com/embed/play/online" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+  </div>  <div id="race" class="game-container">
+    <h2>Car Racing Game</h2>
+    <iframe src="https://games.construct.net/960/latest" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
   </div>  <script>
-    let currentScore = 0;
-    const canvas = document.getElementById('footballGame');
-    const ctx = canvas.getContext('2d');
-    let ball = { x: 300, y: 350, r: 15, dx: 0, dy: 0 };
-    let goal = { x: 250, y: 10, w: 100, h: 20 };
+    let currentGame = null;
+    function showGame(id) {
+      if (currentGame) document.getElementById(currentGame).style.display = 'none';
+      currentGame = id;
+      document.getElementById(id).style.display = 'block';
+    }
+
+    const canvas = document.getElementById('footballCanvas');
+    const ctx = canvas?.getContext('2d');
+    let ball = { x: 250, y: 150, r: 15, dx: 0, dy: 0 };
+    let goal = { x: 200, y: 10, w: 100, h: 20 };
 
     function drawBall() {
       ctx.beginPath();
@@ -119,61 +138,42 @@ canvas {
       ctx.fill();
       ctx.closePath();
     }
-
     function drawGoal() {
       ctx.fillStyle = 'yellow';
       ctx.fillRect(goal.x, goal.y, goal.w, goal.h);
     }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function drawField() {
+      ctx.fillStyle = '#006400';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    function drawGame() {
+      drawField();
       drawGoal();
       drawBall();
-
       ball.x += ball.dx;
       ball.y += ball.dy;
-
       if (ball.x < ball.r || ball.x > canvas.width - ball.r) ball.dx = -ball.dx;
       if (ball.y < ball.r || ball.y > canvas.height - ball.r) ball.dy = -ball.dy;
-
-      if (
-        ball.y - ball.r < goal.y + goal.h &&
-        ball.x > goal.x &&
-        ball.x < goal.x + goal.w
-      ) {
-        currentScore++;
-        document.getElementById('scoreBoard').innerText = "Score: " + currentScore;
+      if (ball.y - ball.r < goal.y + goal.h && ball.x > goal.x && ball.x < goal.x + goal.w) {
+        alert("Goal!!!");
         resetBall();
       }
-
-      requestAnimationFrame(draw);
+      requestAnimationFrame(drawGame);
     }
-
     function resetBall() {
-      ball.x = 300;
-      ball.y = 350;
+      ball.x = 250;
+      ball.y = 150;
       ball.dx = 0;
       ball.dy = 0;
     }
-
     function move(direction) {
       switch (direction) {
-        case 'up': ball.dy = -3; break;
-        case 'down': ball.dy = 3; break;
-        case 'left': ball.dx = -3; break;
-        case 'right': ball.dx = 3; break;
+        case 'up': ball.dy = -2; break;
+        case 'down': ball.dy = 2; break;
+        case 'left': ball.dx = -2; break;
+        case 'right': ball.dx = 2; break;
       }
     }
-
-    document.addEventListener('keyup', () => {
-      ball.dx = 0;
-      ball.dy = 0;
-    });
-
-    function showGame(id) {
-      document.querySelectorAll('.game-container').forEach(g => g.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-      if (id === 'football') draw();
-    }
+    if (ctx) drawGame();
   </script></body>
-  </html>
+        </html>
