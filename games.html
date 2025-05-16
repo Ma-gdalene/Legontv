@@ -1,893 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LegonTV Entertainment</title>
-<style>
-  /* RESET & BASE */
-  * {
-    box-sizing: border-box;
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    user-select: none;
-  }
-  body {
-    background: #0f172a;
-    color: #a0f0ff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 10px 60px;
-  }
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 0.3em;
-    color: #00d9ff;
-    text-shadow: 0 0 8px #00d9ffaa;
-  }
-  h2 {
-    margin-bottom: 0.5em;
-    color: #39f;
-  }
-  p.motivation {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: #77ddee;
-    text-align: center;
-    max-width: 600px;
-    font-weight: 600;
-  }
-
-  /* GAME CARDS */
-  .game-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    max-width: 900px;
-    justify-content: center;
-  }
-  .game-card {
-    background: #123;
-    border: 2px solid #00d9ff;
-    border-radius: 15px;
-    width: 270px;
-    box-shadow: 0 0 20px #00d9ff44;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    transition: box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  .game-card:hover {
-    box-shadow: 0 0 30px #00ffffcc;
-  }
-  .game-title {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-    color: #00d9ff;
-    text-shadow: 0 0 8px #00d9ffbb;
-  }
-  .game-desc {
-    font-size: 1rem;
-    color: #88ccffcc;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  .btn-play {
-    background: #00d9ff;
-    border: none;
-    color: #022;
-    font-weight: 700;
-    padding: 12px 28px;
-    font-size: 1.1rem;
-    border-radius: 35px;
-    box-shadow: 0 0 10px #00d9ffbb;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .btn-play:hover {
-    background: #00ffff;
-  }
-
-  /* GAME AREAS */
-  .game-area {
-    margin-top: 40px;
-    background: #1e293b;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 40px #00d9ff88;
-    width: 100%;
-    max-width: 900px;
-    min-height: 480px;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-
-  /* BUTTONS INSIDE GAMES */
-  .game-controls {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-  .game-controls button {
-    padding: 12px 20px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    background: #00d9ff;
-    border: none;
-    border-radius: 50px;
-    color: #022;
-    box-shadow: 0 0 10px #00d9ffbb;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .game-controls button:hover {
-    background: #00ffff;
-  }
-
-  /* FOOTBALL GAME */
-  #footballGame {
-    background: linear-gradient(45deg, #074, #0b3);
-    border: 4px solid #00d9ff;
-    border-radius: 15px;
-    box-shadow: 0 0 30px #00d9ffaa inset;
-  }
-
-  /* CHESS GAME */
-  #chessBoard {
-    border: 4px solid #00d9ff;
-    border-radius: 10px;
-    box-shadow: 0 0 25px #00d9ffcc inset;
-    background: linear-gradient(45deg, #123, #234);
-  }
-
-  /* CAR RACE GAME */
-  #carRaceCanvas {
-    background: #111;
-    border-radius: 15px;
-    border: 4px solid #00d9ff;
-    box-shadow: 0 0 30px #00d9ffbb inset;
-  }
-
-  /* CLOSE BUTTON */
-  .close-game {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    background: #00d9ff;
-    border: none;
-    color: #022;
-    font-weight: 700;
-    font-size: 1.3rem;
-    padding: 6px 14px;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 0 15px #00d9ffbb;
-    transition: background 0.3s ease;
-  }
-  .close-game:hover {
-    background: #00ffff;
-  }
-
-  /* SCORE & INFO */
-  .game-info {
-    margin-top: 15px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #00d9ff;
-    user-select: none;
-  }
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ultimate Game Zone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: #fff;
+    }
+    header, footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+    }
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+    .game-card {
+      background: #1f1f1f;
+      padding: 20px;
+      margin: 15px auto;
+      border-radius: 12px;
+      max-width: 300px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+    .game-section {
+      display: none;
+      padding: 20px;
+      background: #111;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .board, .football-field, .car-track {
+      margin: 0 auto;
+      display: grid;
+      gap: 2px;
+    }
+    .cell {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+    .white { background-color: #f0d9b5; }
+    .black { background-color: #b58863; }
+    .highlight { border: 2px solid yellow; }
+    .football-field {
+      grid-template-columns: repeat(5, 80px);
+      grid-template-rows: repeat(5, 80px);
+      background: green;
+    }
+    .car-track {
+      grid-template-columns: repeat(10, 60px);
+      grid-template-rows: repeat(1, 60px);
+      background: #555;
+    }
+    .car {
+      background: red;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .scoreboard {
+      margin-top: 10px;
+      font-size: 20px;
+      color: #ffd700;
+    }
+    .motivation {
+      font-style: italic;
+      margin-top: 10px;
+      color: #90ee90;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Welcome to the Ultimate Game Zone</h1>
+  </header>
+  <main>
+    <div class="game-card" onclick="showGame('chess')"><h2>Play Chess</h2></div>
+    <div class="game-card" onclick="showGame('football')"><h2>Football Challenge</h2></div>
+    <div class="game-card" onclick="showGame('car')"><h2>Car Racing</h2></div>
 
-<h1>LegonTV Entertainment</h1>
-<p class="motivation">Play hard, challenge yourself, and have fun! Your skills grow when the game gets tough.</p>
+    <section id="chess" class="game-section">
+      <h2>Chess Game</h2>
+      <div id="chessboard" class="board" style="grid-template-columns: repeat(8, 60px); grid-template-rows: repeat(8, 60px);"></div>
+      <button onclick="initChess()">Restart Chess</button>
+      <div class="motivation">Outsmart your opponent and be the king of the board!</div>
+    </section>
 
-<div class="game-list">
+    <section id="football" class="game-section">
+      <h2>Football Game</h2>
+      <div id="football-field" class="football-field"></div>
+      <button onclick="scoreGoal()">Score Goal</button>
+      <button onclick="initFootball()">Restart Football</button>
+      <div id="football-score" class="scoreboard">Goals: 0</div>
+      <div class="motivation">Aim for the goal and be the champion!</div>
+    </section>
 
-  <div class="game-card" data-game="football">
-    <div class="game-title">Football</div>
-    <div class="game-desc">Control your players, dribble, and score. Realistic gameplay with teams and advanced scoring.</div>
-    <button class="btn-play">Play Football</button>
-  </div>
+    <section id="car" class="game-section">
+      <h2>Car Racing</h2>
+      <div id="car-track" class="car-track"></div>
+      <button onclick="moveCar()">Move Car</button>
+      <button onclick="initCar()">Restart Race</button>
+      <div id="car-distance" class="scoreboard">Distance: 0</div>
+      <div class="motivation">Speed through the track and reach the finish line!</div>
+    </section>
+  </main>
 
-  <div class="game-card" data-game="chess">
-    <div class="game-title">Chess</div>
-    <div class="game-desc">Classic chess game built from scratch. Play 2-player, think ahead, and win the king!</div>
-    <button class="btn-play">Play Chess</button>
-  </div>
+  <footer>
+    <p>Connect: <a href="#">Instagram</a> | <a href="#">TikTok</a> | <a href="#">YouTube</a></p>
+  </footer>
 
-  <div class="game-card" data-game="carRace">
-    <div class="game-title">Car Race</div>
-    <div class="game-desc">Race your car, dodge obstacles, and aim for the highest score. Simple but addictive!</div>
-    <button class="btn-play">Play Car Race</button>
-  </div>
+  <script>
+    function showGame(id) {
+      document.querySelectorAll('.game-section').forEach(s => s.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
 
-</div>
-
-<!-- FOOTBALL GAME AREA -->
-<div id="footballGameArea" class="game-area">
-  <button class="close-game" title="Close Football Game">&times;</button>
-  <h2>Football Game</h2>
-  <canvas id="footballGame" width="700" height="400"></canvas>
-  <div class="game-info" id="footballScore">Score: 0</div>
-  <div class="game-controls">
-    <button data-dir="up">Up</button>
-    <button data-dir="left">Left</button>
-    <button data-dir="down">Down</button>
-    <button data-dir="right">Right</button>
-  </div>
-</div>
-
-<!-- CHESS GAME AREA -->
-<div id="chessGameArea" class="game-area">
-  <button class="close-game" title="Close Chess Game">&times;</button>
-  <h2>Chess Game</h2>
-  <canvas id="chessBoard" width="480" height="480"></canvas>
-  <div class="game-info" id="chessTurn">White's turn</div>
-</div>
-
-<!-- CAR RACE GAME AREA -->
-<div id="carRaceGameArea" class="game-area">
-  <button class="close-game" title="Close Car Race Game">&times;</button>
-  <h2>Car Race Game</h2>
-  <canvas id="carRaceCanvas" width="700" height="400"></canvas>
-  <div class="game-info" id="carRaceScore">Score: 0
-    </div>
-<div class="game-controls">
-  <button id="carLeftBtn">Left</button>
-  <button id="carRightBtn">Right</button>
-  <button id="carAccelBtn">Accelerate</button>
-</div>
-</div>
-
-<script>
-// ===================
-// Sound Effects Setup
-// ===================
-const sounds = {
-  click: new Audio('https://actions.google.com/sounds/v1/ui/click.ogg'),
-  score: new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg'),
-  crash: new Audio('https://actions.google.com/sounds/v1/cartoon/metal_thud_and_ding.ogg'),
-};
-
-// Play click sound helper
-function playClick() {
-  sounds.click.currentTime = 0;
-  sounds.click.play();
-}
-
-// ===================
-// Page & Game Handling
-// ===================
-const gameCards = document.querySelectorAll('.btn-play');
-const footballArea = document.getElementById('footballGameArea');
-const chessArea = document.getElementById('chessGameArea');
-const carRaceArea = document.getElementById('carRaceGameArea');
-
-gameCards.forEach(btn => {
-  btn.onclick = () => {
-    playClick();
-    const game = btn.closest('.game-card').dataset.game;
-    showGame(game);
-  };
-});
-
-document.querySelectorAll('.close-game').forEach(btn => {
-  btn.onclick = () => {
-    playClick();
-    hideAllGames();
-  };
-});
-
-function showGame(game) {
-  hideAllGames();
-  switch(game) {
-    case 'football':
-      footballArea.style.display = 'flex';
-      startFootballGame();
-      break;
-    case 'chess':
-      chessArea.style.display = 'flex';
-      startChessGame();
-      break;
-    case 'carRace':
-      carRaceArea.style.display = 'flex';
-      startCarRaceGame();
-      break;
-  }
-}
-
-function hideAllGames() {
-  footballArea.style.display = 'none';
-  chessArea.style.display = 'none';
-  carRaceArea.style.display = 'none';
-  stopAllGames();
-}
-
-// ===================
-// FOOTBALL GAME CODE
-// ===================
-const footballCanvas = document.getElementById('footballGame');
-const fCtx = footballCanvas.getContext('2d');
-const footballScoreDisplay = document.getElementById('footballScore');
-
-let footballGameInterval, footballScore;
-const field = { width: 700, height: 400 };
-const playerRadius = 14;
-const ballRadius = 10;
-
-const playerColor = '#00ffff';
-const opponentColor = '#ff5500';
-const ballColor = '#ffee00';
-
-const keysPressed = {};
-let playerPos = { x: 100, y: 200 };
-let ballPos = { x: 350, y: 200 };
-let ballVelocity = { x: 0, y: 0 };
-let opponentPos = { x: 600, y: 200 };
-
-function startFootballGame() {
-  footballScore = 0;
-  playerPos = { x: 100, y: 200 };
-  ballPos = { x: 350, y: 200 };
-  ballVelocity = { x: 0, y: 0 };
-  opponentPos = { x: 600, y: 200 };
-  footballScoreDisplay.textContent = `Score: ${footballScore}`;
-  clearInterval(footballGameInterval);
-  footballGameInterval = setInterval(footballGameLoop, 30);
-}
-
-function stopFootballGame() {
-  clearInterval(footballGameInterval);
-}
-
-// Controls for football game
-const footballControls = document.querySelectorAll('#footballGameArea .game-controls button');
-footballControls.forEach(btn => {
-  btn.onclick = () => {
-    const dir = btn.dataset.dir;
-    movePlayer(dir);
-  };
-});
-
-function movePlayer(dir) {
-  const speed = 8;
-  switch(dir) {
-    case 'up': if(playerPos.y - speed - playerRadius > 0) playerPos.y -= speed; break;
-    case 'down': if(playerPos.y + speed + playerRadius < field.height) playerPos.y += speed; break;
-    case 'left': if(playerPos.x - speed - playerRadius > 0) playerPos.x -= speed; break;
-    case 'right': if(playerPos.x + speed + playerRadius < field.width) playerPos.x += speed; break;
-  }
-  kickBallIfNear();
-}
-
-function kickBallIfNear() {
-  const dx = ballPos.x - playerPos.x;
-  const dy = ballPos.y - playerPos.y;
-  const dist = Math.sqrt(dx*dx + dy*dy);
-  if(dist < playerRadius + ballRadius + 5) {
-    // Kick ball towards opponent's goal (right side)
-    ballVelocity.x = 10;
-    ballVelocity.y = dy * 0.2;
-    sounds.score.play();
-  }
-}
-
-function footballGameLoop() {
-  // Move ball with friction
-  ballPos.x += ballVelocity.x;
-  ballPos.y += ballVelocity.y;
-
-  // Friction slows ball
-  ballVelocity.x *= 0.94;
-  ballVelocity.y *= 0.94;
-
-  // Ball bounce off top and bottom
-  if(ballPos.y < ballRadius) {
-    ballPos.y = ballRadius;
-    ballVelocity.y = -ballVelocity.y;
-  }
-  if(ballPos.y > field.height - ballRadius) {
-    ballPos.y = field.height - ballRadius;
-    ballVelocity.y = -ballVelocity.y;
-  }
-
-  // Opponent AI: move to ball
-  if(opponentPos.y < ballPos.y) opponentPos.y += 4;
-  if(opponentPos.y > ballPos.y) opponentPos.y -= 4;
-  if(opponentPos.y < ballRadius) opponentPos.y = ballRadius;
-  if(opponentPos.y > field.height - ballRadius) opponentPos.y = field.height - ballRadius;
-
-  // Ball collision with opponent player
-  const dx = ballPos.x - opponentPos.x;
-  const dy = ballPos.y - opponentPos.y;
-  const dist = Math.sqrt(dx*dx + dy*dy);
-  if(dist < playerRadius + ballRadius) {
-    ballVelocity.x = -10;
-    ballVelocity.y = dy * 0.3;
-    sounds.crash.play();
-  }
-
-  // Ball collision with player - can kick again
-  const pdx = ballPos.x - playerPos.x;
-  const pdy = ballPos.y - playerPos.y;
-  const pdist = Math.sqrt(pdx*pdx + pdy*pdy);
-  if(pdist < playerRadius + ballRadius) {
-    ballVelocity.x = 10;
-    ballVelocity.y = pdy * 0.3;
-  }
-
-  // Check goal - right side (opponent's goal)
-  if(ballPos.x > field.width) {
-    footballScore++;
-    footballScoreDisplay.textContent = `Score: ${footballScore}`;
-    sounds.score.play();
-    resetPositions();
-  }
-  // Check goal - left side (player's goal)
-  if(ballPos.x < 0) {
-    // Opponent scores, reset positions, no score increment
-    sounds.crash.play();
-    resetPositions();
-  }
-
-  drawFootballGame();
-}
-
-function resetPositions() {
-  playerPos = { x: 100, y: 200 };
-  ballPos = { x: 350, y: 200 };
-  ballVelocity = { x: 0, y: 0 };
-  opponentPos = { x: 600, y: 200 };
-}
-
-function drawFootballGame() {
-  fCtx.clearRect(0, 0, field.width, field.height);
-
-  // Draw field lines
-  fCtx.fillStyle = '#087';
-  fCtx.fillRect(0, 0, field.width, field.height);
-  fCtx.strokeStyle = '#004';
-  fCtx.lineWidth = 4;
-  fCtx.strokeRect(0, 0, field.width, field.height);
-
-  // Middle line
-  fCtx.strokeStyle = '#0ff';
-  fCtx.lineWidth = 2;
-  fCtx.beginPath();
-  fCtx.moveTo(field.width/2, 0);
-  fCtx.lineTo(field.width/2, field.height);
-  fCtx.stroke();
-
-  // Draw players
-  drawCircle(playerPos.x, playerPos.y, playerRadius, playerColor);
-  drawCircle(opponentPos.x, opponentPos.y, playerRadius, opponentColor);
-
-  // Draw ball
-  drawCircle(ballPos.x, ballPos.y, ballRadius, ballColor);
-}
-
-function drawCircle(x, y, r, color) {
-  fCtx.beginPath();
-  fCtx.arc(x, y, r, 0, Math.PI*2);
-  fCtx.fillStyle = color;
-  fCtx.shadowColor = color;
-  fCtx.shadowBlur = 10;
-  fCtx.fill();
-}
-
-// ===================
-// CHESS GAME CODE
-// ===================
-const chessCanvas = document.getElementById('chessBoard');
-const cCtx = chessCanvas.getContext('2d');
-const chessTurnDisplay = document.getElementById('chessTurn');
-const boardSize = 480;
-const squareSize = boardSize / 8;
-
-let chessBoard = [];
-let selectedPiece = null;
-let currentTurn = 'white';
-let validMoves = [];
-
-function startChessGame() {
-  initChessBoard();
-  drawChessBoard();
-  chessTurnDisplay.textContent = "White's turn";
-  selectedPiece = null;
-  validMoves = [];
-  chessCanvas.style.cursor = 'pointer';
-}
-
-function stopChessGame() {
-  // Clear canvas & reset
-  cCtx.clearRect(0, 0, boardSize, boardSize);
-  selectedPiece = null;
-  validMoves = [];
-}
-
-function initChessBoard() {
-  // Empty 8x8 board
-  chessBoard = new Array(8).fill(null).map(() => new Array(8).fill(null));
-
-  // Place pawns
-  for(let i=0; i<8; i++) {
-    chessBoard[1][i] = { type: 'pawn', color: 'black' };
-    chessBoard[6][i] = { type: 'pawn', color: 'white' };
-  }
-  // Place Rooks
-  chessBoard[0][0] = { type: 'rook', color: 'black' };
-  chessBoard[0][7] = { type: 'rook', color: 'black' };
-  chessBoard[7][0] = { type: 'rook', color: 'white' };
-  chessBoard[7][7] = { type: 'rook', color: 'white' };
-
-  // Knights
-  chessBoard[0][1] = { type: 'knight', color: 'black' };
-  chessBoard[0][6] = { type: 'knight', color: 'black' };
-  chessBoard[7][1] = { type: 'knight', color: 'white' };
-  chessBoard[7][6] = { type: 'knight', color: 'white' };
-
-  // Bishops
-  chessBoard[0][2] = { type: 'bishop', color: 'black' };
-  chessBoard[0][5] = { type: 'bishop', color: 'black' };
-  chessBoard[7][2] = { type: 'bishop', color: 'white' };
-  chessBoard[7][5] = { type: 'bishop', color: 'white' };
-
-  // Queens
-  chessBoard[0][3] = { type: 'queen', color: 'black' };
-  chessBoard[7][3] = { type: 'queen', color: 'white' };
-
-  // Kings
-  chessBoard[0][4] = { type: 'king', color: 'black' };
-  chessBoard[7][4] = { type: 'king', color: 'white' };
-}
-
-function drawChessBoard() {
-  cCtx.clearRect(0, 0, boardSize, boardSize);
-  for(let row=0; row<8; row++) {
-    for(let col=0; col<8; col++) {
-      const isLight = (row + col) % 2 === 0;
-      cCtx.fillStyle = isLight ? '#a2d149' : '#6b8e23';
-      cCtx.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
-      
-      // Highlight valid moves
-      if(validMoves.some(m => m[0] === row && m[1] === col)) {
-        cCtx.fillStyle = 'rgba(255,255,0,0.4)';
-        cCtx.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
-      }
-
-      // Highlight selected piece
-      if(selectedPiece && selectedPiece[0] === row && selectedPiece[1] === col) {
-        cCtx.strokeStyle = '#ffff00';
-        cCtx.lineWidth = 4;
-        cCtx.strokeRect(col * squareSize + 3, row * squareSize + 3, squareSize - 6, squareSize - 6);
-      }
-
-      // Draw piece
-      const piece = chessBoard[row][col];
-      if(piece) {
-        drawChessPiece(piece, row, col);
+    // Chess
+    const initialSetup = [
+      ['br','bn','bb','bq','bk','bb','bn','br'],
+      ['bp','bp','bp','bp','bp','bp','bp','bp'],
+      ['','','','','','','',''],
+      ['','','','','','','',''],
+      ['','','','','','','',''],
+      ['','','','','','','',''],
+      ['wp','wp','wp','wp','wp','wp','wp','wp'],
+      ['wr','wn','wb','wq','wk','wb','wn','wr']
+    ];
+    function initChess() {
+      const board = document.getElementById('chessboard');
+      board.innerHTML = '';
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell ' + ((r + c) % 2 === 0 ? 'white' : 'black');
+          const piece = initialSetup[r][c];
+          cell.textContent = getUnicode(piece);
+          board.appendChild(cell);
+        }
       }
     }
-  }
-}
+    function getUnicode(piece) {
+      const map = {
+        'wp': '♙', 'wr': '♖', 'wn': '♘', 'wb': '♗', 'wq': '♕', 'wk': '♔',
+        'bp': '♟', 'br': '♜', 'bn': '♞', 'bb': '♝', 'bq': '♛', 'bk': '♚'
+      };
+      return map[piece] || '';
+    }
 
-function drawChessPiece(piece, row, col) {
-  cCtx.fillStyle = piece.color === 'white' ? '#eee' : '#222';
-  cCtx.font = `${squareSize * 0.7}px Arial`;
-  cCtx.textAlign = 'center';
-  cCtx.textBaseline = 'middle';
-  const centerX = col * squareSize + squareSize / 2;
-  const centerY = row * squareSize + squareSize / 2;
-  const symbols = {
-    'pawn': '♟',
-    'rook': '♜',
-    'knight': '♞',
-    'bishop': '♝',
-    'queen': '♛',
-    'king': '♚'
-  };
-  let symbol = symbols[piece.type];
-  if(piece.color === 'white') {
-    // White pieces use uppercase symbols
-    const whiteSymbols = {
-      'pawn': '♙',
-      'rook': '♖',
-      'knight': '♘',
-      'bishop': '♗',
-      'queen': '♕',
-      'king': '♔'
+    // Football Game
+    let footballGoals = 0;
+    function initFootball() {
+      const field = document.getElementById('football-field');
+      field.innerHTML = '';
+      for (let i = 0; i < 25; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        if (i === 12) cell.textContent = '⚽';
+        field.appendChild(cell);
+      }
+      footballGoals = 0;
+      updateFootballScore();
+    }
+    function scoreGoal() {
+      footballGoals++;
+      updateFootballScore();
+    }
+    function updateFootballScore() {
+      document.getElementById('football-score').textContent = 'Goals: ' + footballGoals;
+    }
+
+    // Car Racing Game
+    let carPos = 0;
+    function initCar() {
+      const track = document.getElementById('car-track');
+      track.innerHTML = '';
+      carPos = 0;
+      for (let i = 0; i < 10; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        if (i === 0) {
+          const car = document.createElement('div');
+          car.className = 'car';
+          cell.appendChild(car);
+        }
+        track.appendChild(cell);
+      }
+      updateCarDistance();
+    }
+    function moveCar() {
+      if (carPos < 9) carPos++;
+      const track = document.getElementById('car-track');
+      track.innerHTML = '';
+      for (let i = 0; i < 10; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        if (i === carPos) {
+          const car = document.createElement('div');
+          car.className = 'car';
+          cell.appendChild(car);
+        }
+        track.appendChild(cell);
+      }
+      updateCarDistance();
+    }
+    function updateCarDistance() {
+      document.getElementById('car-distance').textContent = 'Distance: ' + carPos;
+    }
+
+    // Init all on load
+    window.onload = () => {
+      initChess();
+      initFootball();
+      initCar();
     };
-    symbol = whiteSymbols[piece.type];
-  }
-  cCtx.fillText(symbol, centerX, centerY + 3);
-}
-
-// Chess click handling
-chessCanvas.onclick = function(e) {
-  if(!chessArea.style.display || chessArea.style.display === 'none') return;
-  const rect = chessCanvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  const col = Math.floor(x / squareSize);
-  const row = Math.floor(y / squareSize);
-  onChessSquareClick(row, col);
-};
-
-function onChessSquareClick(row, col) {
-  const clickedPiece = chessBoard[row][col];
-  if(selectedPiece) {
-    // Attempt move
-    if(validMoves.some(m => m[0] === row && m[1] === col)) {
-      moveChessPiece(selectedPiece[0], selectedPiece[1], row, col);
-      selectedPiece = null;
-      validMoves = [];
-      drawChessBoard();
-      toggleTurn();
-    } else {
-      // Select another piece if same color
-      if(clickedPiece && clickedPiece.color === currentTurn) {
-        selectedPiece = [row, col];
-        validMoves = calculateValidMoves(row, col);
-        drawChessBoard();
-      } else {
-        // Deselect
-        selectedPiece = null;
-        validMoves = [];
-        drawChessBoard();
-      }
-    }
-  } else {
-    // Select piece of current turn
-    if(clickedPiece && clickedPiece.color === currentTurn) {
-      selectedPiece = [row, col];
-      validMoves = calculateValidMoves(row, col);
-      drawChessBoard();
-    }
-  }
-}
-
-// Simplified move logic — checks basic moves and captures
-function calculateValidMoves(row, col) {
-  const piece = chessBoard[row][col];
-  if(!piece) return [];
-  let moves = [];
-
-  const directions = {
-    'pawn': () => {
-      let forward = piece.color === 'white' ? -1 : 1;
-      // Forward move
-      if(inBounds(row + forward, col) && !chessBoard[row + forward][col]) {
-        moves.push([row + forward, col]);
-        // Double move from starting position
-        if ((piece.color === 'white' && row === 6) || (piece.color === 'black' && row === 1)) {
-          if (!chessBoard[row + 2 * forward][col]) {
-            moves.push([row + 2 * forward, col]);
-          }
-        }
-      }
-      // Captures
-      if (inBounds(row + forward, col - 1) && chessBoard[row + forward][col - 1] && chessBoard[row + forward][col - 1].color !== piece.color) {
-        moves.push([row + forward, col - 1]);
-      }
-      if (inBounds(row + forward, col + 1) && chessBoard[row + forward][col + 1] && chessBoard[row + forward][col + 1].color !== piece.color) {
-        moves.push([row + forward, col + 1]);
-      }
-    },
-    'rook': () => {
-      moves = moves.concat(linearMoves(row, col, [[1,0], [-1,0], [0,1], [0,-1]]));
-    },
-    'bishop': () => {
-      moves = moves.concat(linearMoves(row, col, [[1,1], [1,-1], [-1,1], [-1,-1]]));
-    },
-    'queen': () => {
-      moves = moves.concat(linearMoves(row, col, [[1,0], [-1,0], [0,1], [0,-1], [1,1], [1,-1], [-1,1], [-1,-1]]));
-    },
-    'king': () => {
-      for (let [dr, dc] of [[1,0], [-1,0], [0,1], [0,-1], [1,1], [1,-1], [-1,1], [-1,-1]]) {
-        const r = row + dr, c = col + dc;
-        if (inBounds(r,c) && (!chessBoard[r][c] || chessBoard[r][c].color !== piece.color)) {
-          moves.push([r,c]);
-        }
-      }
-    },
-    'knight': () => {
-      const knightMoves = [[-2,1],[-1,2],[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1]];
-      for (let [dr, dc] of knightMoves) {
-        const r = row + dr, c = col + dc;
-        if (inBounds(r,c) && (!chessBoard[r][c] || chessBoard[r][c].color !== piece.color)) {
-          moves.push([r,c]);
-        }
-      }
-    }
-  };
-
-  if (directions[piece.type]) directions[piece.type]();
-
-  return moves;
-}
-
-function linearMoves(row, col, directions) {
-  const moves = [];
-  const piece = chessBoard[row][col];
-  for (const [dr, dc] of directions) {
-    let r = row + dr, c = col + dc;
-    while (inBounds(r, c)) {
-      if (!chessBoard[r][c]) {
-        moves.push([r, c]);
-      } else {
-        if (chessBoard[r][c].color !== piece.color) moves.push([r, c]);
-        break;
-      }
-      r += dr;
-      c += dc;
-    }
-  }
-  return moves;
-}
-
-function inBounds(row, col) {
-  return row >= 0 && row < 8 && col >= 0 && col < 8;
-}
-
-function moveChessPiece(fromRow, fromCol, toRow, toCol) {
-  // Basic move: update board
-  chessBoard[toRow][toCol] = chessBoard[fromRow][fromCol];
-  chessBoard[fromRow][fromCol] = null;
-
-  // TODO: Add pawn promotion, check, checkmate detection (simplified for now)
-}
-
-function toggleTurn() {
-  currentTurn = currentTurn === 'white' ? 'black' : 'white';
-  chessTurnDisplay.textContent = currentTurn.charAt(0).toUpperCase() + currentTurn.slice(1) + "'s turn";
-  sounds.click.play();
-}
-
-// ===================
-// CAR RACE GAME CODE
-// ===================
-const carRaceCanvas = document.getElementById('carRaceGame');
-const carCtx = carRaceCanvas.getContext('2d');
-const carRaceScoreDisplay = document.getElementById('carRaceScore');
-
-let carGameInterval, carScore;
-const carWidth = 50;
-const carHeight = 90;
-const laneCount = 3;
-const laneWidth = carRaceCanvas.width / laneCount;
-let carX, carY;
-let carSpeed = 5;
-let obstacles = [];
-let obstacleSpeed = 5;
-let gameOver = false;
-
-function startCarRaceGame() {
-  carScore = 0;
-  carX = laneWidth; // start middle lane (lane 1)
-  carY = carRaceCanvas.height - carHeight - 10;
-  carSpeed = 5;
-  obstacleSpeed = 5;
-  obstacles = [];
-  gameOver = false;
-  carRaceScoreDisplay.textContent = `Score: ${carScore}`;
-  clearInterval(carGameInterval);
-  carGameInterval = setInterval(carRaceGameLoop, 30);
-}
-
-function stopCarRaceGame() {
-  clearInterval(carGameInterval);
-  gameOver = true;
-  carCtx.clearRect(0, 0, carRaceCanvas.width, carRaceCanvas.height);
-}
-
-function carRaceGameLoop() {
-  carCtx.clearRect(0, 0, carRaceCanvas.width, carRaceCanvas.height);
-
-  // Draw road lanes
-  carCtx.fillStyle = '#333';
-  carCtx.fillRect(0, 0, carRaceCanvas.width, carRaceCanvas.height);
-  carCtx.strokeStyle = '#fff';
-  carCtx.lineWidth = 2;
-  for(let i = 1; i < laneCount; i++) {
-    const x = i * laneWidth;
-    carCtx.setLineDash([20, 20]);
-    carCtx.beginPath();
-    carCtx.moveTo(x, 0);
-    carCtx.lineTo(x, carRaceCanvas.height);
-    carCtx.stroke();
-  }
-  carCtx.setLineDash([]);
-
-  // Draw player car
-  drawCar(carX, carY, '#00f');
-
-  // Update and draw obstacles
-  for(let i = obstacles.length - 1; i >= 0; i--) {
-    const obs = obstacles[i];
-    obs.y += obstacleSpeed;
-    drawCar(obs.x, obs.y, '#f00');
-
-    // Collision detection
-    if (rectCollision(carX, carY, carWidth, carHeight, obs.x, obs.y, carWidth, carHeight)) {
-      gameOver = true;
-      sounds.crash.play();
-      alert('Game Over! Your score: ' + carScore);
-      stopCarRaceGame();
-      return;
-    }
-
-    // Remove off-screen obstacles & increment score
-    if (obs.y > carRaceCanvas.height) {
-      obstacles.splice(i, 1);
-      carScore++;
-      carRaceScoreDisplay.textContent = `Score: ${carScore}`;
-      sounds.score.play();
-
-      // Increase difficulty every 5 points
-      if (carScore % 5 === 0) {
-        obstacleSpeed += 1;
-      }
-    }
-  }
-
-  // Spawn new obstacles randomly
-  if (Math.random() < 0.02) {
-    const lane = Math.floor(Math.random() * laneCount);
-    obstacles.push({ x: lane * laneWidth + (laneWidth - carWidth) / 2, y: -carHeight });
-  }
-}
-
-// Draw a simple car shape
-function drawCar(x, y, color) {
-  carCtx.fillStyle = color;
-  carCtx.shadowColor = color;
-  carCtx.shadowBlur = 15;
-  carCtx.fillRect(x, y, carWidth, carHeight);
-  // Wheels
-  carCtx.fillStyle = '#222';
-  carCtx.fillRect(x + 5, y + carHeight - 15, 12, 12);
-  carCtx.fillRect(x + carWidth - 17, y + carHeight - 15, 12, 12);
-}
-
-// Rectangle collision detection
-function rectCollision(x1, y1, w1, h1, x2, y2, w2, h2) {
-  return !(x2 > x1 + w1 || 
-           x2 + w2 < x1 || 
-           y2 > y1 + h1 || 
-           y2 + h2 < y1);
-}
-
-// Car controls
-document.getElementById('carLeftBtn').onclick = () => {
-  if (carX > 0) carX -= laneWidth;
-  sounds.click.play();
-};
-document.getElementById('carRightBtn').onclick = () => {
-  if (carX < laneWidth * (laneCount -1)) carX += laneWidth;
-  sounds.click.play();
-};
-document.getElementById('carAccelBtn').onclick = () => {
-  obstacleSpeed += 1; // Accelerate obstacles to increase challenge
-  sounds.click.play();
-};
-
-// ===================
-// Stop all games on exit
-// ===================
-function stopAllGames() {
-  stopFootballGame();
-  stopChessGame();
-  stopCarRaceGame();
-}
-</script>
+  </script>
+</body>
+</html>
