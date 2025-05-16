@@ -1,109 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LegonTV Games</title>
   <style>
-    body {
-      background: #0f172a;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }body {
+  background: linear-gradient(135deg, #1e3a8a, #0f172a);
+  color: white;
+  padding: 20px;
+}
 
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-    h1 {
-      color: #00d9ff;
-    }
+header h1 {
+  font-size: 3rem;
+  color: #00ffea;
+  text-shadow: 0 0 10px #00ffea;
+}
 
-    .game-list {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+.game-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-    .game-list button {
-      margin: 10px;
-      padding: 15px 25px;
-      font-size: 16px;
-      background: #00d9ff;
-      border: none;
-      border-radius: 5px;
-      color: black;
-      cursor: pointer;
-    }
+.game-card {
+  background: #1e293b;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 
-    .game-container {
-      display: none;
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      margin-top: 20px;
-    }
+.game-card:hover {
+  transform: scale(1.05);
+}
 
-    canvas {
-      background: green;
-      display: block;
-      margin: 20px auto;
-      border: 2px solid #00d9ff;
-    }
+.game-container {
+  margin-top: 30px;
+  display: none;
+}
+
+canvas {
+  background: url('https://i.imgur.com/6bCVz1o.png');
+  background-size: cover;
+  display: block;
+  margin: 20px auto;
+  border: 3px solid #00ffea;
+}
+
+.controls {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.controls button {
+  background: #00ffea;
+  border: none;
+  margin: 5px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00ffea;
+}
+
+#scoreBoard {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
   </style>
 </head>
 <body>
   <header>
-    <h1>LegonTV Game Center</h1>
-  </header>
-
-  <div class="game-list">
-    <button onclick="showGame('football')">Play Football Game</button>
-    <button onclick="showGame('chess')">Play Chess (Coming Soon)</button>
-  </div>
-
-  <!-- Football Game Section -->
-  <div class="game-container" id="football">
-    <h2>Mini Football Game</h2>
-    <canvas id="footballCanvas" width="600" height="400"></canvas>
-    <p>Score: <span id="score">0</span> | Time Left: <span id="timer">60</span></p>
-    <button onclick="startFootball()">Start Game</button>
-    <button onclick="resetFootball()">Reset</button>
-    <button onclick="hideAllGames()">Back to Games List</button>
-  </div>
-
-  <!-- Placeholder for Chess -->
-  <div class="game-container" id="chess">
-    <h2>Chess Game</h2>
-    <p>Coming Soon!</p>
-    <button onclick="hideAllGames()">Back to Games List</button>
-  </div>
-
-  <script>
-    // Show selected game
-    function showGame(gameId) {
-      hideAllGames();
-      document.getElementById(gameId).style.display = 'block';
-    }
-
-    // Hide all game sections
-    function hideAllGames() {
-      document.getElementById('football').style.display = 'none';
-      document.getElementById('chess').style.display = 'none';
-    }
-
-    // Football game logic
-    const canvas = document.getElementById('footballCanvas');
+    <h1>LegonTV Games</h1>
+  </header>  <div class="game-list">
+    <div class="game-card" onclick="showGame('football')">Football Game</div>
+    <div class="game-card" onclick="showGame('chess')">Chess Game</div>
+    <div class="game-card" onclick="showGame('car')">Car Racing</div>
+  </div>  <div id="football" class="game-container">
+    <canvas id="footballGame" width="600" height="400"></canvas>
+    <div class="controls">
+      <button onclick="move('up')">Up</button>
+      <button onclick="move('down')">Down</button>
+      <button onclick="move('left')">Left</button>
+      <button onclick="move('right')">Right</button>
+    </div>
+    <div id="scoreBoard">Score: 0</div>
+  </div>  <div id="chess" class="game-container">
+    <iframe src="https://www.chess.com/embed" width="100%" height="600" frameborder="0"></iframe>
+  </div>  <div id="car" class="game-container">
+    <iframe src="https://games.construct.net/41/latest" width="100%" height="500" frameborder="0"></iframe>
+  </div>  <script>
+    let currentScore = 0;
+    const canvas = document.getElementById('footballGame');
     const ctx = canvas.getContext('2d');
-
     let ball = { x: 300, y: 350, r: 15, dx: 0, dy: 0 };
     let goal = { x: 250, y: 10, w: 100, h: 20 };
-    let score = 0;
-    let timeLeft = 60;
-    let footballInterval;
-    let running = false;
 
     function drawBall() {
       ctx.beginPath();
@@ -118,8 +125,7 @@
       ctx.fillRect(goal.x, goal.y, goal.w, goal.h);
     }
 
-    function drawFootball() {
-      if (!running) return;
+    function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawGoal();
       drawBall();
@@ -132,65 +138,42 @@
 
       if (
         ball.y - ball.r < goal.y + goal.h &&
-        ball.x > goal.x && ball.x < goal.x + goal.w
+        ball.x > goal.x &&
+        ball.x < goal.x + goal.w
       ) {
-        score++;
-        document.getElementById('score').textContent = score;
+        currentScore++;
+        document.getElementById('scoreBoard').innerText = "Score: " + currentScore;
         resetBall();
       }
 
-      requestAnimationFrame(drawFootball);
-    }
-
-    function startFootball() {
-      resetBall();
-      score = 0;
-      timeLeft = 60;
-      running = true;
-      document.getElementById('score').textContent = score;
-      document.getElementById('timer').textContent = timeLeft;
-      drawFootball();
-
-      footballInterval = setInterval(() => {
-        timeLeft--;
-        document.getElementById('timer').textContent = timeLeft;
-        if (timeLeft <= 0) {
-          clearInterval(footballInterval);
-          running = false;
-          alert('Game Over! Score: ' + score);
-        }
-      }, 1000);
-    }
-
-    function resetFootball() {
-      clearInterval(footballInterval);
-      running = false;
-      resetBall();
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      document.getElementById('score').textContent = 0;
-      document.getElementById('timer').textContent = 60;
+      requestAnimationFrame(draw);
     }
 
     function resetBall() {
       ball.x = 300;
       ball.y = 350;
-      ball.dx = 3;
-      ball.dy = -3;
+      ball.dx = 0;
+      ball.dy = 0;
     }
 
-    document.addEventListener('keydown', (e) => {
-      switch (e.key) {
-        case 'ArrowUp': ball.dy = -3; break;
-        case 'ArrowDown': ball.dy = 3; break;
-        case 'ArrowLeft': ball.dx = -3; break;
-        case 'ArrowRight': ball.dx = 3; break;
+    function move(direction) {
+      switch (direction) {
+        case 'up': ball.dy = -3; break;
+        case 'down': ball.dy = 3; break;
+        case 'left': ball.dx = -3; break;
+        case 'right': ball.dx = 3; break;
       }
-    });
+    }
 
     document.addEventListener('keyup', () => {
       ball.dx = 0;
       ball.dy = 0;
     });
-  </script>
-</body>
+
+    function showGame(id) {
+      document.querySelectorAll('.game-container').forEach(g => g.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      if (id === 'football') draw();
+    }
+  </script></body>
   </html>
