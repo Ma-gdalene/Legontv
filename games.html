@@ -1,907 +1,1289 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Legon TV Game Hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legon TV Game Hub</title>
+  <style>
+    :root {
+      --primary: #0044cc;
+      --secondary: #00b4d8;
+      --bg: #f0f8ff;
+      --glow: 0 0 10px rgba(0, 180, 216, 0.8);
+    }
 
-<!-- Fonts & icons -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: #000;
+    }
 
-<!-- Three.js for 3D rendering -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.0/examples/js/controls/OrbitControls.js"></script>
+    header, footer {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: var(--glow);
+    }
 
+    .game-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .game-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--glow);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      border-radius: 10px;
+      background: #000;
+    }
+
+    .controls {
+      margin-top: 10px;
+    }
+
+    .controls button {
+      margin: 5px;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      background: var(--secondary);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      box-shadow: var(--glow);
+      cursor: pointer;
+    }
+
+    .score {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+    }
+
+    .socials {
+      margin-top: 1rem;
+    }
+
+    .socials a {
+      margin: 0 10px;
+      color: white;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Legon TV Game Hub</h1>
+    <nav class="socials">
+      <a href="https://tiktok.com/@legon.tvv" target="_blank">TikTok</a>
+      <a href="https://instagram.com/legontv.web" target="_blank">Instagram</a>
+      <a href="https://youtube.com/@legontv" target="_blank">YouTube</a>
+    </nav>
+  </header>
+
+  <main class="game-container">
+<!-- 3D Chess Game -->
+    <section class="game-card" id="chess-section">
+      <h2>3D Chess</h2>
+      <canvas id="chess-canvas" width="600" height="400"></canvas>
+      <div class="score" id="chess-score">Score: 0</div>
+      <div class="controls">
+        <button id="chess-start">Start</button>
+        <button id="chess-pause">Pause</button>
+        <button id="chess-reset">Reset</button>
+      </div>
+    </section>
+<!-- Football Game -->
+    <section class="game-card" id="football-section">
+      <h2>Football Challenge</h2>
+      <canvas id="football-canvas" width="600" height="400"></canvas>
+      <div class="score" id="football-score">Score: 0</div>
+      <div class="controls">
+        <button id="football-start">Start</button>
+        <button id="football-pause">Pause</button>
+        <button id="football-reset">Reset</button>
+      </div>
+    </section>
+<script>
+class FootballGame {
+  constructor(canvas, scoreDisplay) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.scoreDisplay = scoreDisplay;
+    this.width = canvas.width;
+    this.height = canvas.height;
+    this.ball = {
+      x: this.width / 2,
+      y: this.height / 2,
+      radius: 15,
+      vx: 4,
+      vy: 3,
+    };
+    this.goalWidth = 150;
+    this.goalHeight = 20;
+    this.goal = {
+      x: this.width / 2 - this.goalWidth / 2,
+      y: 0,
+      width: this.goalWidth,
+      height: this.goalHeight,
+    };
+    this.score = 0;
+    this.isRunning = false;
+
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    this.canvas.addEventListener("click", (e) => {
+      if (!this.isRunning) return;
+      const rect = this.canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      const dx = clickX - this.ball.x;
+      const dy = clickY - this.ball.y;
+      const magnitude = Math.sqrt(dx * dx + dy * dy);
+      this.ball.vx = (dx / magnitude) * 5;
+      this.ball.vy = (dy / magnitude) * 5;
+    });
+  }
+
+  _updateScore() {
+    this.scoreDisplay.textContent = `Score: ${this.score}`;
+  }
+
+  _drawField() {
+    const ctx = this.ctx;
+    ctx.fillStyle = "#4CAF50";
+    ctx.fillRect(0, 0, this.width, this.height);
+
+    // Draw goal
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(this.goal.x, this.goal.y, this.goal.width, this.goal.height);
+  }
+
+  _drawBall() {
+    const ctx = this.ctx;
+    ctx.beginPath();
+    ctx.arc(this.ball.x, this.ball.y, this.ball.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "#fff";
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  _update() {
+    this.ball.x += this.ball.vx;
+    this.ball.y += this.ball.vy;
+
+    // Bounce off walls
+    if (
+      this.ball.x < this.ball.radius ||
+      this.ball.x > this.width - this.ball.radius
+    ) {
+      this.ball.vx *= -1;
+    }
+    if (
+      this.ball.y < this.ball.radius ||
+      this.ball.y > this.height - this.ball.radius
+    ) {
+      this.ball.vy *= -1;
+    }
+
+    // Goal detection
+    if (
+      this.ball.y - this.ball.radius <= this.goal.y + this.goal.height &&
+      this.ball.x >= this.goal.x &&
+      this.ball.x <= this.goal.x + this.goal.width
+    ) {
+      this.score += 1;
+      this._updateScore();
+      this.ball.x = this.width / 2;
+      this.ball.y = this.height / 2;
+      this.ball.vx = 4;
+      this.ball.vy = 3;
+    }
+  }
+
+  _draw() {
+    this._drawField();
+    this._drawBall();
+  }
+
+  _loop = () => {
+    if (!this.isRunning) return;
+    this._update();
+    this._draw();
+    requestAnimationFrame(this._loop);
+  };
+
+  start() {
+    this.isRunning = true;
+    this.score = 0;
+    this._updateScore();
+    this._loop();
+  }
+
+  pause() {
+    this.isRunning = false;
+  }
+
+  reset() {
+    this.pause();
+    this.ball = {
+      x: this.width / 2,
+      y: this.height / 2,
+      radius: 15,
+      vx: 4,
+      vy: 3,
+    };
+    this.score = 0;
+    this._updateScore();
+    this._draw();
+  }
+}
+</script>
+<script>
+class RacingGame {
+  constructor(canvas, scoreDisplay) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.scoreDisplay = scoreDisplay;
+    this.width = canvas.width;
+    this.height = canvas.height;
+
+    this.car = {
+      x: this.width / 2 - 20,
+      y: this.height - 100,
+      width: 40,
+      height: 80,
+      speed: 7,
+    };
+
+    this.obstacles = [];
+    this.score = 0;
+    this.isRunning = false;
+
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    window.addEventListener("keydown", (e) => {
+      if (!this.isRunning) return;
+      if (e.key === "ArrowLeft" || e.key === "a") {
+        this.car.x -= this.car.speed;
+        if (this.car.x < 0) this.car.x = 0;
+      }
+      if (e.key === "ArrowRight" || e.key === "d") {
+        this.car.x += this.car.speed;
+        if (this.car.x > this.width - this.car.width)
+          this.car.x = this.width - this.car.width;
+      }
+    });
+  }
+
+  _updateScore() {
+    this.scoreDisplay.textContent = `Score: ${this.score}`;
+  }
+
+  _drawRoad() {
+    const ctx = this.ctx;
+    ctx.fillStyle = "#222";
+    ctx.fillRect(0, 0, this.width, this.height);
+
+    // center lane line
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 4;
+    ctx.setLineDash([30, 20]);
+    ctx.beginPath();
+    ctx.moveTo(this.width / 2, 0);
+    ctx.lineTo(this.width / 2, this.height);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  _drawCar() {
+    const ctx = this.ctx;
+    ctx.fillStyle = "#007bff";
+    ctx.fillRect(this.car.x, this.car.y, this.car.width, this.car.height);
+    // add simple car details
+    ctx.fillStyle = "#0056b3";
+    ctx.fillRect(this.car.x + 5, this.car.y + 10, this.car.width - 10, 15);
+  }
+
+  _drawObstacles() {
+    const ctx = this.ctx;
+    ctx.fillStyle = "#ff4444";
+    this.obstacles.forEach((ob) => {
+      ctx.fillRect(ob.x, ob.y, ob.width, ob.height);
+    });
+  }
+
+  _update() {
+    // Move obstacles down
+    this.obstacles.forEach((ob) => {
+      ob.y += 7;
+    });
+
+    // Remove obstacles off screen
+    this.obstacles = this.obstacles.filter((ob) => ob.y < this.height);
+
+    // Add new obstacles randomly
+    if (Math.random() < 0.04) {
+      const obsWidth = 40;
+      const obsHeight = 60;
+      const x = Math.random() * (this.width - obsWidth);
+      this.obstacles.push({ x, y: -obsHeight, width: obsWidth, height: obsHeight });
+    }
+
+    // Collision detection
+    for (const ob of this.obstacles) {
+      if (
+        this.car.x < ob.x + ob.width &&
+        this.car.x + this.car.width > ob.x &&
+        this.car.y < ob.y + ob.height &&
+        this.car.y + this.car.height > ob.y
+      ) {
+        this.pause();
+        alert("Crash! Game Over.");
+        return;
+      }
+    }
+
+    this.score++;
+    this._updateScore();
+  }
+
+  _draw() {
+    this._drawRoad();
+    this._drawCar();
+    this._drawObstacles();
+  }
+
+  _loop = () => {
+    if (!this.isRunning) return;
+    this._update();
+    this._draw();
+    requestAnimationFrame(this._loop);
+  };
+
+  start() {
+    this.isRunning = true;
+    this.score = 0;
+    this.obstacles = [];
+    this._updateScore();
+    this._loop();
+  }
+
+  pause() {
+    this.isRunning = false;
+  }
+
+  reset() {
+    this.pause();
+    this.car.x = this.width / 2 - this.car.width / 2;
+    this.obstacles = [];
+    this.score = 0;
+    this._updateScore();
+    this._draw();
+  }
+}
+</script>
+<script>
+(() => {
+  // Assuming Chess3D and FootballGame and RacingGame classes are already defined above
+
+  // Get elements
+  const chessCanvas = document.getElementById("chess-canvas");
+  const footballCanvas = document.getElementById("football-canvas");
+  const racingCanvas = document.getElementById("racing-canvas");
+
+  const chessScore = document.getElementById("chess-score");
+  const footballScore = document.getElementById("football-score");
+  const racingScore = document.getElementById("racing-score");
+
+  // Create game instances
+  const chessGame = new Chess3D(chessCanvas, chessScore);
+  const footballGame = new FootballGame(footballCanvas, footballScore);
+  const racingGame = new RacingGame(racingCanvas, racingScore);
+
+  // Chess controls
+  document.getElementById("chess-start").onclick = () => chessGame.start();
+  document.getElementById("chess-pause").onclick = () => chessGame.pause();
+  document.getElementById("chess-reset").onclick = () => chessGame.reset();
+
+  // Football controls
+  document.getElementById("football-start").onclick = () => footballGame.start();
+  document.getElementById("football-pause").onclick = () => footballGame.pause();
+  document.getElementById("football-reset").onclick = () => footballGame.reset();
+
+  // Racing controls
+  document.getElementById("racing-start").onclick = () => racingGame.start();
+  document.getElementById("racing-pause").onclick = () => racingGame.pause();
+  document.getElementById("racing-reset").onclick = () => racingGame.reset();
+
+  // Initially, show Chess game, hide others
+  function showGame(game) {
+    const games = ["chess", "football", "racing"];
+    games.forEach((g) => {
+      const section = document.getElementById(`${g}-game`);
+      if (g === game) {
+        section.style.display = "block";
+      } else {
+        section.style.display = "none";
+      }
+    });
+  }
+
+  // Card buttons to switch games
+  document.getElementById("card-chess").onclick = () => {
+    showGame("chess");
+    chessGame.reset();
+    footballGame.pause();
+    racingGame.pause();
+  };
+  document.getElementById("card-football").onclick = () => {
+    showGame("football");
+    footballGame.reset();
+    chessGame.pause();
+    racingGame.pause();
+  };
+  document.getElementById("card-racing").onclick = () => {
+    showGame("racing");
+    racingGame.reset();
+    chessGame.pause();
+    footballGame.pause();
+  };
+
+  // Start by showing chess game
+  showGame("chess");
+})();
+</script>
 <style>
-  /* --- Reset and base --- */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
+  :root {
+    --deep-blue: #0d1b2a;
+    --light-blue: #1b263b;
+    --accent-blue: #3a86ff;
+    --text-light: #f1f1f1;
+    --glow: 0 0 15px rgba(58, 134, 255, 0.7);
   }
+
   body {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, #0a3d62, #3c6382);
-    color: #e1e5ea;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-  }
-
-  /* --- Header & Nav --- */
-  .utility-bar {
-    background: #162f4d;
-    color: #a3b1c6;
-    padding: 0.3em 1em;
-    font-size: 0.9rem;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .breaking-news {
-    font-weight: 600;
-    color: #f9ca24;
-  }
-  .sign-in {
-    color: #f9ca24;
-    text-decoration: none;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  .sign-in:hover {
-    text-decoration: underline;
-  }
-
-  header.navbar {
-    background: #1e4f75;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, var(--deep-blue), var(--light-blue));
+    color: var(--text-light);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 0.8em 1em;
-    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    min-height: 100vh;
+  }
+
+  header {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--deep-blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--glow);
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 10;
   }
-  .logo {
+
+  header img {
     height: 50px;
-    margin-right: 20px;
   }
-  nav.nav-links a {
-    color: #cfd8dc;
+
+  header nav a {
     margin: 0 15px;
+    color: var(--text-light);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1.05rem;
-    transition: color 0.3s;
-  }
-  nav.nav-links a:hover,
-  nav.nav-links a.active {
-    color: #f9ca24;
-    text-shadow: 0 0 8px #f9ca24;
+    font-weight: bold;
   }
 
-  /* --- Main content --- */
-  main {
-    flex: 1;
-    padding: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  h1.main-title {
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #f9ca24;
-    text-shadow: 0 0 10px #f9ca24;
-  }
-  p.motivation {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: #d3dfe6;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+  header nav a:hover {
+    color: var(--accent-blue);
   }
 
-  /* --- Game cards --- */
   .game-cards {
     display: flex;
     justify-content: center;
-    gap: 30px;
     flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-  .game-card {
-    background: linear-gradient(145deg, #2e86de, #054a91);
-    width: 280px;
-    height: 180px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px #3a7bd5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #f9ca24;
-    font-size: 1.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .game-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px #f9ca24;
-  }
-  .game-card:active {
-    transform: scale(0.95);
-  }
-  .game-card svg {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 15px;
-    filter: drop-shadow(0 0 5px #f9ca24);
+    gap: 2rem;
+    padding: 2rem;
   }
 
-  /* --- Game container --- */
-  .game-container {
-    background: #183661;
+  .card {
+    background: var(--light-blue);
     border-radius: 20px;
-    box-shadow: 0 0 40px #3a7bd5;
-    padding: 1rem;
-    max-width: 900px;
-    margin: 0 auto 3rem;
+    padding: 1.5rem;
+    box-shadow: var(--glow);
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--accent-blue);
+  }
+
+  canvas {
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    border-radius: 20px;
+    background: #111;
+    box-shadow: var(--glow);
+    margin: 1rem 0;
+  }
+
+  .controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem;
+  }
+
+  .controls button {
+    background: var(--accent-blue);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    box-shadow: var(--glow);
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .controls button:hover {
+    background: #265eff;
+  }
+
+  .score {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .game-container {
     display: none;
     flex-direction: column;
     align-items: center;
-  }
-  .game-container.active {
-    display: flex;
-  }
-  .game-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #f9ca24;
-    text-shadow: 0 0 8px #f9ca24;
+    width: 100%;
+    padding: 2rem;
   }
 
-  /* --- Canvas styles for 3D games --- */
-  canvas {
-    border-radius: 15px;
-    box-shadow: 0 0 25px #f9ca24;
-    background: #0a2a5a;
-    max-width: 100%;
-    height: 480px;
-  }
-
-  /* --- Controls panel --- */
-  .controls {
-    margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-  .btn-control {
-    background: #f9ca24;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 15px;
-    color: #183661;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 0 10px #f9ca24;
-    transition: background 0.3s ease;
-    user-select: none;
-    min-width: 100px;
-    text-align: center;
-  }
-  .btn-control:hover {
-    background: #fbcf4a;
-  }
-  .btn-control:active {
-    background: #d4af37;
-  }
-
-  /* --- Scoreboard --- */
-  .scoreboard {
-    margin-top: 1rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #f9ca24;
-    text-shadow: 0 0 6px #f9ca24;
-  }
-
-  /* --- Footer --- */
   footer {
-    background: #1e4f75;
-    padding: 1rem 1.5rem;
+    background: var(--deep-blue);
+    padding: 1rem;
+    width: 100%;
     text-align: center;
-    color: #cfd8dc;
-    box-shadow: 0 -5px 10px rgba(0,0,0,0.4);
-    user-select: none;
-  }
-  footer .footer-links {
-    margin-top: 0.5rem;
-  }
-  footer .footer-links a {
-    color: #f9ca24;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  footer .footer-links a:hover {
-    color: #fbcf4a;
+    color: #ccc;
+    box-shadow: var(--glow);
   }
 
-  /* --- Responsive --- */
-  @media (max-width: 900px) {
-    .game-cards {
+  /* Mobile on-screen control panel (optional) */
+  @media (max-width: 768px) {
+    .controls {
       flex-direction: column;
-      align-items: center;
     }
-  }
-  @media (max-width: 400px) {
-    .btn-control {
-      min-width: 80px;
-      padding: 10px 14px;
-      font-size: 0.9rem;
+
+    .card {
+      width: 90%;
+    }
+
+    canvas {
+      height: 300px;
     }
   }
 </style>
-
-</head>
-<body>
-
-<!-- Utility Bar -->
-<div class="utility-bar">
-  <span class="breaking-news">Breaking: Legon TV launches its brand-new digital platform!</span>
-  <a href="#" class="sign-in">Sign In</a>
+<!-- Game: 3D Chess -->
+<div id="chessContainer" class="game-container">
+  <h2>3D Chess</h2>
+  <canvas id="chessCanvas"></canvas>
+  <div class="score" id="chessScore">Your Move</div>
+  <div class="controls">
+    <button onclick="startChess()">Start</button>
+    <button onclick="resetChess()">Reset</button>
+    <button onclick="exitChess()">Exit</button>
+  </div>
 </div>
 
-<!-- Navigation -->
-<header class="navbar">
-  <img src="https://i.imgur.com/IqL1PbX.png" alt="Legon TV Logo" class="logo" />
-  <nav class="nav-links" aria-label="Primary Navigation">
-    <a href="index.html">Home</a>
-    <a href="news.html">News</a>
-    <a href="politics.html">Politics</a>
-    <a href="shop.html">Shop</a>
-    <a href="entertainment.html">Entertainment</a>
-    <a href="games.html" class="active">Games</a>
-  </nav>
-</header>
-
-<main>
-  <h1 class="main-title">Legon TV Game Hub</h1>
-  <p class="motivation">Play premium 3D games with immersive controls, realistic physics, and smart AI. Compatible with all devices: PC, tablets, and phones.</p>
-
-  <section class="game-cards">
-    <div class="game-card" id="card-chess" tabindex="0" role="button" aria-pressed="false" aria-label="Play 3D Chess Game">
-      <svg viewBox="0 0 64 64" fill="none" stroke="#f9ca24" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-        <path d="M16 48h32l-8-32H24l-8 32z"/>
-        <path d="M32 24v24"/>
-        <path d="M24 40h16"/>
-      </svg>
-      3D Chess
-    </div>
-    <div class="game-card" id="card-football" tabindex="0" role="button" aria-pressed="false" aria-label="Play Football Challenge">
-      <svg viewBox="0 0 64 64" fill="none" stroke="#f9ca24" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-        <circle cx="32" cy="32" r="28"/>
-        <path d="M32 12v40"/>
-        <path d="M12 32h40"/>
-      </svg>
-      Football Challenge
-    </div>
-    <div class="game-card" id="card-racing" tabindex="0" role="button" aria-pressed="false" aria-label="Play Car Racing Game">
-      <svg viewBox="0 0 64 64" fill="none" stroke="#f9ca24" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-        <rect x="14" y="24" width="36" height="16" rx="3" ry="3"/>
-        <circle cx="20" cy="44" r="6"/>
-        <circle cx="44" cy="44" r="6"/>
-      </svg>
-      Car Racing
-    </div>
-  </section>
-
-  <!-- Games Sections -->
-  <section id="game-chess" class="game-container" aria-hidden="true" tabindex="-1">
-    <h2 class="game-title">3D Chess</h2>
-    <canvas id="chess-canvas" width="800" height="480" aria-label="3D chess game"></canvas>
-    <div class="controls">
-      <button class="btn-control" id="chess-start">Start Game</button>
-      <button class="btn-control" id="chess-pause">Pause</button>
-      <button class="btn-control" id="chess-reset">Reset</button>
-    </div>
-    <div class="scoreboard" id="chess-score">Score: 0</div>
-  </section>
-
-  <section id="game-football" class="game-container" aria-hidden="true" tabindex="-1">
-    <h2 class="game-title">Football Challenge</h2>
-    <canvas id="football-canvas" width="800" height="480" aria-label="Football game"></canvas>
-    <div class="controls">
-      <button class="btn-control" id="football-start">Start Game</button>
-      <button class="btn-control" id="football-pause">Pause</button>
-      <button class="btn-control" id="football-reset">Reset</button>
-    </div>
-    <div class="scoreboard" id="football-score">Score: 0</div>
-  </section>
-
-  <section id="game-racing" class="game-container" aria-hidden="true" tabindex="-1">
-    <h2 class="game-title">Car Racing</h2>
-    <canvas id="racing-canvas" width="800" height="480" aria-label="Car racing game"></canvas>
-    <div class="controls">
-      <button class="btn-control" id="racing-start">
-        Start Game</button>
-      <button class="btn-control" id="racing-pause">Pause</button>
-      <button class="btn-control" id="racing-reset">Reset</button>
-    </div>
-    <div class="scoreboard" id="racing-score">Score: 0</div>
-  </section>
-</main>
-
-<footer>
-  &copy; 2025 Legon TV | All rights reserved.
-  <div class="footer-links">
-    <a href="https://www.tiktok.com/@legon.tvv" target="_blank" rel="noopener noreferrer">TikTok</a>
-    <a href="https://www.instagram.com/legontv.web" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://www.youtube.com/@legontv" target="_blank" rel="noopener noreferrer">YouTube</a>
+<!-- Game: Football -->
+<div id="footballContainer" class="game-container">
+  <h2>3D Football</h2>
+  <canvas id="footballCanvas"></canvas>
+  <div class="score" id="footballScore">Score: 0 - 0</div>
+  <div class="controls">
+    <button onclick="startFootball()">Start</button>
+    <button onclick="resetFootball()">Reset</button>
+    <button onclick="exitFootball()">Exit</button>
   </div>
-</footer>
+</div>
+
+<!-- Game: Racing -->
+<div id="racingContainer" class="game-container">
+  <h2>3D Car Racing</h2>
+  <canvas id="racingCanvas"></canvas>
+  <div class="score" id="racingScore">Lap: 0 / 3</div>
+  <div class="controls">
+    <button onclick="startRacing()">Start</button>
+    <button onclick="resetRacing()">Reset</button>
+    <button onclick="exitRacing()">Exit</button>
+  </div>
+</div>
+<script>
+  // Store references to game containers
+  const chessContainer = document.getElementById("chessContainer");
+  const footballContainer = document.getElementById("footballContainer");
+  const racingContainer = document.getElementById("racingContainer");
+
+  // Hide all containers
+  function hideAllGames() {
+    chessContainer.style.display = "none";
+    footballContainer.style.display = "none";
+    racingContainer.style.display = "none";
+  }
+
+  // Show a specific game
+  function showGame(gameName) {
+    hideAllGames();
+    if (gameName === "chess") chessContainer.style.display = "block";
+    if (gameName === "football") footballContainer.style.display = "block";
+    if (gameName === "racing") racingContainer.style.display = "block";
+  }
+
+  // Event listeners for card clicks
+  document.getElementById("card-chess").addEventListener("click", () => showGame("chess"));
+  document.getElementById("card-football").addEventListener("click", () => showGame("football"));
+  document.getElementById("card-racing").addEventListener("click", () => showGame("racing"));
+
+  // Placeholders for full game logic functions
+  function startChess() {
+    // Replace with actual chess game start logic
+    document.getElementById("chessScore").textContent = "Game Started!";
+  }
+
+  function resetChess() {
+    // Replace with chess reset logic
+    document.getElementById("chessScore").textContent = "Reset Chess Board";
+  }
+
+  function exitChess() {
+    hideAllGames();
+  }
+
+  function startFootball() {
+    // Replace with actual football start
+    document.getElementById("footballScore").textContent = "Score: 1 - 0";
+  }
+
+  function resetFootball() {
+    document.getElementById("footballScore").textContent = "Score: 0 - 0";
+  }
+
+  function exitFootball() {
+    hideAllGames();
+  }
+
+  function startRacing() {
+    document.getElementById("racingScore").textContent = "Lap: 1 / 3";
+  }
+
+  function resetRacing() {
+    document.getElementById("racingScore").textContent = "Lap: 0 / 3";
+  }
+
+  function exitRacing() {
+    hideAllGames();
+  }
+
+  // On load, hide all games
+  window.onload = hideAllGames;
+</script>
+<script>
+class Chess3D {
+  constructor(canvasId, scoreDisplayId) {
+    this.canvas = document.getElementById(canvasId);
+    this.ctx = this.canvas.getContext("2d");
+    this.scoreDisplay = document.getElementById(scoreDisplayId);
+    this.tileSize = 60;
+    this.boardSize = 8;
+    this.board = [];
+    this.selectedPiece = null;
+    this.turn = "white";
+    this.running = false;
+
+    this.initBoard();
+    this.drawBoard();
+    this.canvas.addEventListener("click", this.handleClick.bind(this));
+  }
+
+  initBoard() {
+    // Create empty board
+    this.board = new Array(this.boardSize).fill(null).map(() => new Array(this.boardSize).fill(null));
+
+    // Place pawns
+    for (let i = 0; i < this.boardSize; i++) {
+      this.board[1][i] = { color: "black", type: "pawn" };
+      this.board[6][i] = { color: "white", type: "pawn" };
+    }
+
+    // Place rooks
+    this.board[0][0] = this.board[0][7] = { color: "black", type: "rook" };
+    this.board[7][0] = this.board[7][7] = { color: "white", type: "rook" };
+
+    // Place knights
+    this.board[0][1] = this.board[0][6] = { color: "black", type: "knight" };
+    this.board[7][1] = this.board[7][6] = { color: "white", type: "knight" };
+
+    // Place bishops
+    this.board[0][2] = this.board[0][5] = { color: "black", type: "bishop" };
+    this.board[7][2] = this.board[7][5] = { color: "white", type: "bishop" };
+
+    // Place queens
+    this.board[0][3] = { color: "black", type: "queen" };
+    this.board[7][3] = { color: "white", type: "queen" };
+
+    // Place kings
+    this.board[0][4] = { color: "black", type: "king" };
+    this.board[7][4] = { color: "white", type: "king" };
+  }
+
+  drawBoard() {
+    const ctx = this.ctx;
+    for (let y = 0; y < this.boardSize; y++) {
+      for (let x = 0; x < this.boardSize; x++) {
+        const isLight = (x + y) % 2 === 0;
+        ctx.fillStyle = isLight ? "#EEE" : "#888";
+        ctx.fillRect(x * this.tileSize, y * this.tileSize, this.tileSize, this.tileSize);
+
+        const piece = this.board[y][x];
+        if (piece) {
+          this.drawPiece(x, y, piece);
+        }
+      }
+    }
+  }
+
+  drawPiece(x, y, piece) {
+    const ctx = this.ctx;
+    ctx.fillStyle = piece.color === "white" ? "#fff" : "#000";
+    ctx.font = "40px Arial";
+    const symbol = this.getSymbol(piece);
+    ctx.fillText(symbol, x * this.tileSize + 15, y * this.tileSize + 45);
+  }
+
+  getSymbol(piece) {
+    const symbols = {
+      pawn: "♙",
+      rook: "♖",
+      knight: "♘",
+      bishop: "♗",
+      queen: "♕",
+      king: "♔"
+    };
+    return symbols[piece.type];
+  }
+
+  handleClick(e) {
+    const rect = this.canvas.getBoundingClientRect();
+    const x = Math.floor((e.clientX - rect.left) / this.tileSize);
+    const y = Math.floor((e.clientY - rect.top) / this.tileSize);
+
+    const clicked = this.board[y][x];
+
+    if (this.selectedPiece) {
+      const [sx, sy] = this.selectedPiece;
+      if (sx === x && sy === y) {
+        this.selectedPiece = null;
+        this.drawBoard();
+        return;
+      }
+
+      const piece = this.board[sy][sx];
+      if (piece && piece.color === this.turn) {
+        this.board[y][x] = piece;
+        this.board[sy][sx] = null;
+        this.turn = this.turn === "white" ? "black" : "white";
+      }
+
+      this.selectedPiece = null;
+      this.drawBoard();
+    } else {
+      if (clicked && clicked.color === this.turn) {
+        this.selectedPiece = [x, y];
+        this.highlightSquare(x, y);
+      }
+    }
+  }
+
+  highlightSquare(x, y) {
+    this.drawBoard();
+    this.ctx.strokeStyle = "red";
+    this.ctx.lineWidth = 4;
+    this.ctx.strokeRect(x * this.tileSize, y * this.tileSize, this.tileSize, this.tileSize);
+  }
+}
+</script>
+<script>
+class Football3D {
+  constructor(canvasId, scoreboardId) {
+    this.canvas = document.getElementById(canvasId);
+    this.ctx = this.canvas.getContext("2d");
+    this.scoreboard = document.getElementById(scoreboardId);
+    this.players = [];
+    this.ball = { x: 390, y: 240, dx: 0, dy: 0, radius: 10 };
+    this.scores = { teamA: 0, teamB: 0 };
+    this.keys = {};
+
+    this.init();
+    this.loop = this.loop.bind(this);
+    this.canvas.width = 800;
+    this.canvas.height = 500;
+    this.listenKeys();
+    requestAnimationFrame(this.loop);
+  }
+
+  init() {
+    // Team A (left)
+    this.players.push({ team: "A", x: 100, y: 200, color: "blue", dx: 0, dy: 0 });
+    this.players.push({ team: "A", x: 100, y: 300, color: "blue", dx: 0, dy: 0 });
+
+    // Team B (right)
+    this.players.push({ team: "B", x: 700, y: 200, color: "red", dx: 0, dy: 0 });
+    this.players.push({ team: "B", x: 700, y: 300, color: "red", dx: 0, dy: 0 });
+  }
+
+  listenKeys() {
+    window.addEventListener("keydown", e => {
+      this.keys[e.key] = true;
+    });
+    window.addEventListener("keyup", e => {
+      this.keys[e.key] = false;
+    });
+  }
+
+  movePlayers() {
+    const speed = 3;
+    const p = this.players[0]; // control only 1 player for now
+
+    if (this.keys["ArrowUp"]) p.y -= speed;
+    if (this.keys["ArrowDown"]) p.y += speed;
+    if (this.keys["ArrowLeft"]) p.x -= speed;
+    if (this.keys["ArrowRight"]) p.x += speed;
+
+    // Keep in bounds
+    p.x = Math.max(0, Math.min(this.canvas.width, p.x));
+    p.y = Math.max(0, Math.min(this.canvas.height, p.y));
+  }
+
+  updateBall() {
+    this.ball.x += this.ball.dx;
+    this.ball.y += this.ball.dy;
+    this.ball.dx *= 0.98;
+    this.ball.dy *= 0.98;
+
+    if (this.ball.x < 0 || this.ball.x > this.canvas.width) this.ball.dx *= -1;
+    if (this.ball.y < 0 || this.ball.y > this.canvas.height) this.ball.dy *= -1;
+
+    this.players.forEach(p => {
+      const dist = Math.hypot(p.x - this.ball.x, p.y - this.ball.y);
+      if (dist < 20) {
+        const angle = Math.atan2(this.ball.y - p.y, this.ball.x - p.x);
+        this.ball.dx += Math.cos(angle) * 2;
+        this.ball.dy += Math.sin(angle) * 2;
+      }
+    });
+
+    // Check goal
+    if (this.ball.x < 10 && this.ball.y > 180 && this.ball.y < 320) {
+      this.scores.teamB++;
+      this.resetBall();
+    } else if (this.ball.x > this.canvas.width - 10 && this.ball.y > 180 && this.ball.y < 320) {
+      this.scores.teamA++;
+      this.resetBall();
+    }
+  }
+
+  resetBall() {
+    this.ball = { x: 390, y: 240, dx: 0, dy: 0, radius: 10 };
+  }
+
+  drawField() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Field
+    ctx.fillStyle = "#009900";
+    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Midline and center circle
+    ctx.strokeStyle = "white";
+    ctx.beginPath();
+    ctx.moveTo(this.canvas.width / 2, 0);
+    ctx.lineTo(this.canvas.width / 2, this.canvas.height);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(this.canvas.width / 2, this.canvas.height / 2, 60, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Goals
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 180, 5, 140);
+    ctx.fillRect(this.canvas.width - 5, 180, 5, 140);
+  }
+
+  drawPlayers() {
+    this.players.forEach(p => {
+      this.ctx.beginPath();
+      this.ctx.arc(p.x, p.y, 12, 0, Math.PI * 2);
+      this.ctx.fillStyle = p.color;
+      this.ctx.fill();
+      this.ctx.stroke();
+    });
+  }
+
+  drawBall() {
+    this.ctx.beginPath();
+    this.ctx.arc(this.ball.x, this.ball.y, this.ball.radius, 0, Math.PI * 2);
+    this.ctx.fillStyle = "white";
+    this.ctx.fill();
+    this.ctx.stroke();
+  }
+
+  updateScoreboard() {
+    if (this.scoreboard) {
+      this.scoreboard.innerText = `Team A: ${this.scores.teamA} - Team B: ${this.scores.teamB}`;
+    }
+  }
+
+  loop() {
+    this.movePlayers();
+    this.updateBall();
+    this.drawField();
+    this.drawPlayers();
+    this.drawBall();
+    this.updateScoreboard();
+    requestAnimationFrame(this.loop);
+  }
+}
+</script>
+<canvas id="racingCanvas" width="800" height="500" style="display:none; border-radius: 16px; margin-top:20px;"></canvas>
+<div id="racingScore" style="color:white; font-size:18px; margin-top:10px;"></div>
 
 <script>
-(() => {
-  // Utility to show/hide game sections
-  const gameCards = document.querySelectorAll('.game-card');
-  const gameContainers = {
-    chess: document.getElementById('game-chess'),
-    football: document.getElementById('game-football'),
-    racing: document.getElementById('game-racing')
-  };
+class RacingGame {
+  constructor(canvasId, scoreId) {
+    this.canvas = document.getElementById(canvasId);
+    this.ctx = this.canvas.getContext("2d");
+    this.scoreDisplay = document.getElementById(scoreId);
 
-  // Hide all games except selected
-  function showGame(name) {
-    Object.entries(gameContainers).forEach(([key, el]) => {
-      if (key === name) {
-        el.classList.add('active');
-        el.setAttribute('aria-hidden', 'false');
-        el.focus();
-      } else {
-        el.classList.remove('active');
-        el.setAttribute('aria-hidden', 'true');
-      }
+    this.car = { x: 370, y: 420, width: 50, height: 80, speed: 5 };
+    this.obstacles = [];
+    this.keys = {};
+    this.score = 0;
+    this.gameOver = false;
+
+    this.init();
+    this.loop = this.loop.bind(this);
+    this.listenKeys();
+    requestAnimationFrame(this.loop);
+  }
+
+  init() {
+    this.spawnObstacle();
+    setInterval(() => {
+      if (!this.gameOver) this.spawnObstacle();
+    }, 2000);
+  }
+
+  listenKeys() {
+    window.addEventListener("keydown", (e) => {
+      this.keys[e.key] = true;
+    });
+    window.addEventListener("keyup", (e) => {
+      this.keys[e.key] = false;
     });
   }
 
-  // Add click + keyboard accessibility on cards
-  gameCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const id = card.id;
-      if (id === 'card-chess') showGame('chess');
-      else if (id === 'card-football') showGame('football');
-      else if (id === 'card-racing') showGame('racing');
-    });
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
+  spawnObstacle() {
+    const laneX = [170, 270, 370, 470, 570];
+    const randomX = laneX[Math.floor(Math.random() * laneX.length)];
+    this.obstacles.push({ x: randomX, y: -80, width: 50, height: 80 });
+  }
 
-  // ============ 3D Chess Game =============
-  class Chess3D {
-    constructor(canvas, scoreDisplay) {
-      this.canvas = canvas;
-      this.scoreDisplay = scoreDisplay;
-      this.scene = new THREE.Scene();
-      this.camera = new THREE.PerspectiveCamera(45, canvas.width / canvas.height, 0.1, 1000);
-      this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      this.renderer.setSize(canvas.width, canvas.height);
-      this.renderer.setClearColor(0x0a2a5a, 1);
-
-      // Controls for orbit
-      this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.enableDamping = true;
-      this.controls.dampingFactor = 0.1;
-      this.controls.minDistance = 10;
-      this.controls.maxDistance = 60;
-      this.controls.maxPolarAngle = Math.PI / 2.3;
-
-      // Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-      this.scene.add(ambientLight);
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-      dirLight.position.set(10, 20, 10);
-      this.scene.add(dirLight);
-
-      this.camera.position.set(30, 30, 30);
-      this.controls.update();
-
-      // Game state
-      this.boardGroup = new THREE.Group();
-      this.scene.add(this.boardGroup);
-      this.piecesGroup = new THREE.Group();
-      this.scene.add(this.piecesGroup);
-
-      this.isRunning = false;
-      this.score = 0;
-
-      this.raycaster = new THREE.Raycaster();
-      this.mouse = new THREE.Vector2();
-      this.selectedPiece = null;
-      this.possibleMoves = [];
-
-      this._initBoard();
-      this._initPieces();
-
-      this._animate = this._animate.bind(this);
-
-      this._bindEvents();
+  moveCar() {
+    if (this.keys["ArrowLeft"] && this.car.x > 150) {
+      this.car.x -= this.car.speed;
     }
-
-    _initBoard() {
-      // Create chessboard 8x8 squares alternating colors
-      const squareSize = 3;
-      const darkColor = 0x223344;
-      const lightColor = 0xcfcfcf;
-
-      for (let x = 0; x < 8; x++) {
-        for (let z = 0; z < 8; z++) {
-          const geometry = new THREE.BoxGeometry(squareSize, 0.3, squareSize);
-          const color = (x + z) % 2 === 0 ? lightColor : darkColor;
-          const material = new THREE.MeshPhongMaterial({ color });
-          const square = new THREE.Mesh(geometry, material);
-          square.position.set(
-            (x - 3.5) * squareSize,
-            0,
-            (z - 3.5) * squareSize
-          );
-          this.boardGroup.add(square);
-        }
-      }
-    }
-
-    _initPieces() {
-      // We'll create simple geometric shapes for pieces with colors
-      // White pieces on one side, black pieces on other
-      this.pieces = [];
-      this.piecesGroup.clear?.();
-      this.piecesGroup = new THREE.Group();
-      this.scene.add(this.piecesGroup);
-
-      // Piece shapes:
-      // Pawn: small cylinder
-      // Rook: cube
-      // Knight: cone
-      // Bishop: sphere
-      // Queen: torus
-      // King: cylinder with sphere top
-
-      const pieceSize = 1.2;
-      const whiteMaterial = new THREE.MeshPhongMaterial({ color: 0xf0e68c });
-      const blackMaterial = new THREE.MeshPhongMaterial({ color: 0x333333 });
-
-      const positions = {
-        pawns: [...Array(8).keys()].map(i => [i, 1]),
-        rooks: [[0,0],[7,0]],
-        knights: [[1,0],[6,0]],
-        bishops: [[2,0],[5,0]],
-        queen: [[3,0]],
-        king: [[4,0]],
-      };
-
-      // White side
-      // Pawns
-      positions.pawns.forEach(([x,z]) => {
-        this._addPiece('pawn', x, z, whiteMaterial, true);
-      });
-      // Rooks
-      positions.rooks.forEach(([x,z]) => this._addPiece('rook', x, z, whiteMaterial, true));
-      // Knights
-      positions.knights.forEach(([x,z]) => this._addPiece('knight', x, z, whiteMaterial, true));
-      // Bishops
-      positions.bishops.forEach(([x,z]) => this._addPiece('bishop', x, z, whiteMaterial, true));
-      // Queen
-      positions.queen.forEach(([x,z]) => this._addPiece('queen', x, z, whiteMaterial, true));
-      // King
-      positions.king.forEach(([x,z]) => this._addPiece('king', x, z, whiteMaterial, true));
-
-      // Black side (mirrored on z axis)
-      const mirrorZ = (z) => 7 - z;
-      // Pawns
-      positions.pawns.forEach(([x,z]) => {
-        this._addPiece('pawn', x, mirrorZ(z), blackMaterial, false);
-      });
-      // Rooks
-      positions.rooks.forEach(([x,z]) => this._addPiece('rook', x, mirrorZ(z), blackMaterial, false));
-      // Knights
-      positions.knights.forEach(([x,z]) => this._addPiece('knight', x, mirrorZ(z), blackMaterial, false));
-      // Bishops
-      positions.bishops.forEach(([x,z]) => this._addPiece('bishop', x, mirrorZ(z), blackMaterial, false));
-      // Queen
-      positions.queen.forEach(([x,z]) => this._addPiece('queen', x, mirrorZ(z), blackMaterial, false));
-      // King
-      positions.king.forEach(([x,z]) => this._addPiece('king', x, mirrorZ(z), blackMaterial, false));
-    }
-
-    _addPiece(type, x, z, material, isWhite) {
-      let geometry;
-      const size = 1.2;
-      switch(type) {
-        case 'pawn':
-          geometry = new THREE.CylinderGeometry(size/4, size/4, size*1.5, 20);
-          break;
-        case 'rook':
-          geometry = new THREE.BoxGeometry(size*0.8, size*1.5, size*0.8);
-          break;
-        case 'knight':
-          geometry = new THREE.ConeGeometry(size/1.5, size*1.5, 20);
-          break;
-        case 'bishop':
-          geometry = new THREE.SphereGeometry(size/1.5, 32, 16);
-          break;
-        case 'queen':
-          geometry = new THREE.TorusGeometry(size/1.3, size/5, 16, 100);
-          break;
-        case 'king':
-          geometry = new THREE.CylinderGeometry(size/3, size/3, size*2, 20);
-          break;
-      }
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set(
-        (x - 3.5) * 3,
-        0.8,
-        (z - 3.5) * 3
-      );
-      mesh.userData = { type, x, z, isWhite };
-      this.piecesGroup.add(mesh);
-      this.pieces.push(mesh);
-    }
-
-    _bindEvents() {
-      this.canvas.addEventListener('pointerdown', this._onPointerDown.bind(this));
-    }
-
-    _onPointerDown(event) {
-      if (!this.isRunning) return;
-
-      const rect = this.canvas.getBoundingClientRect();
-      this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-      this.raycaster.setFromCamera(this.mouse, this.camera);
-
-      // Intersect pieces first
-      const intersectsPieces = this.raycaster.intersectObjects(this.pieces, true);
-
-      if (intersectsPieces.length > 0) {
-        const picked = intersectsPieces[0].object;
-        if (this.selectedPiece === picked) {
-          // Deselect
-          this._clearSelection();
-        } else {
-          this._selectPiece(picked);
-        }
-      } else if (this.selectedPiece) {
-        // If a piece is selected, check board squares for move
-
-        // Intersect board squares
-        const squares = this.boardGroup.children;
-        const intersectsSquares = this.raycaster.intersectObjects(squares);
-
-        if (intersectsSquares.length > 0) {
-          const square = intersectsSquares[0].object;
-          const pos = square.position;
-
-          // Snap move logic: move selected piece here if valid
-          // For demo, allow any move - advanced chess logic omitted for brevity
-          this.selectedPiece.position.set(pos.x, this.selectedPiece.position.y, pos.z);
-          this.selectedPiece.userData.x = Math.round(pos.x / 3 + 3.5);
-          this.selectedPiece.userData.z = Math.round(pos.z / 3 + 3.5);
-
-          this._clearSelection();
-          this.score += 10;
-          this._updateScore();
-        }
-      }
-    }
-
-    _selectPiece(piece) {
-      this._clearSelection();
-      this.selectedPiece = piece;
-      piece.material.emissive = new THREE.Color(0xf9ca24);
-      piece.material.emissiveIntensity = 0.6;
-    }
-
-    _clearSelection() {
-      if (this.selectedPiece) {
-        this.selectedPiece.material.emissiveIntensity = 0;
-        this.selectedPiece = null;
-      }
-    }
-
-    _updateScore() {
-      this.scoreDisplay.textContent = `Score: ${this.score}`;
-    }
-
-    start() {
-      if (this.isRunning) return;
-      this.isRunning = true;
-      this.score = 0;
-      this._updateScore();
-      this._animate();
-    }
-
-    pause() {
-      this.isRunning = false;
-    }
-
-    reset() {
-      this.isRunning = false;
-      this.score = 0;
-      this._updateScore();
-      this.pieces.forEach(p => this.piecesGroup.remove(p));
-      this._initPieces();
-    }
-
-    _animate() {
-      if (!this.isRunning) return;
-      requestAnimationFrame(this._animate);
-      this.controls.update();
-      this.renderer.render(this.scene, this.camera);
+    if (this.keys["ArrowRight"] && this.car.x < this.canvas.width - 200) {
+      this.car.x += this.car.speed;
     }
   }
 
-  // ============ Football Game =============
-  class FootballGame {
-    constructor(canvas, scoreDisplay) {
-      this.canvas = canvas;
-      this.ctx = canvas.getContext('2d');
-      this.scoreDisplay = scoreDisplay;
-      this.width = canvas.width;
-      this.height = canvas.height;
-
-      // Game elements
-      this.goal = { x: this.width / 2 - this.goalWidth / 2, y: 0, width: this.goalWidth, height: this.goalHeight };
-      this.score = 0;
-      this.isRunning = false;
-
-      this._bindEvents();
-    }
-
-    _bindEvents() {
-      this.canvas.addEventListener('click', (e) => {
-        if (!this.isRunning) return;
-        const rect = this.canvas.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const clickY = e.clientY - rect.top;
-        const dx = clickX - this.ball.x;
-        const dy = clickY - this.ball.y;
-        const magnitude = Math.sqrt(dx * dx + dy * dy);
-        this.ball.vx = (dx / magnitude) * 5;
-        this.ball.vy = (dy / magnitude) * 5;
-      });
-    }
-
-    _updateScore() {
-      this.scoreDisplay.textContent = `Score: ${this.score}`;
-    }
-
-    _drawField() {
-      const ctx = this.ctx;
-      ctx.fillStyle = "#4CAF50";
-      ctx.fillRect(0, 0, this.width, this.height);
-
-      // Draw goals
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(this.goal.x, this.goal.y, this.goal.width, this.goal.height);
-    }
-
-    _drawBall() {
-      const ctx = this.ctx;
-      ctx.beginPath();
-      ctx.arc(this.ball.x, this.ball.y, this.ball.radius, 0, Math.PI * 2);
-      ctx.fillStyle = "#ffffff";
-      ctx.fill();
-      ctx.closePath();
-    }
-
-    _update() {
-      this.ball.x += this.ball.vx;
-      this.ball.y += this.ball.vy;
-
-      // Bounce off walls
-      if (this.ball.x < this.ball.radius || this.ball.x > this.width - this.ball.radius) {
-        this.ball.vx *= -1;
-      }
-      if (this.ball.y < this.ball.radius || this.ball.y > this.height - this.ball.radius) {
-        this.ball.vy *= -1;
-      }
-
-      // Goal detection
-      if (
-        this.ball.y - this.ball.radius <= this.goal.y + this.goal.height &&
-        this.ball.x >= this.goal.x &&
-        this.ball.x <= this.goal.x + this.goal.width
-      ) {
-        this.score += 1;
-        this._updateScore();
-        this.ball.x = this.width / 2;
-        this.ball.y = this.height / 2;
-        this.ball.vx = 5;
-        this.ball.vy = 3;
-      }
-    }
-
-    _draw() {
-      this._drawField();
-      this._drawBall();
-    }
-
-    _loop = () => {
-      if (!this.isRunning) return;
-      this._update();
-      this._draw();
-      requestAnimationFrame(this._loop);
-    }
-
-    start() {
-      this.isRunning = true;
-      this.score = 0;
-      this._updateScore();
-      this._loop();
-    }
-
-    pause() {
-      this.isRunning = false;
-    }
-
-    reset() {
-      this.pause();
-      this.ball = { x: this.width / 2, y: this.height / 2, radius: 15, vx: 5, vy: 3 };
-      this.score = 0;
-      this._updateScore();
-      this._draw();
-    }
-  }
-
-  // ============ Racing Game =============
-  class RacingGame {
-    constructor(canvas, scoreDisplay) {
-      this.canvas = canvas;
-      this.ctx = canvas.getContext('2d');
-      this.scoreDisplay = scoreDisplay;
-      this.width = canvas.width;
-      this.height = canvas.height;
-      this.car = { x: this.width / 2, y: this.height - 60, width: 40, height: 70, speed: 5 };
-      this.obstacles = [];
-      this.score = 0;
-      this.isRunning = false;
-
-      this._bindEvents();
-    }
-
-    _bindEvents() {
-      window.addEventListener('keydown', (e) => {
-        if (!this.isRunning) return;
-        if (e.key === "ArrowLeft") this.car.x -= this.car.speed;
-        if (e.key === "ArrowRight") this.car.x += this.car.speed;
-      });
-    }
-
-    _updateScore() {
-      this.scoreDisplay.textContent = `Score: ${this.score}`;
-    }
-
-    _drawRoad() {
-      const ctx = this.ctx;
-      ctx.fillStyle = "#333";
-      ctx.fillRect(0, 0, this.width, this.height);
-
-      ctx.strokeStyle = "#fff";
-      for (let i = 0; i < this.height; i += 40) {
-        ctx.beginPath();
-        ctx.moveTo(this.width / 2 - 2, i);
-        ctx.lineTo(this.width / 2 - 2, i + 20);
-        ctx.stroke();
-      }
-    }
-
-    _drawCar() {
-      const ctx = this.ctx;
-      ctx.fillStyle = "#00f";
-      ctx.fillRect(this.car.x, this.car.y, this.car.width, this.car.height);
-    }
-
-    _drawObstacles() {
-      const ctx = this.ctx;
-      ctx.fillStyle = "#f00";
-      this.obstacles.forEach(ob => {
-        ctx.fillRect(ob.x, ob.y, ob.width, ob.height);
-      });
-    }
-
-    _update() {
-      // Move obstacles
-      this.obstacles.forEach(ob => ob.y += 5);
-      // Remove off-screen
-      this.obstacles = this.obstacles.filter(ob => ob.y < this.height);
-
-      // Add new obstacles
-      if (Math.random() < 0.05) {
-        const x = Math.random() * (this.width - 50);
-        this.obstacles.push({ x, y: -60, width: 40, height: 60 });
-      }
+  updateObstacles() {
+    for (let i = 0; i < this.obstacles.length; i++) {
+      this.obstacles[i].y += 4;
 
       // Collision detection
-      for (const ob of this.obstacles) {
-        if (
-          this.car.x < ob.x + ob.width &&
-          this.car.x + this.car.width > ob.x &&
-          this.car.y < ob.y + ob.height &&
-          this.car.y + this.car.height > ob.y
-        ) {
-          this.pause();
-          alert("Crash! Game Over.");
-          return;
-        }
+      if (
+        this.car.x < this.obstacles[i].x + this.obstacles[i].width &&
+        this.car.x + this.car.width > this.obstacles[i].x &&
+        this.car.y < this.obstacles[i].y + this.obstacles[i].height &&
+        this.car.y + this.car.height > this.obstacles[i].y
+      ) {
+        this.gameOver = true;
+        this.scoreDisplay.innerText = "Game Over! Score: " + this.score;
+        return;
       }
 
-      this.score += 1;
-      this._updateScore();
-    }
-
-    _draw() {
-      this._drawRoad();
-      this._drawCar();
-      this._drawObstacles();
-    }
-
-    _loop = () => {
-      if (!this.isRunning) return;
-      this._update();
-      this._draw();
-      requestAnimationFrame(this._loop);
-    }
-
-    start() {
-      this.isRunning = true;
-      this.score = 0;
-      this._updateScore();
-      this._loop();
-    }
-
-    pause() {
-      this.isRunning = false;
-    }
-
-    reset() {
-      this.pause();
-      this.car.x = this.width / 2;
-      this.obstacles = [];
-      this.score = 0;
-      this._updateScore();
-      this._draw();
+      // Score
+      if (this.obstacles[i].y > this.canvas.height) {
+        this.obstacles.splice(i, 1);
+        this.score++;
+        this.scoreDisplay.innerText = "Score: " + this.score;
+      }
     }
   }
 
-  // Game init
-  const chessGame = new Chess3D(document.getElementById('chess-canvas'), document.getElementById('chess-score'));
-  const footballGame = new FootballGame(document.getElementById('football-canvas'), document.getElementById('football-score'));
-  const racingGame = new RacingGame(document.getElementById('racing-canvas'), document.getElementById('racing-score'));
+  drawRoad() {
+    const ctx = this.ctx;
+    ctx.fillStyle = "gray";
+    ctx.fillRect(140, 0, 520, 500);
 
-  document.getElementById('chess-start').onclick = () => chessGame.start();
-  document.getElementById('chess-pause').onclick = () => chessGame.pause();
-  document.getElementById('chess-reset').onclick = () => chessGame.reset();
+    ctx.fillStyle = "white";
+    for (let i = 0; i < 500; i += 40) {
+      ctx.fillRect(240, i, 5, 20);
+      ctx.fillRect(340, i, 5, 20);
+      ctx.fillRect(440, i, 5, 20);
+      ctx.fillRect(540, i, 5, 20);
+    }
+  }
 
-  document.getElementById('football-start').onclick = () => footballGame.start();
-  document.getElementById('football-pause').onclick = () => footballGame.pause();
-  document.getElementById('football-reset').onclick = () => footballGame.reset();
+  drawCar() {
+    this.ctx.fillStyle = "blue";
+    this.ctx.fillRect(this.car.x, this.car.y, this.car.width, this.car.height);
+  }
 
-  document.getElementById('racing-start').onclick = () => racingGame.start();
-  document.getElementById('racing-pause').onclick = () => racingGame.pause();
-  document.getElementById('racing-reset').onclick = () => racingGame.reset();
-})();
+  drawObstacles() {
+    this.ctx.fillStyle = "red";
+    for (let obs of this.obstacles) {
+      this.ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+    }
+  }
+
+  loop() {
+    if (this.gameOver) return;
+
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drawRoad();
+    this.moveCar();
+    this.updateObstacles();
+    this.drawCar();
+    this.drawObstacles();
+    requestAnimationFrame(this.loop);
+  }
+}
 </script>
-</body>
-</html>
+<script>
+const chessCard = document.querySelector('[onclick*="chess"]');
+const footballCard = document.querySelector('[onclick*="football"]');
+const racingCard = document.querySelector('[onclick*="racing"]');
+
+const chessBoard = document.getElementById("chessBoard");
+const chessStatus = document.getElementById("chessStatus");
+const footballCanvas = document.getElementById("footballCanvas");
+const footballScore = document.getElementById("footballScore");
+const racingCanvas = document.getElementById("racingCanvas");
+const racingScore = document.getElementById("racingScore");
+
+let chess, football, racing;
+
+function hideAllGames() {
+  chessBoard.style.display = "none";
+  chessStatus.style.display = "none";
+  footballCanvas.style.display = "none";
+  footballScore.style.display = "none";
+  racingCanvas.style.display = "none";
+  racingScore.style.display = "none";
+}
+
+function startChess() {
+  hideAllGames();
+  chessBoard.style.display = "block";
+  chessStatus.style.display = "block";
+  chess = new ChessGame("chessBoard", "chessStatus");
+}
+
+function startFootball() {
+  hideAllGames();
+  footballCanvas.style.display = "block";
+  footballScore.style.display = "block";
+  football = new FootballGame("footballCanvas", "footballScore");
+}
+
+function startRacing() {
+  hideAllGames();
+  racingCanvas.style.display = "block";
+  racingScore.style.display = "block";
+  racing = new RacingGame("racingCanvas", "racingScore");
+}
+</script>
+<style>
+/* On-screen control styles */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.controls button {
+  background: linear-gradient(to right, #0047AB, #007BFF);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.controls button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.9);
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.scoreboard {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  text-align: center;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  .controls button {
+    width: 80%;
+  }
+}
+</style>
+
+<div class="controls" id="game-controls">
+  <button onclick="chess?.start(); football?.start(); racing?.start()">Start</button>
+  <button onclick="chess?.pause(); football?.pause(); racing?.pause()">Pause</button>
+  <button onclick="chess?.reset(); football?.reset(); racing?.reset()">Reset</button>
+</div>
+
+<script>
+// Auto-switch buttons for the current game only
+function showGameControls(gameType) {
+  document.getElementById("game-controls").style.display = "flex";
+  const buttons = document.querySelectorAll("#game-controls button");
+  buttons.forEach(btn => {
+    btn.onclick = () => {
+      if (gameType === "chess") {
+        if (btn.textContent === "Start") chess.start();
+        else if (btn.textContent === "Pause") chess.pause();
+        else chess.reset();
+      } else if (gameType === "football") {
+        if (btn.textContent === "Start") football.start();
+        else if (btn.textContent === "Pause") football.pause();
+        else football.reset();
+      } else if (gameType === "racing") {
+        if (btn.textContent === "Start") racing.start();
+        else if (btn.textContent === "Pause") racing.pause();
+        else racing.reset();
+      }
+    };
+  });
+}
+</script>
+<!-- Favicon and Meta -->
+<link rel="icon" href="https://raw.githubusercontent.com/legontv/web-assets/main/logo.png" type="image/png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Legon TV Game Hub - Play premium 3D Chess, Football, and Racing games online.">
+<meta name="theme-color" content="#001F3F">
+
+<!-- Loading Spinner -->
+<style>
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000d1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+.loader {
+  width: 70px;
+  height: 70px;
+  border: 10px solid #007bff;
+  border-top: 10px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+<div id="loading"><div class="loader"></div></div>
+<script>
+window.onload = () => document.getElementById("loading").style.display = "none";
+</script>
+
+<!-- Footer and Social Links -->
+<footer style="background:#001F3F; color:#fff; text-align:center; padding:2rem 1rem; font-family:'Segoe UI', sans-serif; margin-top:2rem;">
+  <h2>Follow Legon TV</h2>
+  <div style="font-size:2rem; margin-top:1rem;">
+    <a href="https://www.tiktok.com/@legon.tvv" target="_blank" style="color:white; margin:0 1rem;"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="https://www.instagram.com/legontv.web" target="_blank" style="color:white; margin:0 1rem;"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@legontv" target="_blank" style="color:white; margin:0 1rem;"><i class="fa-brands fa-youtube"></i></a>
+  </div>
+  <p style="margin-top:1rem;">&copy; 2025 Legon TV Game Hub. All rights reserved.</p>
+</footer>
+
+<!-- FontAwesome for Icons -->
+<script src="https://kit.fontawesome.com/3e6e4c6a13.js" crossorigin="anonymous"></script>
