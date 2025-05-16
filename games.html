@@ -1,39 +1,1107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LegonTV Entertainment - Games Hub</title>
+<style>
+  /* === Reset and base === */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    background: radial-gradient(circle at center, #0a1526 0%, #081024 90%);
+    color: #c1dff0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a {
+    color: #00d9ff; text-decoration: none;
+  }
+  a:hover {
+    color: #38f5ff;
+  }
+
+  /* === Header === */
+  header {
+    background: #021028;
+    padding: 20px 40px;
+    text-align: center;
+    box-shadow: 0 3px 10px #00d9ff66;
+    position: sticky;
+    top: 0; z-index: 100;
+  }
+  header h1 {
+    font-size: 2.8rem;
+    color: #00d9ff;
+    text-shadow: 0 0 6px #00d9ffcc;
+  }
+  nav {
+    margin-top: 12px;
+  }
+  nav a {
+    font-weight: bold;
+    margin: 0 16px;
+    font-size: 1.1rem;
+  }
+
+  /* === Footer === */
+  footer {
+    background: #021028;
+    padding: 15px 40px;
+    text-align: center;
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: #007a9e;
+  }
+  .social-icons {
+    margin-top: 8px;
+  }
+  .social-icons a {
+    margin: 0 12px;
+    font-size: 1.6rem;
+    transition: color 0.3s ease;
+  }
+  .social-icons a:hover {
+    color: #38f5ff;
+  }
+
+  /* === Main container === */
+  main {
+    flex-grow: 1;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px 40px 20px;
+  }
+  h2 {
+    font-size: 2rem;
+    color: #00d9ff;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 0 6px #00d9ffcc;
+  }
+
+  /* === Game cards grid === */
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .game-card {
+    background: #0f1f3a;
+    border-radius: 16px;
+    box-shadow: 0 0 15px #0099cc99;
+    cursor: pointer;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 28px #00d9ffdd;
+  }
+  .game-card h3 {
+    margin: 12px 0;
+    color: #00e0ff;
+  }
+  .game-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px #00d9ff88);
+  }
+  .game-card p {
+    color: #89c9f7cc;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  /* === Game area container === */
+  .game-area {
+    margin-top: 40px;
+    background: #1c2a4d;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 40px #00d9ffbb;
+    min-height: 480px;
+    position: relative;
+  }
+
+  /* === Back button === */
+  .back-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #0082b8;
+    border: none;
+    border-radius: 8px;
+    color: #e0f7ff;
+    padding: 8px 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 8px #00baffcc;
+    transition: background-color 0.3s ease;
+  }
+  .back-btn:hover {
+    background: #00d9ff;
+    color: #003c4a;
+  }
+
+  /* === Common game controls === */
+  .controls {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    background: #0082b8;
+    border: none;
+    border-radius: 8px;
+    color: #e0f7ff;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00baffcc;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  .btn:hover {
+    background: #00d9ff;
+    color: #003c4a;
+  }
+  .btn:active {
+    background: #005f7a;
+  }
+
+  /* === Football game styles === */
+  #footballCanvas {
+    display: block;
+    margin: 20px auto;
+    background:
+      radial-gradient(circle at center, #005500 40%, #002200 90%);
+    border: 4px solid #00d9ff;
+    border-radius: 15px;
+  }
+  .scoreboard {
+    margin-top: 12px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #00f0ff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00d9ffaa;
+  }
+  .timer {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: #00bfff;
+    text-align: center;
+  }
+  .message {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-style: italic;
+    text-align: center;
+    color: #00ffaaff;
+    text-shadow: 0 0 10px #00ffccbb;
+  }
+
+  /* === Chess styles === */
+  #chessBoard {
+    width: 480px;
+    height: 480px;
+    margin: 0 auto;
+    border: 4px solid #00d9ff;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #2a3a6a 25%, #1b2650 25%, #1b2650 50%, #2a3a6a 50%, #2a3a6a 75%, #1b2650 75%, #1b2650 100%);
+    background-size: 60px 60px;
+    box-shadow: 0 0 20px #00d9ffcc;
+  }
+  #chessBoard td {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 38px;
+    cursor: pointer;
+    user-select: none;
+  }
+  #chessBoard .white {
+    background-color: #e4f0ffcc;
+  }
+  #chessBoard .black {
+    background-color: #0d1c3dcc;
+  }
+  #chessControls {
+    margin-top: 16px;
+    text-align: center;
+  }
+  #chessStatus {
+    margin-top: 12px;
+    color: #00f0ff;
+    font-weight: bold;
+    min-height: 30px;
+    text-shadow: 0 0 8px #00d9ffaa;
+  }
+
+  /* === Car race styles === */
+  #carGameCanvas {
+    display: block;
+    margin: 20px auto;
+    background: linear-gradient(to bottom, #07141f 0%, #031421 100%);
+    border: 4px solid #00d9ff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #00d9ffcc;
+  }
+  .car-controls {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .car-controls .btn {
+    width: 80px;
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>LegonTV Entertainment</h1>
+  <nav>
+    <a href="#" id="homeLink">Home</a>
+    <a href="#" class="disabled" title="Coming soon...">Sports</a>
+    <a href="#" class="disabled" title="Coming soon...">Music</a>
+    <a href="#" class="disabled" title="Coming soon...">News</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Choose Your Game</h2>
+  <div class="games-grid" id="gamesGrid">
+    <!-- Game cards -->
+    <div class="game-card" data-game="football" tabindex="0" aria-label="Play Football Game">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Soccerball.svg" alt="Football Icon" />
+      <h3>Football Game</h3>
+      <p>Use buttons or arrow keys to control the ball. Score goals and beat the timer!</p>
+    </div>
+    <div class="game-card" data-game="chess" tabindex="0" aria-label="Play Chess Game">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Chess_piece_-_king.svg/1024px-Chess_piece_-_king.svg.png" alt="Chess Icon" />
+      <h3>Chess Game</h3>
+      <p>Play classic chess with move validation and turn-based play.</p>
+    </div>
+    <div class="game-card" data-game="carRace" tabindex="0" aria-label="Play Car Race Game">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Ferrari_F1_2008_1.jpg" alt="Car Race Icon" />
+      <h3>Car Race Game</h3>
+      <p>Dodge obstacles, accelerate, and race with simple controls.</p>
+    </div>
+  </div>
+
+  <!-- Game container (hidden initially) -->
+  <section class="game-area" id="gameArea" style="display:none;">
+    <button class="back-btn" id="backBtn">Back to Games</button>
+    <!-- Dynamic game content goes here -->
+    <div id="gameContent"></div>
+  </section>
+</main>
+
+<footer>
+  LegonTV Entertainment © 2025. Connect with us:
+  <div class="social-icons" aria-label="Social media links">
+    <a href="https://facebook.com/legontv" target="_blank" rel="noopener" aria-label="Facebook">&#xf09a;</a>
+    <a href="https://twitter.com/legontv" target="_blank" rel="noopener" aria-label="Twitter">&#xf099;</a>
+    <a href="https://instagram.com/legontv" target="_blank" rel="noopener" aria-label="Instagram">&#xf16d;</a>
+    <a href="https://youtube.com/legontv" target="_blank" rel="noopener" aria-label="YouTube">&#xf167;</a>
+  </div>
+</footer>
+
+<!-- FontAwesome for social icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<script>
+  // Main JS for switching games & handling back button
+  Alright, let’s extend the chess game logic to support all pieces with proper move validation — no repeats, clean and clear:
+
+// Directions for sliding pieces
+const directions = {
+  rook: [
+    [1,0], [-1,0], [0,1], [0,-1]
+  ],
+  bishop: [
+    [1,1], [1,-1], [-1,1], [-1,-1]
+  ],
+  queen: [
+    [1,0], [-1,0], [0,1], [0,-1], [1,1], [1,-1], [-1,1], [-1,-1]
+  ],
+  knightMoves: [
+    [2,1], [2,-1], [-2,1], [-2,-1], [1,2], [1,-2], [-1,2], [-1,-2]
+  ]
+};
+
+// Check if position is inside board
+function inBounds(r, c) {
+  return r >= 0 && r < 8 && c >= 0 && c < 8;
+}
+
+// Check path clear for sliding pieces (rook, bishop, queen)
+function isPathClear(fromRow, fromCol, toRow, toCol) {
+  const dRow = Math.sign(toRow - fromRow);
+  const dCol = Math.sign(toCol - fromCol);
+
+  let r = fromRow + dRow;
+  let c = fromCol + dCol;
+
+  while (r !== toRow || c !== toCol) {
+    if (chessBoard[r][c]) return false;
+    r += dRow;
+    c += dCol;
+  }
+  return true;
+}
+
+function isValidMove(fromRow, fromCol, toRow, toCol) {
+  const piece = chessBoard[fromRow][fromCol];
+  if (!piece) return false;
+  const color = piece[0];
+  const type = piece[1];
+  const target = chessBoard[toRow][toCol];
+
+  if (target && target[0] === color) return false; // Can't capture own piece
+
+  const dr = toRow - fromRow;
+  const dc = toCol - fromCol;
+
+  switch(type) {
+    case 'p': { // Pawn
+      const direction = color === 'w' ? -1 : 1;
+      // Forward move
+      if (dc === 0) {
+        if (dr === direction && !target) return true;
+        if ((color === 'w' && fromRow === 6 || color === 'b' && fromRow === 1) && dr === 2 * direction && !target && !chessBoard[fromRow + direction][fromCol]) return true;
+      }
+      // Capture
+      if (Math.abs(dc) === 1 && dr === direction && target && target[0] !== color) return true;
+      return false;
+    }
+    case 'r': { // Rook
+      if (dr === 0 || dc === 0) {
+        if (isPathClear(fromRow, fromCol, toRow, toCol)) return true;
+      }
+      return false;
+    }
+    case 'b': { // Bishop
+      if (Math.abs(dr) === Math.abs(dc)) {
+        if (isPathClear(fromRow, fromCol, toRow, toCol)) return true;
+      }
+      return false;
+    }
+    case 'q': { // Queen
+      if (dr === 0 || dc === 0 || Math.abs(dr) === Math.abs(dc)) {
+        if (isPathClear(fromRow, fromCol, toRow, toCol)) return true;
+      }
+      return false;
+    }
+    case 'n': { // Knight
+      for (let [mr, mc] of directions.knightMoves) {
+        if (dr === mr && dc === mc) return true;
+      }
+      return false;
+    }
+    case 'k': { // King
+      if (Math.abs(dr) <= 1 && Math.abs(dc) <= 1) return true;
+      return false;
+    }
+    default:
+      return false;
+  }
+}
+
+
+---
+
+This will fully validate moves for all chess pieces respecting basic chess rules (no castling or en passant yet).
+
+Want me to implement:
+
+Check/checkmate detection?
+
+Castling and en passant?
+
+A restart/reset button and move history display?
+
+
+Or should I move on to the car race game?
+
+let player = { x: width / 2, y: height - 70, radius: 18, speed: 5 };
+    let ball = { x: width / 2, y: height - 100, radius: 10, speedX: 0, speedY: 0, heldByPlayer: true };
+    let opponents = [];
+    let score = 0;
+    let timeLeft = 60;
+    let gameInterval, timerInterval;
+    let gameRunning = false;
+
+    // Opponent settings
+    const opponentCount = 5;
+    const opponentRadius = 18;
+    const opponentSpeedMin = 1.5;
+    const opponentSpeedMax = 3.5;
+
+    // Initialize opponents randomly on field
+    function createOpponents() {
+      opponents = [];
+      for (let i = 0; i < opponentCount; i++) {
+        opponents.push({
+          x: Math.random() * (width - opponentRadius * 2) + opponentRadius,
+          y: Math.random() * (height / 2),
+          radius: opponentRadius,
+          speedX: (Math.random() - 0.5) * 2,
+          speedY: opponentSpeedMin + Math.random() * (opponentSpeedMax - opponentSpeedMin),
+        });
+      }
+    }
+
+    // Draw field
+    function drawField() {
+      ctx.fillStyle = '#004d1a'; // green grass
+      ctx.fillRect(0, 0, width, height);
+
+      // Midline
+      ctx.strokeStyle = '#ffffff88';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(width / 2, 0);
+      ctx.lineTo(width / 2, height);
+      ctx.stroke();
+
+      // Center circle
+      ctx.beginPath();
+      ctx.arc(width / 2, height / 2, 70, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Goals
+      ctx.fillStyle = '#ffffff33';
+      ctx.fillRect(width / 2 - 100, 0, 200, 20);
+      ctx.fillRect(width / 2 - 100, height - 20, 200, 20);
+    }
+
+    // Draw player
+    function drawPlayer() {
+      ctx.fillStyle = '#00d9ff';
+      ctx.beginPath();
+      ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#005f77';
+      ctx.beginPath();
+      ctx.arc(player.x, player.y + 4, player.radius / 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Draw ball
+    function drawBall() {
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Draw opponents
+    function drawOpponents() {
+      ctx.fillStyle = '#ff4c4c';
+      opponents.forEach(op => {
+        ctx.beginPath();
+        ctx.arc(op.x, op.y, op.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    // Move player with bounds
+    function movePlayer(dx, dy) {
+      player.x += dx * player.speed;
+      player.y += dy * player.speed;
+      player.x = Math.min(width - player.radius, Math.max(player.radius, player.x));
+      player.y = Math.min(height - player.radius, Math.max(height / 2, player.y));
+      if (ball.heldByPlayer) {
+        ball.x = player.x;
+        ball.y = player.y - player.radius - ball.radius;
+      }
+    }
+
+    // Opponents move with bouncing edges
+    function moveOpponents() {
+      opponents.forEach(op => {
+        op.x += op.speedX;
+        op.y += op.speedY;
+
+        if (op.x <= op.radius || op.x >= width - op.radius) op.speedX = -op.speedX;
+        if (op.y >= height - op.radius || op.y <= op.radius) op.speedY = -op.speedY;
+      });
+    }
+
+    // Ball physics when shot or passed
+    function moveBall() {
+      if (!ball.heldByPlayer) {
+        ball.x += ball.speedX;
+        ball.y += ball.speedY;
+        // Gravity like slow down
+        ball.speedX *= 0.98;
+        ball.speedY *= 0.98;
+
+        // Check goal area top (opponent goal)
+        if (
+          ball.y <= 20 + ball.radius &&
+          ball.x >= width / 2 - 100 &&
+          ball.x <= width / 2 + 100
+        ) {
+          score++;
+          updateScore();
+          resetBall();
+        }
+        // Check goal area bottom (player goal, opponent scores)
+        else if (
+          ball.y >= height - 20 - ball.radius &&
+          ball.x >= width / 2 - 100 &&
+          ball.x <= width / 2 + 100
+        ) {
+          // Opponent scored, reset ball & reduce time a bit for challenge
+          timeLeft = Math.max(10, timeLeft - 5);
+          resetBall();
+        }
+        // Ball hits edges - bounce
+        if (ball.x <= ball.radius || ball.x >= width - ball.radius) ball.speedX = -ball.speedX;
+        if (ball.y <= ball.radius || ball.y >= height - ball.radius) ball.speedY = -ball.speedY;
+
+        // Check collision with opponents - ball stops and returns to player
+        opponents.forEach(op => {
+          const dx = ball.x - op.x;
+          const dy = ball.y - op.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < ball.radius + op.radius) {
+            resetBall();
+          }
+        });
+      }
+    }
+
+    // Reset ball to player
+    function resetBall() {
+      ball.x = player.x;
+      ball.y = player.y - player.radius - ball.radius;
+      ball.speedX = 0;
+      ball.speedY = 0;
+      ball.heldByPlayer = true;
+    }
+
+    // Update score display
+    function updateScore() {
+      document.getElementById('footballScore').textContent = score;
+    }
+
+    // Update timer display
+    function updateTimer() {
+      document.getElementById('footballTimer').textContent = timeLeft;
+    }
+
+    // Shoot or pass ball
+    function shootBall(isShoot) {
+      if (!ball.heldByPlayer) return;
+      ball.heldByPlayer = false;
+
+      if (isShoot) {
+        // Shoot forward with power
+        ball.speedX = (Math.random() - 0.5) * 8;
+        ball.speedY = -8 - Math.random() * 3;
+      } else {
+        // Pass to random nearby player spot
+        ball.speedX = (Math.random() - 0.5) * 5;
+        ball.speedY = -3 - Math.random() * 2;
+      }
+    }
+
+    // Game loop
+    function gameLoop() {
+      ctx.clearRect(0, 0, width, height);
+      drawField();
+      drawPlayer();
+      drawOpponents();
+      drawBall();
+
+      moveOpponents();
+      moveBall();
+    }
+
+    // Timer countdown
+    function countdown() {
+      if (timeLeft > 0) {
+        timeLeft--;
+        updateTimer();
+      } else {
+        endGame();
+      }
+    }
+
+    // End game
+    function endGame() {
+      clearInterval(gameInterval);
+      clearInterval(timerInterval);
+      gameRunning = false;
+      alert(`Game over! Your final score is ${score}.`);
+      document.getElementById('resetFootballBtn').disabled = false;
+      document.getElementById('startFootballBtn').disabled = false;
+    }
+
+    // Reset game
+    function resetGame() {
+      clearInterval(gameInterval);
+      clearInterval(timerInterval);
+      score = 0;
+      timeLeft = 60;
+      updateScore();
+      updateTimer();
+      resetBall();
+      createOpponents();
+      drawField();
+      drawPlayer();
+      drawOpponents();
+      drawBall();
+      document.getElementById('resetFootballBtn').disabled = true;
+      document.getElementById('startFootballBtn').disabled = false;
+      gameRunning = false;
+    }
+
+    // Start game
+    function startGame() {
+      if (gameRunning) return;
+      resetGame();
+      gameRunning = true;
+      document.getElementById('resetFootballBtn').disabled = true;
+      document.getElementById('startFootballBtn').disabled = true;
+      gameInterval = setInterval(gameLoop, 30);
+      timerInterval = setInterval(countdown, 1000);
+    }
+
+    // Keyboard controls
+    const keys = {};
+    window.addEventListener('keydown', e => {
+      keys[e.key.toLowerCase()] = true;
+    });
+    window.addEventListener('keyup', e => {
+      keys[e.key.toLowerCase()] = false;
+    });
+
+    function handleKeys() {
+      if (!gameRunning) return;
+      if (keys['arrowleft'] || keys['a']) movePlayer(-1, 0);
+      if (keys['arrowright'] || keys['d']) movePlayer(1, 0);
+      if (keys['arrowup'] || keys['w']) movePlayer(0, -1);
+      if (keys['arrowdown'] || keys['s']) movePlayer(0, 1);
+    }
+
+    setInterval(handleKeys, 30);
+
+    // Button controls
+    document// Chess variables
+const chessCanvas = document.getElementById('chessCanvas');
+const chessCtx = chessCanvas.getContext('2d');
+const chessSize = 480;
+chessCanvas.width = chessSize;
+chessCanvas.height = chessSize;
+
+const tileSize = chessSize / 8;
+let chessBoard = [];
+let selectedTile = null;
+let chessTurn = 'white'; // 'white' or 'black'
+
+// Pieces unicode for simple display
+const piecesUnicode = {
+  'wp': '♙', 'wr': '♖', 'wn': '♘', 'wb': '♗', 'wq': '♕', 'wk': '♔',
+  'bp': '♟', 'br': '♜', 'bn': '♞', 'bb': '♝', 'bq': '♛', 'bk': '♚'
+};
+
+// Initialize chess board with starting positions
+function initChessBoard() {
+  const emptyRow = [null,null,null,null,null,null,null,null];
+  chessBoard = [
+    ['br','bn','bb','bq','bk','bb','bn','br'],
+    ['bp','bp','bp','bp','bp','bp','bp','bp'],
+    [...emptyRow],[...emptyRow],[...emptyRow],[...emptyRow],
+    ['wp','wp','wp','wp','wp','wp','wp','wp'],
+    ['wr','wn','wb','wq','wk','wb','wn','wr']
+  ];
+  selectedTile = null;
+  chessTurn = 'white';
+}
+
+// Draw chess board grid and pieces
+function drawChessBoard() {
+  chessCtx.clearRect(0, 0, chessSize, chessSize);
+  for(let row=0; row<8; row++) {
+    for(let col=0; col<8; col++) {
+      // Draw tile color
+      if ((row + col) % 2 === 0) {
+        chessCtx.fillStyle = '#f0d9b5'; // light
+      } else {
+        chessCtx.fillStyle = '#b58863'; // dark
+      }
+      chessCtx.fillRect(col*tileSize, row*tileSize, tileSize, tileSize);
+
+      // Highlight selected tile
+      if (selectedTile && selectedTile.row === row && selectedTile.col === col) {
+        chessCtx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+        chessCtx.fillRect(col*tileSize, row*tileSize, tileSize, tileSize);
+      }
+
+      // Draw piece
+      const piece = chessBoard[row][col];
+      if (piece) {
+        chessCtx.font = `${tileSize * 0.75}px Arial`;
+        chessCtx.textAlign = 'center';
+        chessCtx.textBaseline = 'middle';
+        chessCtx.fillStyle = piece[0] === 'w' ? '#fff' : '#000';
+        chessCtx.fillText(piecesUnicode[piece], col*tileSize + tileSize/2, row*tileSize + tileSize/2);
+      }
+    }
+  }
+  }// Button event listeners
+    document.getElementById('startFootballBtn').addEventListener('click', startGame);
+    document.getElementById('resetFootballBtn').addEventListener('click', resetGame);
+    document.getElementById('shootFootballBtn').addEventListener('click', () => shootBall(true));
+    document.getElementById('passFootballBtn').addEventListener('click', () => shootBall(false));
+
+    // Initial setup
+    resetGame();// Convert mouse coordinates to board tile
+function getTileFromCoords(x, y) {
+  const rect = chessCanvas.getBoundingClientRect();
+  const col = Math.floor((x - rect.left) / tileSize);
+  const row = Math.floor((y - rect.top) / tileSize);
+  if (col >= 0 && col < 8 && row >= 0 && row < 8) {
+    return { row, col };
+  }
+  return null;
+}
+
+// Basic move validation (pawn only for demo, extend later)
+function isValidMove(fromRow, fromCol, toRow, toCol) {
+  const piece = chessBoard[fromRow][fromCol];
+  if (!piece) return false;
+  const color = piece[0];
+  const type = piece[1];
+
+  // Can't move to tile with own piece
+  if (chessBoard[toRow][toCol] && chessBoard[toRow][toCol][0] === color) return false;
+
+  // Pawn move rules (basic)
+  if (type === 'p') {
+    const direction = color === 'w' ? -1 : 1;
+    // Single step forward
+    if (toCol === fromCol && toRow === fromRow + direction && !chessBoard[toRow][toCol]) return true;
+    // Double step forward from start
+    if (toCol === fromCol && ((color === 'w' && fromRow === 6) || (color === 'b' && fromRow === 1)) &&
+        toRow === fromRow + 2*direction && !chessBoard[fromRow + direction][toCol] && !chessBoard[toRow][toCol]) return true;
+    // Capture diagonally
+    if (Math.abs(toCol - fromCol) === 1 && toRow === fromRow + direction && chessBoard[toRow][toCol] && chessBoard[toRow][toCol][0] !== color) return true;
+
+    return false;
+  }
+
+  // Allow all moves for other pieces for now (to be extended)
+  return true;
+}
+
+// Handle click events on chessboard
+chessCanvas.addEventListener('click', (e) => {
+  const tile = getTileFromCoords(e.clientX, e.clientY);
+  if (!tile) return;
+
+  const { row, col } = tile;
+  const clickedPiece = chessBoard[row][col];
+
+  if (selectedTile) {
+    // Try to move selected piece
+    if (isValidMove(selectedTile.row, selectedTile.col, row, col)) {
+      chessBoard[row][col] = chessBoard[selectedTile.row][selectedTile.col];
+      chessBoard[selectedTile.row][selectedTile.col] = null;
+      chessTurn = chessTurn === 'white' ? 'black' : 'white';
+    }
+    selectedTile = null;
+  } else {
+    // Select piece if it matches current turn color
+    if (clickedPiece && clickedPiece[0] === chessTurn[0]) {
+      selectedTile = tile;
+    }
+  }
+  drawChessBoard();
+});// Directions for sliding pieces
+const directions = {
+  rook: [
+    [1,0], [-1,0], [0,1], [0,-1]
+  ],
+  bishop: [
+    [1,1], [1,-1], [-1,1], [-1,-1]
+  ],
+  queen: [
+    [1,0], [-1,0], [0,1], [0,-1], [1,1], [1,-1], [-1,1], [-1,-1]
+  ],
+  knightMoves: [
+    [2,1], [2,-1], [-2,1], [-2,-1], [1,2], [1,-2], [-1,2], [-1,-2]
+  ]
+};
+
+// Check if position is inside board
+function inBounds(r, c) {
+  return r >= 0 && r < 8 && c >= 0 && c < 8;
+}
+
+// Check path clear for sliding pieces (rook, bishop, queen)
+function isPathClear(fromRow, fromCol, toRow, toCol) {
+  const dRow = Math.sign(toRow - fromRow);
+  const dCol = Math.sign(toCol - fromCol);
+
+  let r = fromRow + dRow;
+  let c = fromCol + dCol;
+
+  while (r !== toRow || c !== toCol) {
+    if (chessBoard[r][c]) return false;
+    r += dRow;
+    c += dCol;
+  }
+  return true;
+}
+
+function isValidMove(fromRow, fromCol, toRow, toCol) {
+  const piece = chessBoard[fromRow][fromCol];
+  if (!piece) return false;
+  const color = piece[0];
+  const type = piece[1];
+  const target = chessBoard[toRow][toCol];
+
+  if (target && target[0] === color) return false; // Can't capture own piece
+
+  const dr = toRow - fromRow;
+  const dc = toCol - fromCol;
+
+  switch(type) {
+    case 'p': { // Pawn
+      const direction = color === 'w' ? -1 : 1;
+      // Forward move
+      if (dc === 0) {
+        if (dr === direction && !target) return true;
+        if ((color === 'w' && fromRow === 6 || color === 'b' && fromRow === 1) && dr === 2 * direction && !target && !chessBoard[fromRow + direction][fromCol]) return true;
+      }
+      // Capture
+      if (Math.abs(dc) === 1 && dr === direction && target && target[0] !== color) return true;
+      return false;
+    }
+    case 'r': { // Rook
+      if (dr === 0 || dc === 0) {
+        if (isPathClear(fromRow, fromCol, toRow, toCol)) return true;
+      }
+      return false;
+    }
+    case 'b': { // Bishop
+      if (Math.abs(dr) === Math.abs(dc)) {
+        if (isPathClear(fromRow, fromCol, toRow, toCol)) return true;
+      }
+      return false;
+    }
+    case 'q': { // Queen
+      if (dr === 0 || dc === 0 || Math.abs(dr) === Math.abs(dc)) {
+        if (isPathClear(fromRow, fromCol, toRow, toCol)) return true;
+      }
+      return false;
+    }
+    case 'n': { // Knight
+      for (let [mr, mc] of directions.knightMoves) {
+        if (dr === mr && dc === mc) return true;
+      }
+      return false;
+    }
+    case 'k': { // King
+      if (Math.abs(dr) <= 1 && Math.abs(dc) <= 1) return true;
+      return false;
+    }
+    default:
+      return false;
+  }
+                            }// Check if the king of the given color is in check
+function isInCheck(color) {
+  let kingPos = null;
+  // Find king position
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      if (chessBoard[r][c] === color + 'k') {
+        kingPos = [r, c];
+        break;
+      }
+    }
+    if (kingPos) break;
+  }
+  if (!kingPos) return false;
+
+  // Check all opponent pieces if they can attack the king
+  const opponentColor = (color === 'w') ? 'b' : 'w';
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      let piece = chessBoard[r][c];
+      if (piece && piece[0] === opponentColor) {
+        if (isValidMove(r, c, kingPos[0], kingPos[1])) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+// Detect checkmate (simplified)
+function isCheckmate(color) {
+  if (!isInCheck(color)) return false;
+
+  // Try all possible moves for the color to escape check
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      if (chessBoard[r][c] && chessBoard[r][c][0] === color) {
+        for (let nr = 0; nr < 8; nr++) {
+          for (let nc = 0; nc < 8; nc++) {
+            if (isValidMove(r, c, nr, nc)) {
+              // Try move temporarily
+              let temp = chessBoard[nr][nc];
+              chessBoard[nr][nc] = chessBoard[r][c];
+              chessBoard[r][c] = null;
+              let inCheck = isInCheck(color);
+              // Undo move
+              chessBoard[r][c] = chessBoard[nr][nc];
+              chessBoard[nr][nc] = temp;
+              if (!inCheck) return false;
+            }
+          }
+        }
+      }
+    }
+  }
+  return true;
+}
+
+// Castling logic (basic)
+function canCastle(color, side) {
+  const row = color === 'w' ? 7 : 0;
+  if (isInCheck(color)) return false;
+
+  if (side === 'king') {
+    // Check if squares between king and rook are empty and not attacked
+    if (chessBoard[row][5] || chessBoard[row][6]) return false;
+    // Check moves through squares for check (simplified)
+    if (isSquareAttacked(row, 5, color) || isSquareAttacked(row, 6, color)) return false;
+    // Assume king and rook haven't moved (you can add flags for moved pieces)
+    return chessBoard[row][7] === color + 'r';
+  } else if (side === 'queen') {
+    if (chessBoard[row][1] || chessBoard[row][2] || chessBoard[row][3]) return false;
+    if (isSquareAttacked(row, 2, color) || isSquareAttacked(row, 3, color)) return false;
+    return chessBoard[row][0] === color + 'r';
+  }
+  return false;
+}
+
+function isSquareAttacked(r, c, color) {
+  const opponent = color === 'w' ? 'b' : 'w';
+  for (let rr = 0; rr < 8; rr++) {
+    for (let cc = 0; cc < 8; cc++) {
+      if (chessBoard[rr][cc] && chessBoard[rr][cc][0] === opponent) {
+        if (isValidMove(rr, cc, r, c)) return true;
+      }
+    }
+  }
+  return false;
+}
+
+// Move history and UI updates
+let moveHistory = [];
+
+function addMoveToHistory(fromRow, fromCol, toRow, toCol, piece) {
+  moveHistory.push(`${piece} from ${String.fromCharCode(97 + fromCol)}${8 - fromRow} to ${String.fromCharCode(97 + toCol)}${8 - toRow}`);
+  updateMoveHistoryUI();
+}
+
+function updateMoveHistoryUI() {
+  const historyDiv = document.getElementById('moveHistory');
+  if (!historyDiv) return;
+  historyDiv.innerHTML = '<h3>Move History</h3><ul>' + moveHistory.map(m => `<li>${m}</li>`).join('') + '</ul>';
+}
+
+// Reset game function
+function resetGame() {
+  chessBoard = [
+    ['br','bn','bb','bq','bk','bb','bn','br'],
+    ['bp','bp','bp','bp','bp','bp','bp','bp'],
+    [null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null],
+    ['wp','wp','wp','wp','wp','wp','wp','wp'],
+    ['wr','wn','wb','wq','wk','wb','wn','wr']
+  ];
+  moveHistory = [];
+  updateMoveHistoryUI();
+  renderBoard();
+}
+
+// Call reset on page load to initialize
+resetGame();
+
+// Attach reset button
+document.getElementById('resetBtn').addEventListener('click', resetGame);<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 1 -->
   <meta charset="UTF-8" />
+  <!-- 2 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ultimate Game Zone</title>
+  <!-- 3 -->
+  <title>Entertainment Hub</title>
+  <!-- 4 -->
   <style>
+    /* General Styles */
+    /* 5 */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #141e30, #243b55);
       color: #fff;
     }
+    /* 11 */
     header, footer {
       background-color: #000;
       color: #fff;
       text-align: center;
       padding: 1em;
     }
+    /* 16 */
     main {
       padding: 20px;
-      text-align: center;
     }
+    /* 19 */
     .game-card {
       background: #1f1f1f;
       padding: 20px;
       margin: 15px auto;
       border-radius: 12px;
+      text-align: center;
       max-width: 300px;
       cursor: pointer;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       transition: transform 0.3s ease;
     }
+    /* 28 */
     .game-card:hover {
       transform: scale(1.05);
     }
+    /* 31 */
     .game-section {
       display: none;
       padding: 20px;
@@ -41,11 +1109,13 @@
       border-radius: 10px;
       margin-top: 20px;
     }
+    /* 36 */
     .board, .football-field, .car-track {
       margin: 0 auto;
       display: grid;
       gap: 2px;
     }
+    /* 40 */
     .cell {
       width: 60px;
       height: 60px;
@@ -54,25 +1124,30 @@
       justify-content: center;
       font-size: 32px;
     }
+    /* 45 */
     .white { background-color: #f0d9b5; }
     .black { background-color: #b58863; }
     .highlight { border: 2px solid yellow; }
+    /* 49 */
     .football-field {
       grid-template-columns: repeat(5, 80px);
       grid-template-rows: repeat(5, 80px);
       background: green;
     }
+    /* 54 */
     .car-track {
       grid-template-columns: repeat(10, 60px);
       grid-template-rows: repeat(1, 60px);
       background: #555;
     }
+    /* 59 */
     .car {
       background: red;
       width: 100%;
       height: 100%;
       border-radius: 10px;
     }
+    /* 64 */
     button {
       margin-top: 15px;
       padding: 10px 20px;
@@ -83,64 +1158,70 @@
       border-radius: 6px;
       cursor: pointer;
     }
-    .scoreboard {
-      margin-top: 10px;
-      font-size: 20px;
-      color: #ffd700;
-    }
-    .motivation {
-      font-style: italic;
-      margin-top: 10px;
-      color: #90ee90;
-    }
   </style>
 </head>
 <body>
+  <!-- 75 -->
   <header>
     <h1>Welcome to the Ultimate Game Zone</h1>
   </header>
+  <!-- 78 -->
   <main>
-    <div class="game-card" onclick="showGame('chess')"><h2>Play Chess</h2></div>
-    <div class="game-card" onclick="showGame('football')"><h2>Football Challenge</h2></div>
-    <div class="game-card" onclick="showGame('car')"><h2>Car Racing</h2></div>
+    <div class="game-card" onclick="showGame('chess')">
+      <h2>Play Chess</h2>
+    </div>
+    <div class="game-card" onclick="showGame('football')">
+      <h2>Football Challenge</h2>
+    </div>
+    <div class="game-card" onclick="showGame('car')">
+      <h2>Car Racing</h2>
+    </div>
 
+    <!-- Chess Section -->
+    <!-- 89 -->
     <section id="chess" class="game-section">
       <h2>Chess Game</h2>
       <div id="chessboard" class="board" style="grid-template-columns: repeat(8, 60px); grid-template-rows: repeat(8, 60px);"></div>
       <button onclick="initChess()">Restart Chess</button>
-      <div class="motivation">Outsmart your opponent and be the king of the board!</div>
     </section>
 
+    <!-- Football Section -->
+    <!-- 96 -->
     <section id="football" class="game-section">
       <h2>Football Game</h2>
       <div id="football-field" class="football-field"></div>
-      <button onclick="scoreGoal()">Score Goal</button>
       <button onclick="initFootball()">Restart Football</button>
-      <div id="football-score" class="scoreboard">Goals: 0</div>
-      <div class="motivation">Aim for the goal and be the champion!</div>
     </section>
 
+    <!-- Car Racing Section -->
+    <!-- 103 -->
     <section id="car" class="game-section">
       <h2>Car Racing</h2>
       <div id="car-track" class="car-track"></div>
-      <button onclick="moveCar()">Move Car</button>
       <button onclick="initCar()">Restart Race</button>
-      <div id="car-distance" class="scoreboard">Distance: 0</div>
-      <div class="motivation">Speed through the track and reach the finish line!</div>
     </section>
   </main>
 
+  <!-- 111 -->
   <footer>
-    <p>Connect: <a href="#">Instagram</a> | <a href="#">TikTok</a> | <a href="#">YouTube</a></p>
+    <p>Connect: 
+      <a href="#">Instagram</a> | 
+      <a href="#">TikTok</a> | 
+      <a href="#">YouTube</a>
+    </p>
   </footer>
 
+  <!-- Scripts -->
+  <!-- 118 -->
   <script>
     function showGame(id) {
       document.querySelectorAll('.game-section').forEach(s => s.style.display = 'none');
       document.getElementById(id).style.display = 'block';
     }
 
-    // Chess
+    // Chess Game Script
+    // 124
+    let chessBoard = [];
     const initialSetup = [
       ['br','bn','bb','bq','bk','bb','bn','br'],
       ['bp','bp','bp','bp','bp','bp','bp','bp'],
@@ -151,6 +1232,7 @@
       ['wp','wp','wp','wp','wp','wp','wp','wp'],
       ['wr','wn','wb','wq','wk','wb','wn','wr']
     ];
+    // 134
     function initChess() {
       const board = document.getElementById('chessboard');
       board.innerHTML = '';
@@ -164,6 +1246,7 @@
         }
       }
     }
+
     function getUnicode(piece) {
       const map = {
         'wp': '♙', 'wr': '♖', 'wn': '♘', 'wb': '♗', 'wq': '♕', 'wk': '♔',
@@ -173,7 +1256,7 @@
     }
 
     // Football Game
-    let footballGoals = 0;
+    // 159
     function initFootball() {
       const field = document.getElementById('football-field');
       field.innerHTML = '';
@@ -183,23 +1266,13 @@
         if (i === 12) cell.textContent = '⚽';
         field.appendChild(cell);
       }
-      footballGoals = 0;
-      updateFootballScore();
-    }
-    function scoreGoal() {
-      footballGoals++;
-      updateFootballScore();
-    }
-    function updateFootballScore() {
-      document.getElementById('football-score').textContent = 'Goals: ' + footballGoals;
     }
 
-    // Car Racing Game
-    let carPos = 0;
+    // Car Game
+    // 169
     function initCar() {
       const track = document.getElementById('car-track');
       track.innerHTML = '';
-      carPos = 0;
       for (let i = 0; i < 10; i++) {
         const cell = document.createElement('div');
         cell.className = 'cell';
@@ -210,29 +1283,10 @@
         }
         track.appendChild(cell);
       }
-      updateCarDistance();
-    }
-    function moveCar() {
-      if (carPos < 9) carPos++;
-      const track = document.getElementById('car-track');
-      track.innerHTML = '';
-      for (let i = 0; i < 10; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        if (i === carPos) {
-          const car = document.createElement('div');
-          car.className = 'car';
-          cell.appendChild(car);
-        }
-        track.appendChild(cell);
-      }
-      updateCarDistance();
-    }
-    function updateCarDistance() {
-      document.getElementById('car-distance').textContent = 'Distance: ' + carPos;
     }
 
-    // Init all on load
+    // Initialize all games on page load
+    // 184
     window.onload = () => {
       initChess();
       initFootball();
@@ -241,3 +1295,184 @@
   </script>
 </body>
 </html>
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luxury Game Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      color: #333;
+      text-align: center;
+    }
+    header, footer {
+      background: #fff8f0;
+      color: #333;
+      padding: 1em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #b8860b;
+    }
+    .game-card {
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 320px;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      font-weight: bold;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .game-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+    .game-section {
+      display: none;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      max-width: 600px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .cell {
+      width: 60px;
+      height: 60px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ddd;
+      font-size: 24px;
+      background: #f0f0f0;
+      margin: 2px;
+      border-radius: 10px;
+    }
+    .car {
+      background: red;
+      border-radius: 8px;
+      width: 100%;
+      height: 100%;
+    }
+    .track {
+      display: flex;
+      justify-content: center;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      margin-top: 15px;
+      background: #f8b500;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #e0a800;
+    }
+    .social-icons img {
+      width: 30px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to the Luxury Game Hub</h1>
+  </header>
+  <main>
+    <div class="game-card" onclick="showGame('chess')">Play Chess</div>
+    <div class="game-card" onclick="showGame('football')">Football Challenge</div>
+    <div class="game-card" onclick="showGame('car')">Car Racing</div><div id="chess" class="game-section">
+  <h2>Chess Game</h2>
+  <div id="chessboard"></div>
+  <button onclick="initChess()">Restart Chess</button>
+</div>
+
+<div id="football" class="game-section">
+  <h2>Football Game</h2>
+  <div id="football-field"></div>
+  <button onclick="initFootball()">Restart Football</button>
+</div>
+
+<div id="car" class="game-section">
+  <h2>Car Racing</h2>
+  <div id="car-track" class="track"></div>
+  <button onclick="moveCar()">Move Car</button>
+</div>
+
+  </main>
+  <footer>
+    <p>Connect with us:</p>
+    <div class="social-icons">
+      <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+      <a href="#"><img src="https://upload.wikimedia.org/wikipedia/en/9/9f/TikTok_logo.svg" alt="TikTok"></a>
+      <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Youtube%28amin%29.png" alt="YouTube"></a>
+    </div>
+  </footer>
+  <script>
+    function showGame(id) {
+      document.querySelectorAll('.game-section').forEach(s => s.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }function initChess() {
+  const board = document.getElementById('chessboard');
+  board.innerHTML = '';
+  for (let i = 0; i < 64; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    cell.textContent = (i + Math.floor(i / 8)) % 2 === 0 ? '♖' : '♙';
+    board.appendChild(cell);
+  }
+}
+
+function initFootball() {
+  const field = document.getElementById('football-field');
+  field.innerHTML = '';
+  for (let i = 0; i < 25; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    cell.textContent = i === 12 ? '⚽' : '';
+    field.appendChild(cell);
+  }
+}
+
+let carPosition = 0;
+function moveCar() {
+  const track = document.getElementById('car-track');
+  track.innerHTML = '';
+  for (let i = 0; i < 10; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    if (i === carPosition) {
+      const car = document.createElement('div');
+      car.className = 'car';
+      cell.appendChild(car);
+    }
+    track.appendChild(cell);
+  }
+  carPosition = (carPosition + 1) % 10;
+}
+
+window.onload = () => {
+  initChess();
+  initFootball();
+  moveCar();
+};
+
+  </script>
+</body>
+</html>
+Update this into and actual full working game code okay 3d games, score board, buttons, textures, characters,  on screen navigation.  My colours are shades of blue and name it. The cards should look like this. Example like this. I want advanced working games.all 3d. I want a ver detailed game. Very advanced.  Extremely advanced.  Button, works on both phone and tablets and pcs. The page should be called  legon Tv game Hub. Saved in games.html file. It should have js , css everything it needs to work, interactive button, motivation on the page, properly embed the socials 
