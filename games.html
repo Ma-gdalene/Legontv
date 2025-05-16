@@ -1,1 +1,139 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legon TV Game Hub</title>  <!-- Three.js CDN -->  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #e9f4ff;
+      color: #003f7f;
+    }
+    header, footer {
+      background: linear-gradient(to right, #007bff, #00bfff);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .game-section {
+      padding: 2rem;
+      text-align: center;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      background: #f0f8ff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      color: #00509e;
+    }
+  </style></head>
+<body>
+  <header>
+    <h1>Legon TV Game Hub</h1>
+    <p>Challenge your brain, speed, and logic!</p>
+  </header>  <!-- 3D Chess -->  <section class="game-section">
+    <h2>3D Chess Game</h2>
+    <canvas id="chessCanvas"></canvas>
+  </section>  <!-- Football Arena -->  <section class="game-section">
+    <h2>Football Arena</h2>
+    <canvas id="footballCanvas"></canvas>
+  </section>  <!-- Car Racing -->  <section class="game-section">
+    <h2>Car Racing 3D</h2>
+    <canvas id="racingCanvas"></canvas>
+  </section>  <footer>
+    <p>&copy; 2025 Legon TV. All rights reserved.</p>
+  </footer>  <script>
+    // Chess Game
+    const sceneChess = new THREE.Scene();
+    const camChess = new THREE.PerspectiveCamera(75, 800/400, 0.1, 1000);
+    const rendererChess = new THREE.WebGLRenderer({ canvas: document.getElementById('chessCanvas') });
+    rendererChess.setSize(800, 400);
+    camChess.position.set(0, 10, 10);
+    camChess.lookAt(0, 0, 0);
+    const lightChess = new THREE.DirectionalLight(0xffffff, 1);
+    lightChess.position.set(0, 10, 10).normalize();
+    sceneChess.add(lightChess);
+    const squareGeom = new THREE.BoxGeometry(1, 0.1, 1);
+    for (let x = -4; x < 4; x++) {
+      for (let z = -4; z < 4; z++) {
+        const matColor = (x + z) % 2 === 0 ? 0xeeeeee : 0x444444;
+        const material = new THREE.MeshStandardMaterial({ color: matColor });
+        const square = new THREE.Mesh(squareGeom, material);
+        square.position.set(x, 0, z);
+        sceneChess.add(square);
+      }
+    }
+    function animateChess() {
+      requestAnimationFrame(animateChess);
+      rendererChess.render(sceneChess, camChess);
+    }
+    animateChess();
 
+    // Football Game
+    const canvasFootball = document.getElementById('footballCanvas');
+    const ctx = canvasFootball.getContext('2d');
+    canvasFootball.width = 800;
+    canvasFootball.height = 400;
+    function drawFootball() {
+      ctx.fillStyle = '#228B22';
+      ctx.fillRect(0, 0, canvasFootball.width, canvasFootball.height);
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(0, 0, 800, 400);
+      ctx.beginPath();
+      ctx.arc(400, 200, 60, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.strokeRect(0, 150, 10, 100);
+      ctx.strokeRect(790, 150, 10, 100);
+      ctx.fillStyle = 'blue';
+      ctx.beginPath();
+      ctx.arc(200, 200, 12, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.fillStyle = 'red';
+      ctx.beginPath();
+      ctx.arc(600, 200, 12, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.fillStyle = 'white';
+      ctx.beginPath();
+      ctx.arc(400, 200, 10, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+    drawFootball();
+
+    // Racing Game
+    const sceneRace = new THREE.Scene();
+    const camRace = new THREE.PerspectiveCamera(75, 800/400, 0.1, 1000);
+    const rendererRace = new THREE.WebGLRenderer({ canvas: document.getElementById('racingCanvas') });
+    rendererRace.setSize(800, 400);
+    camRace.position.set(0, 5, 10);
+    camRace.lookAt(0, 0, 0);
+    const lightRace = new THREE.AmbientLight(0xffffff);
+    sceneRace.add(lightRace);
+    const groundRace = new THREE.Mesh(
+      new THREE.PlaneGeometry(20, 50),
+      new THREE.MeshBasicMaterial({ color: 0x303030 })
+    );
+    groundRace.rotation.x = -Math.PI / 2;
+    sceneRace.add(groundRace);
+    const car = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 0.5, 2),
+      new THREE.MeshStandardMaterial({ color: 'red' })
+    );
+    car.position.y = 0.25;
+    sceneRace.add(car);
+    function animateRace() {
+      requestAnimationFrame(animateRace);
+      car.position.z -= 0.1;
+      if (car.position.z < -25) car.position.z = 25;
+      rendererRace.render(sceneRace, camRace);
+    }
+    animateRace();
+  </script></body>
+                </html>
