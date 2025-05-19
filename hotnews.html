@@ -1,1 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LegonTV Hot News</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .social-icons a {
+      margin-right: 1rem;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+    .news-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      margin: 1.5rem 0;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
 
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-blue-800 to-blue-500 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
+      <img src="logo.png" alt="LegonTV Logo" class="h-10" />
+      <nav class="space-x-6 text-white font-semibold">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="news.html" class="hover:underline">News</a>
+        <a href="politics.html" class="hover:underline">Politics</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Preview Section -->
+  <section class="max-w-4xl mx-auto py-12 px-4">
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
+      <img src="kwesi.jpg" alt="Ghana's Sensational Artist" class="w-full h-64 object-cover rounded-md mb-4" />
+      <h2 class="text-3xl font-bold text-blue-800 mb-2">GHANA’S SENSATIONAL AND VERSATILE ARTIST RETURNS FROM EUROPE</h2>
+      <p class="text-gray-700 mb-4">AFTER LONG RECORDING AND SPENDING TIME WITH THE WIFE......</p>
+      <button id="toggleBtn" onclick="togglePost()" aria-expanded="false" aria-controls="fullPost" class="inline-block text-blue-700 hover:underline font-semibold">Read More</button>
+    </div>
+
+    <!-- Full News Article - Hidden Initially -->
+    <article id="fullPost" class="bg-white p-6 rounded-lg shadow-md space-y-6 hidden">
+
+      <!-- Video at the beginning -->
+      <video controls class="w-full rounded-md mb-6">
+        <source src="zaddy.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <p><strong>KWESI ARTHUR IS BACK: THE KING OF GHANA'S RAP SCENE RETURNS WITH A VENGEANCE!</strong></p>
+
+      <p>The highly anticipated return of Ghana's sensational and versatile artist, Kwesi Arthur, has finally arrived, and it's making waves in the music industry. After a long hiatus spent honing his craft in Europe and quality time with his loved ones, Kwesi Arthur is back to unleash his lyrical prowess on the Ghanaian music scene.</p>
+
+      <p>The news of his return has sent shockwaves of excitement throughout the country, with fans and music enthusiasts eagerly awaiting his next move. And, boy, did he deliver! Kwesi Arthur has announced a tour, with his first performance taking place at the University of Development Studies.</p>
+
+      <img src="kwesi2.jpg" alt="Kwesi Arthur Performing" class="news-image" />
+
+      <p>This is not just any ordinary performance; it's a testament to Kwesi Arthur's dedication to his craft and his fans. The University of Development Studies, known for nurturing young talent, provides the perfect platform for Kwesi Arthur to connect with his audience and showcase his artistry.</p>
+
+      <p>Kwesi Arthur's music has always been a reflection of his life experiences, and his time in Europe has undoubtedly influenced his sound. Fans can expect a fresh perspective, new energy, and unapologetic honesty in his lyrics. With his unique blend of Afrobeats, hip-hop, and highlife, Kwesi Arthur is set to take the Ghanaian music scene by storm once again.</p>
+
+      <img src="kwesi3.jpg" alt="Kwesi Arthur with Fans" class="news-image" />
+
+      <p>The excitement surrounding Kwesi Arthur's return is palpable. Fans are going wild on social media, expressing their eagerness to see him perform live. The University of Development Studies, as expected, was packed to capacity, with students and music lovers alike clamouring to get a glimpse of the king of Ghana's rap scene.</p>
+
+      <img src="kwesi1.jpg" alt="Kwesi Arthur in Studio" class="news-image" />
+
+      <p>As Kwesi Arthur takes the stage, one thing is certain – he's not just back, he's back with a vengeance! Get ready for a night of non-stop entertainment, thought-provoking lyrics, and unbridled energy. It's going to be a wild ride, and you won't want to miss it!</p>
+
+      <p><em>Author: M.F.B.<br/>Editor: Legon KWESIARTHUR</em></p>
+
+    </article>
+  </section>
+
+  <!-- Social Media Icons -->
+  <section class="max-w-4xl mx-auto px-4 mb-12 text-center">
+    <div class="social-icons text-2xl text-blue-700">
+      <a href="https://www.tiktok.com/@legon.tvv" target="_blank" aria-label="TikTok" title="TikTok">
+        <img src="icons/tiktok.svg" alt="TikTok" class="inline h-8 w-8" />
+      </a>
+      <a href="https://youtube.com/@legontv" target="_blank" aria-label="YouTube" title="YouTube">
+        <img src="icons/youtube.svg" alt="YouTube" class="inline h-8 w-8" />
+      </a>
+      <a href="https://www.instagram.com/legontv.web" target="_blank" aria-label="Instagram" title="Instagram">
+        <img src="icons/instagram.svg" alt="Instagram" class="inline h-8 w-8" />
+      </a>
+      <a href="https://whatsapp.com/channel/0029ValCPmp4Y9lf0j0Myb2C" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+        <img src="icons/whatsapp.svg" alt="WhatsApp" class="inline h-8 w-8" />
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-blue-800 to-blue-500 text-white py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-sm">
+      &copy; 2025 LegonTV. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    function togglePost() {
+      const fullPost = document.getElementById('fullPost');
+      const btn = document.getElementById('toggleBtn');
+      if(fullPost.classList.contains('hidden')) {
+        fullPost.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = 'Read Less';
+      } else {
+        fullPost.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = 'Read More';
+      }
+    }
+  </script>
+
+</body>
+  </html>
