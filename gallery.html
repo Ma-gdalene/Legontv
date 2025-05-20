@@ -28,16 +28,8 @@
   </section>
 
   <!-- Gallery Grid -->
-  <section class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    <img src="gallery1.jpg" alt="Gallery image" class="w-full h-64 object-cover rounded-lg shadow-md" />
-    <img src="gallery2.jpg" alt="Gallery image" class="w-full h-64 object-cover rounded-lg shadow-md" />
-    <img src="gallery3.jpg" alt="Gallery image" class="w-full h-64 object-cover rounded-lg shadow-md" />
-    <img src="gallery4.jpg" alt="Gallery image" class="w-full h-64 object-cover rounded-lg shadow-md" />
-    <img src="gallery5.jpg" alt="Gallery image" class="w-full h-64 object-cover rounded-lg shadow-md" />
-    <img src="gallery6.jpg" alt="Gallery image" class="w-full h-64 object-cover rounded-lg shadow-md" />
-    <img src="gallery7.jpg" alt="Gallery image" class="w-full h-64 object-cover rounded-lg shadow-md" />
-    <img src="gallery8.jpg" alt="Gallery image" class="w-full h-64 object-cover rounded-lg shadow-md" />
-    <!-- Add or replace with your local image names -->
+  <section id="gallery" class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Images will be added here by JavaScript -->
   </section>
 
   <!-- Footer -->
@@ -47,5 +39,20 @@
     </div>
   </footer>
 
+  <!-- JavaScript to load images -->
+  <script>
+    const imageCount = 10; // Change this to however many images you have
+    const imageFolder = 'pictures-for-gallery'; // Folder name
+    const gallery = document.getElementById('gallery');
+
+    for (let i = 1; i <= imageCount; i++) {
+      const img = document.createElement('img');
+      img.src = `${imageFolder}/gallery${i}.jpg`; // Example: pictures-for-gallery/gallery1.jpg
+      img.alt = `Gallery image ${i}`;
+      img.className = 'w-full h-64 object-cover rounded-lg shadow-md';
+      gallery.appendChild(img);
+    }
+  </script>
+
 </body>
-    </html>
+</html>
