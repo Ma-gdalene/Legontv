@@ -1,11 +1,15 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LegonTV Entertainment</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
-<body class="bg-gray-50 text-gray-900">  <!-- Header -->  <header class="bg-white shadow-md p-4 flex items-center justify-between">
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md p-4 flex items-center justify-between">
     <div class="flex items-center space-x-4">
       <img src="logo.png" alt="LegonTV Logo" class="h-10 w-auto">
       <h1 class="text-2xl font-bold text-pink-600">LegonTV</h1>
@@ -16,7 +20,12 @@
       <a href="entertainment.html" class="text-gray-900 font-semibold">Entertainment</a>
       <a href="contact.html" class="text-gray-700 hover:text-pink-600">Contact</a>
     </nav>
-  </header>  <!-- Sidebar Navigation -->  <div class="flex flex-col md:flex-row min-h-screen">
+  </header>
+
+  <!-- Sidebar + Main -->
+  <div class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Sidebar Navigation -->
     <aside class="bg-gradient-to-b from-pink-600 to-red-500 text-white w-full md:w-64 p-6">
       <h2 class="text-xl font-bold mb-6">Entertainment Menu</h2>
       <nav class="space-y-4">
@@ -25,15 +34,40 @@
         <a href="birthdays.html" class="block hover:underline">Birthday Celebrations</a>
         <a href="events.html" class="block hover:underline">Events</a>
       </nav>
-    </aside><!-- Main Placeholder -->
-<main class="flex-1 p-6">
-  <div class="bg-white p-6 rounded-lg shadow text-center">
-    <h2 class="text-3xl font-bold text-pink-600 mb-4">Welcome to the Entertainment Section</h2>
-    <p class="text-gray-700">Choose an option from the sidebar to explore our latest gallery, hot news, birthday shoutouts, and upcoming events.</p>
-  </div>
-</main>
+    </aside>
 
-  </div>  <!-- Footer -->  <footer class="bg-gray-800 text-white text-center p-4">
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Welcome Message -->
+      <div class="bg-white p-6 rounded-lg shadow text-center mb-10">
+        <h2 class="text-3xl font-bold text-pink-600 mb-4">Welcome to the Entertainment Section</h2>
+        <p class="text-gray-700">Choose an option from the sidebar to explore our latest gallery, hot news, birthday shoutouts, and upcoming events.</p>
+      </div>
+
+      <!-- Mini Gallery of Ghanaian Artists -->
+      <section>
+        <h3 class="text-2xl font-bold text-pink-600 mb-4 text-center">Top Ghanaian Artists</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <img src="artist1.jpg" alt="Artist 1" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist2.jpg" alt="Artist 2" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist3.jpg" alt="Artist 3" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist4.jpg" alt="Artist 4" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist5.jpg" alt="Artist 5" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist6.jpg" alt="Artist 6" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist7.jpg" alt="Artist 7" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist8.jpg" alt="Artist 8" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist9.jpg" alt="Artist 9" class="w-full h-48 object-cover rounded-lg shadow-md">
+          <img src="artist10.jpg" alt="Artist 10" class="w-full h-48 object-cover rounded-lg shadow-md">
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center p-4">
     <p>&copy; 2025 LegonTV. All rights reserved.</p>
-  </footer></body>
+  </footer>
+
+</body>
   </html>
