@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LegonTV Events</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
-    .modal {
-      background-color: rgba(0, 0, 0, 0.85);
+    .modal-bg {
+      background-color: rgba(0, 0, 0, 0.9);
     }
   </style>
 </head>
@@ -27,68 +27,82 @@
     </nav>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main class="p-6 max-w-7xl mx-auto">
-    <h2 class="text-3xl font-bold text-pink-600 mb-10 text-center">Hall Week Events</h2>
+    <h2 class="text-3xl font-bold text-pink-600 mb-10 text-center">Events Gallery</h2>
 
-    <!-- Event Sections -->
-    <!-- PENT -->
+    <!-- PENT HALL -->
     <section class="mb-16">
       <h3 class="text-2xl font-bold text-pink-600 mb-4">Pent Hall Week</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        <!-- 10 videos -->
-        ${Array.from({ length: 10 }, (_, i) => `
+        <!-- 10 Videos -->
+        <!-- Replace paths with actual thumbnails and videos -->
+        <!-- pent1.jpg, pent1.mp4, etc. -->
+        <!-- Repeat for pent2–pent10 -->
+        ${[...Array(10)].map((_, i) => `
           <div class="cursor-pointer" onclick="openModal('videos/pent${i+1}.mp4')">
-            <img src="thumbnails/pent${i+1}.jpg" alt="Pent ${i+1}" class="w-full h-40 object-cover rounded-lg shadow" />
-            <p class="text-sm mt-1 text-center">Pent Event ${i+1}</p>
+            <img src="thumbnails/pent${i+1}.jpg" alt="Pent ${i+1}" class="w-full h-40 object-cover rounded-lg shadow">
+            <div class="mt-2 text-center">
+              <p class="text-sm font-semibold">Pent Event ${i+1}</p>
+              <p class="text-xs text-gray-600">Short description placeholder here.</p>
+            </div>
           </div>
         `).join('')}
       </div>
     </section>
 
-    <!-- Evandy & Bani -->
+    <!-- EVANDY & BANI -->
     <section class="mb-16">
       <h3 class="text-2xl font-bold text-pink-600 mb-4">Evandy & Bani Hall Week</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        ${Array.from({ length: 10 }, (_, i) => `
+        ${[...Array(10)].map((_, i) => `
           <div class="cursor-pointer" onclick="openModal('videos/evandy${i+1}.mp4')">
-            <img src="thumbnails/evandy${i+1}.jpg" alt="Evandy ${i+1}" class="w-full h-40 object-cover rounded-lg shadow" />
-            <p class="text-sm mt-1 text-center">Evandy Event ${i+1}</p>
+            <img src="thumbnails/evandy${i+1}.jpg" alt="Evandy ${i+1}" class="w-full h-40 object-cover rounded-lg shadow">
+            <div class="mt-2 text-center">
+              <p class="text-sm font-semibold">Evandy Event ${i+1}</p>
+              <p class="text-xs text-gray-600">Short description placeholder here.</p>
+            </div>
           </div>
         `).join('')}
       </div>
     </section>
 
-    <!-- Diaspora -->
+    <!-- DIASPORA -->
     <section class="mb-16">
       <h3 class="text-2xl font-bold text-pink-600 mb-4">Diaspora Hall Week</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        ${Array.from({ length: 10 }, (_, i) => `
+        ${[...Array(10)].map((_, i) => `
           <div class="cursor-pointer" onclick="openModal('videos/diaspora${i+1}.mp4')">
-            <img src="thumbnails/diaspora${i+1}.jpg" alt="Diaspora ${i+1}" class="w-full h-40 object-cover rounded-lg shadow" />
-            <p class="text-sm mt-1 text-center">Diaspora Event ${i+1}</p>
+            <img src="thumbnails/diaspora${i+1}.jpg" alt="Diaspora ${i+1}" class="w-full h-40 object-cover rounded-lg shadow">
+            <div class="mt-2 text-center">
+              <p class="text-sm font-semibold">Diaspora Event ${i+1}</p>
+              <p class="text-xs text-gray-600">Short description placeholder here.</p>
+            </div>
           </div>
         `).join('')}
       </div>
     </section>
 
-    <!-- Other Events -->
+    <!-- OTHER EVENTS -->
     <section class="mb-16">
       <h3 class="text-2xl font-bold text-pink-600 mb-4">Other Events</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        ${Array.from({ length: 10 }, (_, i) => `
+        ${[...Array(10)].map((_, i) => `
           <div class="cursor-pointer" onclick="openModal('videos/other${i+1}.mp4')">
-            <img src="thumbnails/other${i+1}.jpg" alt="Other ${i+1}" class="w-full h-40 object-cover rounded-lg shadow" />
-            <p class="text-sm mt-1 text-center">Other Event ${i+1}</p>
+            <img src="thumbnails/other${i+1}.jpg" alt="Other ${i+1}" class="w-full h-40 object-cover rounded-lg shadow">
+            <div class="mt-2 text-center">
+              <p class="text-sm font-semibold">Other Event ${i+1}</p>
+              <p class="text-xs text-gray-600">Short description placeholder here.</p>
+            </div>
           </div>
         `).join('')}
       </div>
     </section>
   </main>
 
-  <!-- Modal -->
-  <div id="videoModal" class="fixed inset-0 hidden items-center justify-center modal z-50">
-    <div class="relative w-full max-w-5xl p-4">
+  <!-- Video Modal -->
+  <div id="videoModal" class="fixed inset-0 hidden items-center justify-center modal-bg z-50">
+    <div class="relative w-full max-w-4xl p-4">
       <button onclick="closeModal()" class="absolute top-2 right-4 text-white text-3xl font-bold">&times;</button>
       <video id="modalVideo" class="w-full h-auto rounded-lg" controls autoplay></video>
     </div>
@@ -99,6 +113,7 @@
     <p>&copy; 2025 LegonTV. All rights reserved.</p>
   </footer>
 
+  <!-- JavaScript -->
   <script>
     function openModal(videoSrc) {
       const modal = document.getElementById("videoModal");
@@ -116,4 +131,4 @@
     }
   </script>
 </body>
-  </html>
+            </html>
