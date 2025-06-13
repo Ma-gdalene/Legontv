@@ -3,139 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LegonTV - Events</title>
+  <title>LegonTV Events Centre</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
   <style>
-    .modal-bg {
-      background-color: rgba(0, 0, 0, 0.85);
+    .marquee {
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .marquee-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans">
+<body class="bg-gray-50 text-gray-900 font-sans">
 
-  <!-- Header with pink to yellow gradient -->
-  <header class="bg-gradient-to-r from-pink-500 to-yellow-400 text-white shadow p-4 flex justify-between items-center">
+  <!-- Header with gradient -->
+  <header class="bg-gradient-to-r from-pink-500 to-yellow-400 text-white p-5 shadow-md flex justify-between items-center">
     <div class="flex items-center space-x-3">
       <img src="logo.png" alt="LegonTV Logo" class="h-10 w-auto">
-      <h1 class="text-2xl font-bold">LegonTV Events</h1>
+      <h1 class="text-2xl font-bold">LegonTV Events Centre</h1>
     </div>
-    <nav class="space-x-5">
-      <a href="index.html" class="text-white hover:underline">Home</a>
-      <a href="entertainment.html" class="text-white hover:underline">Entertainment</a>
-      <a href="contact.html" class="text-white hover:underline">Contact</a>
+    <nav class="space-x-4">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="entertainment.html" class="hover:underline">Entertainment</a>
+      <a href="contact.html" class="hover:underline">Contact</a>
     </nav>
   </header>
 
-  <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 py-10">
-    <h2 class="text-3xl font-extrabold text-center text-pink-600 mb-12">Explore Our Event Highlights</h2>
-
-    <div class="space-y-16">
-
-      <!-- Event Sections (Pent, Evandy, Diaspora, Other) -->
-      <!-- Repeat for each event type -->
-      <!-- Each has 10 video cards -->
-
-      <!-- Pent Hall Week -->
-      <section>
-        <h3 class="text-2xl font-bold mb-6 text-gray-800 border-l-4 border-pink-500 pl-3">Pent Hall Week</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          <!-- Videos 1-10 -->
-          <!-- Replace image/video sources with your actual file paths -->
-          <!-- Video thumbnails -->
-          <!-- PENT -->
-          <!-- Each video -->
-          <!-- Copy pattern 10x -->
-          <!-- Simplified using JS below if templating available -->
-          <!-- Manually expanded here -->
-          ${[...Array(10)].map((_, i) => `
-          <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer" onclick="openModal('videos/pent${i + 1}.mp4')">
-            <img src="thumbnails/pent${i + 1}.jpg" alt="Pent ${i + 1}" class="w-full h-40 object-cover">
-            <div class="p-3">
-              <p class="font-semibold text-sm text-gray-800">Pent Event ${i + 1}</p>
-              <p class="text-xs text-gray-500">Description for Pent ${i + 1}</p>
-            </div>
-          </div>`).join('')}
-        </div>
-      </section>
-
-      <!-- Evandy & Bani Hall Week -->
-      <section>
-        <h3 class="text-2xl font-bold mb-6 text-gray-800 border-l-4 border-yellow-400 pl-3">Evandy & Bani Hall Week</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          ${[...Array(10)].map((_, i) => `
-          <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer" onclick="openModal('videos/evandy${i + 1}.mp4')">
-            <img src="thumbnails/evandy${i + 1}.jpg" alt="Evandy ${i + 1}" class="w-full h-40 object-cover">
-            <div class="p-3">
-              <p class="font-semibold text-sm text-gray-800">Evandy Event ${i + 1}</p>
-              <p class="text-xs text-gray-500">Description for Evandy ${i + 1}</p>
-            </div>
-          </div>`).join('')}
-        </div>
-      </section>
-
-      <!-- Diaspora Hall Week -->
-      <section>
-        <h3 class="text-2xl font-bold mb-6 text-gray-800 border-l-4 border-pink-400 pl-3">Diaspora Hall Week</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          ${[...Array(10)].map((_, i) => `
-          <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer" onclick="openModal('videos/diaspora${i + 1}.mp4')">
-            <img src="thumbnails/diaspora${i + 1}.jpg" alt="Diaspora ${i + 1}" class="w-full h-40 object-cover">
-            <div class="p-3">
-              <p class="font-semibold text-sm text-gray-800">Diaspora Event ${i + 1}</p>
-              <p class="text-xs text-gray-500">Description for Diaspora ${i + 1}</p>
-            </div>
-          </div>`).join('')}
-        </div>
-      </section>
-
-      <!-- Other Events -->
-      <section>
-        <h3 class="text-2xl font-bold mb-6 text-gray-800 border-l-4 border-yellow-500 pl-3">Other Events</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          ${[...Array(10)].map((_, i) => `
-          <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer" onclick="openModal('videos/other${i + 1}.mp4')">
-            <img src="thumbnails/other${i + 1}.jpg" alt="Other ${i + 1}" class="w-full h-40 object-cover">
-            <div class="p-3">
-              <p class="font-semibold text-sm text-gray-800">Other Event ${i + 1}</p>
-              <p class="text-xs text-gray-500">Description for Other ${i + 1}</p>
-            </div>
-          </div>`).join('')}
-        </div>
-      </section>
-
-    </div>
-  </main>
-
-  <!-- Video Modal -->
-  <div id="videoModal" class="fixed inset-0 hidden items-center justify-center z-50 modal-bg">
-    <div class="relative w-full max-w-5xl mx-auto p-4">
-      <button onclick="closeModal()" class="absolute top-3 right-6 text-white text-3xl font-bold z-50">&times;</button>
-      <video id="modalVideo" class="w-full rounded-lg" controls autoplay></video>
+  <!-- Scrolling Welcome Message -->
+  <div class="bg-yellow-100 py-3 marquee">
+    <div class="marquee-text text-pink-600 font-semibold text-lg">
+      🎉 Welcome to your Events Centre by LegonTV – Explore Hall Weeks, Celebrations, and More! 🎬
     </div>
   </div>
 
+  <!-- Main -->
+  <main class="max-w-6xl mx-auto p-6">
+    <h2 class="text-center text-3xl font-extrabold text-pink-600 my-10">Choose an Event to Explore</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <!-- Each panel leads to a different video gallery -->
+      <a href="pent.html" class="bg-white rounded-xl shadow hover:shadow-lg p-6 text-center transition transform hover:scale-105">
+        <img src="thumbnails/pent1.jpg" alt="Pent Week" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-bold text-pink-600">Pent Hall Week</h3>
+        <p class="text-sm text-gray-600 mt-2">Catch all the exciting moments from Pent Hall's celebrations.</p>
+      </a>
+
+      <a href="evandy.html" class="bg-white rounded-xl shadow hover:shadow-lg p-6 text-center transition transform hover:scale-105">
+        <img src="thumbnails/evandy1.jpg" alt="Evandy & Bani" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-bold text-yellow-500">Evandy & Bani Week</h3>
+        <p class="text-sm text-gray-600 mt-2">Step into the energy of Evandy and Bani Hall's week-long events.</p>
+      </a>
+
+      <a href="diaspora.html" class="bg-white rounded-xl shadow hover:shadow-lg p-6 text-center transition transform hover:scale-105">
+        <img src="thumbnails/diaspora1.jpg" alt="Diaspora Week" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-bold text-pink-500">Diaspora Hall Week</h3>
+        <p class="text-sm text-gray-600 mt-2">Relive unforgettable memories from Diaspora’s vibrant hall week.</p>
+      </a>
+
+      <a href="other.html" class="bg-white rounded-xl shadow hover:shadow-lg p-6 text-center transition transform hover:scale-105">
+        <img src="thumbnails/other1.jpg" alt="Other Events" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-bold text-yellow-600">Other Events</h3>
+        <p class="text-sm text-gray-600 mt-2">Explore other great campus events and special coverage from LegonTV.</p>
+      </a>
+    </div>
+  </main>
+
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white text-center py-4 mt-16">
+  <footer class="bg-gray-800 text-white text-center p-4 mt-16">
     <p>&copy; 2025 LegonTV. All rights reserved.</p>
   </footer>
 
-  <!-- JavaScript -->
-  <script>
-    function openModal(videoSrc) {
-      const modal = document.getElementById('videoModal');
-      const video = document.getElementById('modalVideo');
-      video.src = videoSrc;
-      modal.classList.remove('hidden');
-    }
-
-    function closeModal() {
-      const modal = document.getElementById('videoModal');
-      const video = document.getElementById('modalVideo');
-      video.pause();
-      video.src = '';
-      modal.classList.add('hidden');
-    }
-  </script>
 </body>
-  </html>
+        </html>
