@@ -5,18 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LegonTV Events</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <script>
-    function showEvent(id) {
-      const tabs = document.querySelectorAll(".event-tab");
-      const contents = document.querySelectorAll(".event-content");
-
-      tabs.forEach(tab => tab.classList.remove("bg-pink-600", "text-white"));
-      contents.forEach(content => content.classList.add("hidden"));
-
-      document.getElementById(id).classList.remove("hidden");
-      document.getElementById("tab-" + id).classList.add("bg-pink-600", "text-white");
+  <style>
+    .modal {
+      background-color: rgba(0, 0, 0, 0.85);
     }
-  </script>
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
 
@@ -34,85 +27,93 @@
     </nav>
   </header>
 
-  <!-- Main -->
+  <!-- Main Content -->
   <main class="p-6 max-w-7xl mx-auto">
-    <h2 class="text-3xl font-bold text-pink-600 mb-6 text-center">Hall Week Events</h2>
+    <h2 class="text-3xl font-bold text-pink-600 mb-10 text-center">Hall Week Events</h2>
 
-    <!-- Tabs -->
-    <div class="flex flex-wrap justify-center gap-4 mb-8">
-      <button id="tab-pent" onclick="showEvent('pent')" class="event-tab px-4 py-2 rounded-full border border-pink-600 hover:bg-pink-600 hover:text-white transition">Pent Hall Week</button>
-      <button id="tab-evandy" onclick="showEvent('evandy')" class="event-tab px-4 py-2 rounded-full border border-pink-600 hover:bg-pink-600 hover:text-white transition">Evandy & Bani Hall Week</button>
-      <button id="tab-diaspora" onclick="showEvent('diaspora')" class="event-tab px-4 py-2 rounded-full border border-pink-600 hover:bg-pink-600 hover:text-white transition">Diaspora Hall Week</button>
-      <button id="tab-other" onclick="showEvent('other')" class="event-tab px-4 py-2 rounded-full border border-pink-600 hover:bg-pink-600 hover:text-white transition">Other Events</button>
-    </div>
-
-    <!-- Event: Pent -->
-    <div id="pent" class="event-content hidden">
-      <h3 class="text-2xl font-bold text-pink-600 mb-4">Pent Hall Week Highlights</h3>
+    <!-- Event Sections -->
+    <!-- PENT -->
+    <section class="mb-16">
+      <h3 class="text-2xl font-bold text-pink-600 mb-4">Pent Hall Week</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        <!-- Repeat this block up to 20 times with different video files -->
-        <div>
-          <video controls class="w-full h-36 object-cover rounded-md shadow" poster="thumbnails/pent1.jpg">
-            <source src="videos/pent1.mp4" type="video/mp4">
-          </video>
-          <p class="text-sm mt-1">Opening Ceremony</p>
-        </div>
-        <!-- Repeat for other videos -->
+        <!-- 10 videos -->
+        ${Array.from({ length: 10 }, (_, i) => `
+          <div class="cursor-pointer" onclick="openModal('videos/pent${i+1}.mp4')">
+            <img src="thumbnails/pent${i+1}.jpg" alt="Pent ${i+1}" class="w-full h-40 object-cover rounded-lg shadow" />
+            <p class="text-sm mt-1 text-center">Pent Event ${i+1}</p>
+          </div>
+        `).join('')}
       </div>
-    </div>
+    </section>
 
-    <!-- Event: Evandy & Bani -->
-    <div id="evandy" class="event-content hidden">
-      <h3 class="text-2xl font-bold text-pink-600 mb-4">Evandy & Bani Hall Week Highlights</h3>
+    <!-- Evandy & Bani -->
+    <section class="mb-16">
+      <h3 class="text-2xl font-bold text-pink-600 mb-4">Evandy & Bani Hall Week</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        <div>
-          <video controls class="w-full h-36 object-cover rounded-md shadow" poster="thumbnails/evandy1.jpg">
-            <source src="videos/evandy1.mp4" type="video/mp4">
-          </video>
-          <p class="text-sm mt-1">Talent Show</p>
-        </div>
-        <!-- Add up to 20 thumbnails like this -->
+        ${Array.from({ length: 10 }, (_, i) => `
+          <div class="cursor-pointer" onclick="openModal('videos/evandy${i+1}.mp4')">
+            <img src="thumbnails/evandy${i+1}.jpg" alt="Evandy ${i+1}" class="w-full h-40 object-cover rounded-lg shadow" />
+            <p class="text-sm mt-1 text-center">Evandy Event ${i+1}</p>
+          </div>
+        `).join('')}
       </div>
-    </div>
+    </section>
 
-    <!-- Event: Diaspora -->
-    <div id="diaspora" class="event-content hidden">
-      <h3 class="text-2xl font-bold text-pink-600 mb-4">Diaspora Hall Week Highlights</h3>
+    <!-- Diaspora -->
+    <section class="mb-16">
+      <h3 class="text-2xl font-bold text-pink-600 mb-4">Diaspora Hall Week</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        <div>
-          <video controls class="w-full h-36 object-cover rounded-md shadow" poster="thumbnails/diaspora1.jpg">
-            <source src="videos/diaspora1.mp4" type="video/mp4">
-          </video>
-          <p class="text-sm mt-1">Cultural Night</p>
-        </div>
-        <!-- Add up to 20 thumbnails like this -->
+        ${Array.from({ length: 10 }, (_, i) => `
+          <div class="cursor-pointer" onclick="openModal('videos/diaspora${i+1}.mp4')">
+            <img src="thumbnails/diaspora${i+1}.jpg" alt="Diaspora ${i+1}" class="w-full h-40 object-cover rounded-lg shadow" />
+            <p class="text-sm mt-1 text-center">Diaspora Event ${i+1}</p>
+          </div>
+        `).join('')}
       </div>
-    </div>
+    </section>
 
-    <!-- Event: Other -->
-    <div id="other" class="event-content hidden">
+    <!-- Other Events -->
+    <section class="mb-16">
       <h3 class="text-2xl font-bold text-pink-600 mb-4">Other Events</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        <div>
-          <video controls class="w-full h-36 object-cover rounded-md shadow" poster="thumbnails/other1.jpg">
-            <source src="videos/other1.mp4" type="video/mp4">
-          </video>
-          <p class="text-sm mt-1">Debate Competition</p>
-        </div>
-        <!-- Add up to 20 thumbnails like this -->
+        ${Array.from({ length: 10 }, (_, i) => `
+          <div class="cursor-pointer" onclick="openModal('videos/other${i+1}.mp4')">
+            <img src="thumbnails/other${i+1}.jpg" alt="Other ${i+1}" class="w-full h-40 object-cover rounded-lg shadow" />
+            <p class="text-sm mt-1 text-center">Other Event ${i+1}</p>
+          </div>
+        `).join('')}
       </div>
-    </div>
+    </section>
   </main>
 
+  <!-- Modal -->
+  <div id="videoModal" class="fixed inset-0 hidden items-center justify-center modal z-50">
+    <div class="relative w-full max-w-5xl p-4">
+      <button onclick="closeModal()" class="absolute top-2 right-4 text-white text-3xl font-bold">&times;</button>
+      <video id="modalVideo" class="w-full h-auto rounded-lg" controls autoplay></video>
+    </div>
+  </div>
+
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white text-center p-4 mt-12">
+  <footer class="bg-gray-800 text-white text-center p-4">
     <p>&copy; 2025 LegonTV. All rights reserved.</p>
   </footer>
 
   <script>
-    // Auto-select default tab
-    window.onload = () => showEvent('pent');
-  </script>
+    function openModal(videoSrc) {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("modalVideo");
+      video.src = videoSrc;
+      modal.classList.remove("hidden");
+    }
 
+    function closeModal() {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("modalVideo");
+      video.pause();
+      video.src = "";
+      modal.classList.add("hidden");
+    }
+  </script>
 </body>
-</html>
+  </html>
