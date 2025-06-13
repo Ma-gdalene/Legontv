@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LegonTV Events</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script>
+    function showEvent(id) {
+      const tabs = document.querySelectorAll(".event-tab");
+      const contents = document.querySelectorAll(".event-content");
 
+      tabs.forEach(tab => tab.classList.remove("bg-pink-600", "text-white"));
+      contents.forEach(content => content.classList.add("hidden"));
+
+      document.getElementById(id).classList.remove("hidden");
+      document.getElementById("tab-" + id).classList.add("bg-pink-600", "text-white");
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md p-4 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <img src="logo.png" alt="LegonTV Logo" class="h-10 w-auto">
+      <h1 class="text-2xl font-bold text-pink-600">LegonTV</h1>
+    </div>
+    <nav class="space-x-6">
+      <a href="index.html" class="text-gray-700 hover:text-pink-600">Home</a>
+      <a href="news.html" class="text-gray-700 hover:text-pink-600">News</a>
+      <a href="entertainment.html" class="text-gray-700 hover:text-pink-600">Entertainment</a>
+      <a href="contact.html" class="text-gray-700 hover:text-pink-600">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="p-6 max-w-7xl mx-auto">
+    <h2 class="text-3xl font-bold text-pink-600 mb-6 text-center">Hall Week Events</h2>
+
+    <!-- Tabs -->
+    <div class="flex flex-wrap justify-center gap-4 mb-8">
+      <button id="tab-pent" onclick="showEvent('pent')" class="event-tab px-4 py-2 rounded-full border border-pink-600 hover:bg-pink-600 hover:text-white transition">Pent Hall Week</button>
+      <button id="tab-evandy" onclick="showEvent('evandy')" class="event-tab px-4 py-2 rounded-full border border-pink-600 hover:bg-pink-600 hover:text-white transition">Evandy & Bani Hall Week</button>
+      <button id="tab-diaspora" onclick="showEvent('diaspora')" class="event-tab px-4 py-2 rounded-full border border-pink-600 hover:bg-pink-600 hover:text-white transition">Diaspora Hall Week</button>
+      <button id="tab-other" onclick="showEvent('other')" class="event-tab px-4 py-2 rounded-full border border-pink-600 hover:bg-pink-600 hover:text-white transition">Other Events</button>
+    </div>
+
+    <!-- Event Sections -->
+    <div id="pent" class="event-content hidden">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-2xl font-bold mb-4 text-pink-600">Pent Hall Week</h3>
+        <video controls class="w-full rounded-lg mb-4">
+          <source src="videos/pent-week.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="text-gray-700">Experience the vibrant culture and energy of Pent Hall Week – full of music, dance, fashion shows and exciting student talent displays.</p>
+      </div>
+    </div>
+
+    <div id="evandy" class="event-content hidden">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-2xl font-bold mb-4 text-pink-600">Evandy and Bani Hall Week</h3>
+        <video controls class="w-full rounded-lg mb-4">
+          <source src="videos/evandy-bani.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="text-gray-700">Join the celebration at Evandy and Bani Hall with live performances, interactive games, and unforgettable memories.</p>
+      </div>
+    </div>
+
+    <div id="diaspora" class="event-content hidden">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-2xl font-bold mb-4 text-pink-600">Diaspora Hall Week</h3>
+        <video controls class="w-full rounded-lg mb-4">
+          <source src="videos/diaspora-week.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="text-gray-700">Celebrate Diaspora Hall Week with thrilling events, multicultural showcases, and student excellence.</p>
+      </div>
+    </div>
+
+    <div id="other" class="event-content hidden">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-2xl font-bold mb-4 text-pink-600">Other Events</h3>
+        <video controls class="w-full rounded-lg mb-4">
+          <source src="videos/other-event.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="text-gray-700">Watch highlights from various campus events, talent shows, debates, and cultural nights from across the University of Ghana.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center p-4 mt-12">
+    <p>&copy; 2025 LegonTV. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Default open first tab
+    window.onload = () => showEvent('pent');
+  </script>
+</body>
+        </html>
