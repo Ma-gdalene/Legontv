@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Campus News - LegonTV</title>
+    <title>LegonTV News</title>
     <link href="https:                                                                                   
     <style>
         html {
@@ -25,6 +25,15 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="relative h-96 bg-cover bg-center" style="background-image:url('newshero.jpg');">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-transparent"></div>
+        <div class="relative z-10 text-center py-32 px-4">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white tracking-wide drop-shadow-2xl">Campus News</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-200 font-medium">Breaking Stories and Campus Highlights</p>
+        </div>
+    </section>
+
     <!-- Campus News Section -->
     <section class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- News Card 1 -->
@@ -38,7 +47,6 @@
                 <button onclick="toggleArticle('article1')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
             </div>
         </div>
-
         <!-- News Card 2 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news2.jpg" alt="Campus News 2" class="w-full h-64 object-cover rounded-md mb-4" />
@@ -50,22 +58,10 @@
                 <button onclick="toggleArticle('article2')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
             </div>
         </div>
-
         <!-- News Card 3 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news3.jpg" alt="Campus News 3" class="w-full h-64 object-cover rounded-md mb-4" />
-            <h2 class="text-2xl font-bold text-blue-800 mb-2">Campus News Title 3</h2>
-            <p class="text-gray-700 mb-4">Short intro for campus news 3...</p>
-            <button onclick="toggleArticle('article3')" class="inline-block text-blue-700 hover:underline font-semibold">Read More</button>
-            <div id="article3" class="hidden mt-4">
-                <p>Full article content...</p>
-                <button onclick="toggleArticle('article3')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
-            </div>
-        </div>
-
-        <!-- News Card 4 -->
-        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
-            <img src="news4
+            <h2 class="text-2xl font-bold text-blue-800
         <!-- News Card 4 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news4.jpg" alt="Campus News 4" class="w-full h-64 object-cover rounded-md mb-4" />
@@ -77,7 +73,6 @@
                 <button onclick="toggleArticle('article4')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
             </div>
         </div>
-
         <!-- News Card 5 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news5.jpg" alt="Campus News 5" class="w-full h-64 object-cover rounded-md mb-4" />
@@ -89,7 +84,6 @@
                 <button onclick="toggleArticle('article5')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
             </div>
         </div>
-
         <!-- News Card 6 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news6.jpg" alt="Campus News 6" class="w-full h-64 object-cover rounded-md mb-4" />
@@ -101,7 +95,6 @@
                 <button onclick="toggleArticle('article6')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
             </div>
         </div>
-
         <!-- News Card 7 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news7.jpg" alt="Campus News 7" class="w-full h-64 object-cover rounded-md mb-4" />
@@ -113,7 +106,6 @@
                 <button onclick="toggleArticle('article7')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
             </div>
         </div>
-
         <!-- News Card 8 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news8.jpg" alt="Campus News 8" class="w-full h-64 object-cover rounded-md mb-4" />
@@ -121,11 +113,10 @@
             <p class="text-gray-700 mb-4">Short intro for campus news 8...</p>
             <button onclick="toggleArticle('article8')" class="inline-block text-blue-700 hover:underline font-semibold">Read More</button>
             <div id="article8" class="hidden mt-4">
-                                <p>Full article content...</p>
+                <p>Full article content...</p>
                 <button onclick="toggleArticle('article8')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
             </div>
         </div>
-
         <!-- News Card 9 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news9.jpg" alt="Campus News 9" class="w-full h-64 object-cover rounded-md mb-4" />
@@ -137,7 +128,6 @@
                 <button onclick="toggleArticle('article9')" class="inline-block text-blue-700 hover:underline font-semibold">Close</button>
             </div>
         </div>
-
         <!-- News Card 10 -->
         <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
             <img src="news10.jpg" alt="Campus News 10" class="w-full h-64 object-cover rounded-md mb-4" />
@@ -171,4 +161,3 @@
     </script>
 </body>
 </html>
-
