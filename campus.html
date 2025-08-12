@@ -2,35 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Campus News</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
-<body>
-  <!-- Utility Bar -->
-  <div class="utility-bar">
-    <span class="breaking-news">Breaking: More news coming your way soon on the mobile app!</span>
-    <a href="#" class="sign-in">Sign In</a>
-  </div>
+<body class="bg-gray-50 text-gray-900">
 
-  <!-- Navigation -->
-  <header class="navbar">
-    <img src="logo.png" alt="Legon TV Logo" class="logo" />
-    <nav class="nav-links" aria-label="Primary Navigation">
-      <a href="index.html">Home</a>
-      <a href="news.html">News</a>
-      <a href="FreshersForum.html">Freshers Forum</a>
-    </nav>
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-blue-800 to-blue-500 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
+      <img src="logo.png" alt="LegonTV Logo" class="h-10" />
+      <nav class="space-x-6 text-white font-semibold">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="news.html" class="hover:underline">News</a>
+        <a href="politics.html" class="hover:underline">Politics</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="relative h-96 bg-cover bg-center" style="background-image:url('IMG-20250812-WA0010~2.jpg');">
+<section class="relative h-96 bg-cover bg-center" style="background-image:url('IMG-20250812-WA0010~2.jpg');">
   <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-transparent"></div>
   <div class="relative z-10 text-center py-32 px-4">
-    <h1 class="text-5xl md:text-6xl font-extrabold text-white tracking-wide drop-shadow-2xl">Campus News</h1>
-    <p class="mt-4 text-lg md:text-xl text-gray-200 font-medium">The best updates on all university campuses in Ghana and Beyond</p>
+    <h1 class="text-5xl md:text-6xl font-extrabold text-white tracking-wide drop-shadow-2xl">LegonTV News</h1>
+    <p class="mt-4 text-lg md:text-xl text-gray-200 font-medium">Campus Highlights And More..</p>
   </div>
 </section>
+
+  <!-- News Categories -->
+  <section class="max-w-7xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <a href="general.html" class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
+      <h2 class="text-xl font-bold text-blue-800 mb-2">General News</h2>
+      <p class="text-gray-600">General events and stories affecting students and Ghanaians.</p>
+    </a>
+    <a href="current.html" class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
+      <h2 class="text-xl font-bold text-blue-800 mb-2">Current News</h2>
+      <p class="text-gray-600">Trending and hot news in real-time.</p>
+    </a>
+    <a href="history.html" class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
+      <h2 class="text-xl font-bold text-blue-800 mb-2">History</h2>
+      <p class="text-gray-600">Exclusive stories and scoops on history.</p>
+    </a>
+  </section>
+
   <!-- News Preview -->
   <section class="max-w-4xl mx-auto py-12 px-4">
     <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
@@ -126,4 +146,4 @@
   </script>
 
 </body>
-  </html>
+    </html>
