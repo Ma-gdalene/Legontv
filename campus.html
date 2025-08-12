@@ -63,5 +63,49 @@
       <a href="#">Contact</a>
     </div>
   </footer>
+    <!-- Scripts -->
+  <script>
+    function togglePost() {
+      const post = document.getElementById("fullPost");
+      const btn = document.getElementById("toggleBtn");
+      if (post.classList.contains("hidden")) {
+        post.classList.remove("hidden");
+        btn.innerText = "Read Less";
+        btn.setAttribute("aria-expanded", "true");
+      } else {
+        post.classList.add("hidden");
+        btn.innerText = "Read More";
+        btn.setAttribute("aria-expanded", "false");
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/tabletop@1.6.0/tabletop.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+      Tabletop.init({
+        key: '1jIvItlC3m3xGOhaVKJ8f739DMyEJOzZxzqd6T44TPGc',
+        callback: showPosts,
+        simpleSheet: true
+      });
+    }
+
+    function showPosts(data) {
+      const container = document.getElementById("posts");
+      container.innerHTML = "";
+      data.forEach(post => {
+        container.innerHTML += `
+          <div class="bg-white rounded-lg shadow-md p-6 mb-10">
+            <h3 class="text-2xl font-bold text-blue-800 mb-2">${post.Title}</h3>
+            <small class="block mb-2 text-gray-500">${post.Date}</small>
+            <p class="text-gray-700 mb-4">${post.Content}</p>
+            ${post.Image ? `<img src="${post.Image}" alt="Post image" class="w-full h-64 object-cover rounded-md">` : ''}
+          </div>`;
+      });
+    }
+  </script>
+
 </body>
           </html>
